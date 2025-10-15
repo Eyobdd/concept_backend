@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "0191866cebf1b7c3",
+        "id": "ca4171756da8a0dd",
         "type": "tabs",
         "children": [
           {
-            "id": "60ccb8b74e272dda",
+            "id": "f609ab7a6bce7669",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "design/brainstorming/questioning.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "README"
+              "title": "questioning"
             }
           }
         ]
@@ -169,8 +169,43 @@
       "bases:Create new base": false
     }
   },
-  "active": "60ccb8b74e272dda",
+  "active": "f609ab7a6bce7669",
   "lastOpenFiles": [
-    "README.md"
+    "design/concepts/JournalEntry/spec.md",
+    "design/concepts/JournalEntry/testing.md",
+    "design/concepts/CallSessionConcept/spec.md",
+    "design/concepts/CallWindowConcept/spec.md",
+    "design/brainstorming/overview-design-notes.md",
+    "src/concepts/JournalEntry/journal_entry.spec",
+    "src/concepts/JournalEntry",
+    "design/brainstorming/questioning.md",
+    "context/design/brainstorming/questioning.md/20251014_234011.aa5aef56.md",
+    "context/design/brainstorming/questioning.md/steps/response.7d0aab7a.md",
+    "context/design/brainstorming/questioning.md/20251014_233937.049fb429.md",
+    "context/design/brainstorming/questioning.md/steps/prompt.4286756f.md",
+    "src/concepts/CallWindowConcept/design-notes.md",
+    "src/concepts/CallWindowConcept/test-output.md",
+    "src/concepts/CallWindowConcept/CallWindowConcept.test.ts",
+    "src/concepts/CallWindowConcept/CallWindowConcept.ts",
+    "design/concepts/JournalEntry/JournalEntry.md",
+    "design/background/testing-concepts.md",
+    "src/concepts/CallSessionConcept/design-notes.md",
+    "src/concepts/CallSessionConcept/test-output.md",
+    "src/concepts/CallSessionConcept/CallSessionConcept.test.ts",
+    "src/concepts/CallSessionConcept/CallSessionConcept.ts",
+    "context/design/brainstorming/questioning.md/20251014_230939.365ac04f.md",
+    "context/design/brainstorming/questioning.md/steps/response.145b0c20.md",
+    "context/design/brainstorming/questioning.md/20251014_230901.10e57bbe.md",
+    "context/design/brainstorming/questioning.md/steps/prompt.5a22dbf3.md",
+    "context/design/brainstorming/questioning.md/20251014_230650.a98e6255.md",
+    "context/design/brainstorming/questioning.md/steps/response.76e192a5.md",
+    "context/design/brainstorming/questioning.md/20251014_230619.a5743dff.md",
+    "context/design/brainstorming/questioning.md/steps/prompt.3ca68737.md",
+    "src/concepts/CallSessionConcept/call_session.spec",
+    "src/concepts/CallWindowConcept/call_window.spec",
+    "src/concepts/CallWindowConcept",
+    "context/design/brainstorming/questioning.md/20251014_230426.a3d0a9cd.md",
+    "context/design/brainstorming/questioning.md/steps/response.e4f1b7cd.md",
+    "src/concepts/CallSessionConcept/call_concept.spec"
   ]
 }
