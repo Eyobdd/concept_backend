@@ -1,81 +1,63 @@
 <concept_spec>
-	concept JournalEntryConcept[User]
+	concept JournalEntryConcept[User, ReflectionSession]
 
 	purpose
-    Preserve structured daily journal entries with prompts and responses to support reflection and emotional tracking
+    Preserve completed reflection sessions as immutable daily records for review and trend analysis
 
   principle
-    After a call session, a user creates a journal entry by responding to prompts. The entry captures their reflections and an overall rating for the day.
+    When a reflection session completes, it becomes a permanent journal entry. 
+    The responses and rating are immutable snapshots of that moment in time.
 
   state
-    # A JournalEntry represents a completed daily reflection
     a set of JournalEntries with
       a user User
-      a date Date
-      a set of prompts Prompt
-      a rating Number # An integer between -2 and 2
+      a creationDate Date
+      a reflectionSession ReflectionSession
+      a rating Number  # Integer -2 to 2, immutable snapshot from session
 
-    # A Prompt represents a question-response pair within an entry
-    a set of Prompts with
+    a set of PromptResponses with
       a journalEntry JournalEntry
-      a prompt String
-      a response String
+      a promptId ID            # ID of the PromptTemplate used
+      a promptText String      # Snapshot of prompt text at time of response
+      a position Number        # Order in which prompt was asked (1, 2, 3...)
+      a responseText String    # Immutable user response
       a responseStarted DateTime
       a responseFinished DateTime
-      # Future TODO: audio recording support (would require GridFS)
-      # an audio Audio
 
   invariants
-    - At most one JournalEntry per (user, date).
-    - Each Prompt belongs to exactly one JournalEntry.
-    - rating must be in the range [-2, 2] (inclusive).
+    At most one JournalEntry per (user, creationDate).
+    rating must be an integer in {-2, -1, 0, 1, 2}.
+    PromptResponses for an entry have unique position values.
 
   actions
-    createJournalEntry(user: User, date: Date, rating: Number): JournalEntry
-      requires:
-        - There is no existing JournalEntry je such that je.user = user and je.date = date.
-        - rating is an integer in the range [-2, 2].
-      effect:
-        - A new JournalEntry, je_new, is added to the JournalEntries set.
-        - je_new.user is set to the input user.
-        - je_new.date is set to the input date.
-        - je_new.rating is set to the input rating.
-        - je_new.prompts is initialized as an empty set.
-        - The action returns je_new.
+    createFromSession(session: ReflectionSession): JournalEntry
+      requires: 
+        - session.status is COMPLETED.
+        - session.rating is set.
+        - No existing JournalEntry for (session.user, localDate(session.endedAt)).
+      effect: 
+        - Creates JournalEntry with creationDate = localDate(session.endedAt).
+        - Copies rating from session (immutable).
+        - Copies all PromptResponses from session (including prompt text snapshots).
+        - Links to reflectionSession.
+        - Returns the entry.
 
-    addPrompt(user: User, date: Date, prompt: String, response: String, responseStarted: DateTime, responseFinished: DateTime): Prompt
-      requires:
-        - There exists a JournalEntry je such that je.user = user and je.date = date.
-        - responseFinished must be later than or equal to responseStarted.
-      effect:
-        - A new Prompt, p_new, is added to the Prompts set.
-        - p_new.journalEntry is set to the JournalEntry je.
-        - p_new.prompt is set to the input prompt.
-        - p_new.response is set to the input response.
-        - p_new.responseStarted is set to the input responseStarted.
-        - p_new.responseFinished is set to the input responseFinished.
-        - p_new is added to je.prompts.
-        - The action returns p_new.
+    deleteEntry(entry: JournalEntry)
+      requires: entry exists.
+      effect: 
+        - Removes JournalEntry and its PromptResponses.
+        - Does not delete the linked ReflectionSession.
 
-    updateRating(user: User, date: Date, rating: Number)
-      requires:
-        - There exists a JournalEntry je such that je.user = user and je.date = date.
-        - rating is an integer in the range [-2, 2].
-      effect:
-        - je.rating is updated to the input rating.
+    _getEntriesByUser(user: User): seq of JournalEntry
+      effect: Returns entries ordered by creationDate descending.
 
-    updatePromptResponse(user: User, date: Date, prompt: String, response: String)
-      requires:
-        - There exists a JournalEntry je such that je.user = user and je.date = date.
-        - There exists a Prompt p in je.prompts such that p.prompt = prompt.
-      effect:
-        - p.response is updated to the input response.
+    _getEntriesByDateRange(user: User, startDate: Date, endDate: Date): seq of JournalEntry
+      effect: Returns entries within date range ordered by creationDate.
 
-    deleteJournalEntry(user: User, date: Date)
-      requires:
-        - There exists a JournalEntry je such that je.user = user and je.date = date.
-      effect:
-        - All Prompts p where p.journalEntry = je are removed from the Prompts set.
-        - The JournalEntry je is removed from the JournalEntries set.
+    _getEntryByDate(user: User, date: Date): JournalEntry
+      effect: Returns entry for specific date, or error if none exists.
+
+    _getEntryResponses(entry: JournalEntry): seq of PromptResponse
+      effect: Returns responses ordered by position.
 
 <concept_spec/>
