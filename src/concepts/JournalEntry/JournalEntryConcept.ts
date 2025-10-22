@@ -59,7 +59,7 @@ export default class JournalEntryConcept {
       sessionData: {
         user: User;
         reflectionSession: ReflectionSession;
-        endedAt: Date;
+        endedAt: Date | string;
         rating: number;
       };
       sessionResponses: Array<{
@@ -67,13 +67,18 @@ export default class JournalEntryConcept {
         promptText: string;
         position: number;
         responseText: string;
-        responseStarted: Date;
-        responseFinished: Date;
+        responseStarted: Date | string;
+        responseFinished: Date | string;
       }>;
     },
   ): Promise<{ entry: JournalEntry } | { error: string }> {
+    // Parse endedAt if it's a string (ISO format from frontend)
+    const endedAtDate = typeof sessionData.endedAt === 'string' 
+      ? new Date(sessionData.endedAt) 
+      : sessionData.endedAt;
+    
     // Extract date from endedAt
-    const creationDate = sessionData.endedAt.toISOString().split("T")[0];
+    const creationDate = endedAtDate.toISOString().split("T")[0];
 
     // Check for existing entry on this date
     const existingEntry = await this.journalEntries.findOne({
@@ -108,6 +113,14 @@ export default class JournalEntryConcept {
 
     // Copy all prompt responses
     for (const response of sessionResponses) {
+      // Parse dates if they're strings (ISO format from frontend)
+      const responseStarted = typeof response.responseStarted === 'string'
+        ? new Date(response.responseStarted)
+        : response.responseStarted;
+      const responseFinished = typeof response.responseFinished === 'string'
+        ? new Date(response.responseFinished)
+        : response.responseFinished;
+        
       await this.promptResponses.insertOne({
         _id: freshID() as PromptResponse,
         journalEntry: entryId,
@@ -115,8 +128,8 @@ export default class JournalEntryConcept {
         promptText: response.promptText,
         position: response.position,
         responseText: response.responseText,
-        responseStarted: response.responseStarted,
-        responseFinished: response.responseFinished,
+        responseStarted,
+        responseFinished,
       });
     }
 
