@@ -303,4 +303,60 @@ export default class UserAuthenticationConcept {
     const code = await this.verificationCodes.findOne({ phoneNumber });
     return code?.code || null;
   }
+
+  /**
+   * Helper: Creates credentials for a user after verification and returns a session token (for frontend registration).
+   * @requires valid non-expired VerificationCode exists; code matches; no existing credentials for phoneNumber
+   * @effects Creates Credentials with isVerified=true; creates Session; removes VerificationCode
+   */
+  async createVerifiedCredentials(
+    { user, phoneNumber, code }: { user: User; phoneNumber: string; code: string },
+  ): Promise<{ token: string } | { error: string }> {
+    // Check if phone number already registered
+    const existingCredentials = await this.credentials.findOne({ phoneNumber });
+    if (existingCredentials) {
+      return { error: `Phone number ${phoneNumber} is already registered.` };
+    }
+
+    // Verify code
+    const verificationCode = await this.verificationCodes.findOne({ phoneNumber });
+    if (!verificationCode) {
+      return { error: "No verification code found. Please request a new code." };
+    }
+
+    if (verificationCode.code !== code) {
+      return { error: "Invalid verification code." };
+    }
+
+    if (new Date() > verificationCode.expiresAt) {
+      await this.verificationCodes.deleteOne({ _id: verificationCode._id });
+      return { error: "Verification code has expired. Please request a new code." };
+    }
+
+    // Create credentials
+    await this.credentials.insertOne({
+      _id: crypto.randomUUID() as ID,
+      user,
+      phoneNumber,
+      isVerified: true,
+    });
+
+    // Remove verification code
+    await this.verificationCodes.deleteOne({ _id: verificationCode._id });
+
+    // Create session and return token (so user is automatically logged in)
+    const token = crypto.randomUUID();
+    const now = new Date();
+    const expiresAt = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000); // 30 days
+
+    await this.sessions.insertOne({
+      _id: crypto.randomUUID() as ID,
+      user,
+      token,
+      createdAt: now,
+      expiresAt,
+    });
+
+    return { token };
+  }
 }
