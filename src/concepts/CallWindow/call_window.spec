@@ -67,4 +67,17 @@
         - The window ow is removed from the CallWindows set (and by extension, the OneOffWindows subset).
         - The window ow is removed from the user.callWindows relation.
 
+    mergeOverlappingOneOffWindows(user:User, specificDate: Date, startTime: DateTime, endTime: DateTime): CallWindow
+      requires:
+        - The endTime must be later than the startTime.
+        - There exists at least one OneOffWindow ow for the user on specificDate that overlaps with the time range [startTime, endTime].
+      effect:
+        - All OneOffWindows for the user on specificDate that overlap with [startTime, endTime] are removed from the CallWindows set.
+        - A new merged CallWindow, cw_merged, is created with:
+          - startTime = minimum of all overlapping windows' startTimes and the input startTime
+          - endTime = maximum of all overlapping windows' endTimes and the input endTime
+        - cw_merged is added to the CallWindows set and OneOffWindows subset.
+        - cw_merged is added to the user.callWindows relation.
+        - The action returns cw_merged.
+
 <concept_spec/>
