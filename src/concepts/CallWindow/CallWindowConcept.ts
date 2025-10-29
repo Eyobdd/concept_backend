@@ -278,4 +278,70 @@ export default class CallWindowConcept {
     } as Partial<OneOffWindowDoc>).toArray();
     return results as OneOffWindowDoc[];
   }
+
+  /**
+   * Action: Merges overlapping one-off call windows for a specific date.
+   * @requires endTime must be later than startTime.
+   * @requires At least one overlapping window must exist.
+   * @effects All overlapping windows are deleted and replaced with a single merged window.
+   */
+  async mergeOverlappingOneOffWindows(
+    { user, specificDate, startTime, endTime }: {
+      user: User;
+      specificDate: string;
+      startTime: Date;
+      endTime: Date;
+    },
+  ): Promise<{ callWindow: CallWindow } | { error: string }> {
+    // Validate time ordering
+    if (endTime <= startTime) {
+      return { error: "endTime must be later than startTime." };
+    }
+
+    // Find all overlapping windows for this user on this date
+    const allWindows = await this.callWindows.find({
+      user,
+      windowType: "ONEOFF",
+      specificDate,
+    } as Partial<OneOffWindowDoc>).toArray() as OneOffWindowDoc[];
+
+    // Filter to only overlapping windows
+    const overlappingWindows = allWindows.filter((window) => {
+      // Two windows overlap if: window.start < endTime AND window.end > startTime
+      return window.startTime < endTime && window.endTime > startTime;
+    });
+
+    if (overlappingWindows.length === 0) {
+      return {
+        error:
+          `No overlapping windows found for user ${user} on ${specificDate}.`,
+      };
+    }
+
+    // Calculate merged time range
+    const allStartTimes = [...overlappingWindows.map((w) => w.startTime), startTime];
+    const allEndTimes = [...overlappingWindows.map((w) => w.endTime), endTime];
+    
+    const mergedStartTime = new Date(Math.min(...allStartTimes.map((t) => t.getTime())));
+    const mergedEndTime = new Date(Math.max(...allEndTimes.map((t) => t.getTime())));
+
+    // Delete all overlapping windows
+    await this.callWindows.deleteMany({
+      _id: { $in: overlappingWindows.map((w) => w._id) },
+    });
+
+    // Create the merged window
+    const windowId = freshID() as CallWindow;
+    const mergedWindow: OneOffWindowDoc = {
+      _id: windowId,
+      user,
+      windowType: "ONEOFF",
+      specificDate,
+      startTime: mergedStartTime,
+      endTime: mergedEndTime,
+    };
+
+    await this.callWindows.insertOne(mergedWindow);
+    return { callWindow: windowId };
+  }
 }
