@@ -16,6 +16,7 @@ interface ProfileDoc {
   displayName: string;
   phoneNumber: string; // E.164 format: +1234567890
   timezone: string; // IANA timezone: "America/New_York"
+  includeRating: boolean; // Whether to include day rating prompt in reflection calls
   updatedAt: Date;
 }
 
@@ -64,6 +65,7 @@ export default class ProfileConcept {
       displayName,
       phoneNumber,
       timezone,
+      includeRating: true, // Default to including rating prompt
       updatedAt: new Date(),
     });
 
@@ -136,6 +138,27 @@ export default class ProfileConcept {
     await this.profiles.updateOne(
       { user },
       { $set: { timezone, updatedAt: new Date() } },
+    );
+
+    return {};
+  }
+
+  /**
+   * Action: Updates the rating preference for a user's profile.
+   * @requires Profile exists for user
+   * @effects Updates profile.includeRating and sets updatedAt to current time.
+   */
+  async updateRatingPreference(
+    { user, includeRating }: { user: User; includeRating: boolean },
+  ): Promise<Empty | { error: string }> {
+    const profile = await this.profiles.findOne({ user });
+    if (!profile) {
+      return { error: `No profile found for user ${user}.` };
+    }
+
+    await this.profiles.updateOne(
+      { user },
+      { $set: { includeRating, updatedAt: new Date() } },
     );
 
     return {};
