@@ -204,10 +204,8 @@ export default class ReflectionSessionConcept {
       };
     }
 
-    // Verify rating is set
-    if (sessionDoc.rating === undefined) {
-      return { error: "Rating must be set before completing session." };
-    }
+    // Rating is optional - only verify if it was set that it's valid
+    // (Rating validation happens in setRating method)
 
     // Verify all prompts have responses
     const responses = await this.promptResponses

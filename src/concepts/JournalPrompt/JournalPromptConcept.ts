@@ -50,7 +50,6 @@ export default class JournalPromptConcept {
       "What did you do today?",
       "What are you proud of today?",
       "What do you want to do tomorrow?",
-      "Any other thoughts or reflections?",
     ];
 
     const promptDocs = defaultPrompts.map((text, index) => ({

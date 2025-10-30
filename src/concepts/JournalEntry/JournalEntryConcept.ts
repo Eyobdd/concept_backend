@@ -60,7 +60,7 @@ export default class JournalEntryConcept {
         user: User;
         reflectionSession: ReflectionSession;
         endedAt: Date | string;
-        rating: number;
+        rating?: number; // Optional - user may disable rating
       };
       sessionResponses: Array<{
         promptId: ID;
@@ -92,13 +92,15 @@ export default class JournalEntryConcept {
       };
     }
 
-    // Validate rating
-    if (
-      !Number.isInteger(sessionData.rating) ||
-      sessionData.rating < -2 ||
-      sessionData.rating > 2
-    ) {
-      return { error: "Rating must be an integer between -2 and 2." };
+    // Validate rating if provided
+    if (sessionData.rating !== undefined) {
+      if (
+        !Number.isInteger(sessionData.rating) ||
+        sessionData.rating < -2 ||
+        sessionData.rating > 2
+      ) {
+        return { error: "Rating must be an integer between -2 and 2." };
+      }
     }
 
     // Create journal entry
@@ -108,7 +110,7 @@ export default class JournalEntryConcept {
       user: sessionData.user,
       creationDate,
       reflectionSession: sessionData.reflectionSession,
-      rating: sessionData.rating,
+      rating: sessionData.rating ?? 0, // Default to 0 if not provided
     });
 
     // Copy all prompt responses
@@ -168,6 +170,31 @@ export default class JournalEntryConcept {
       .find({ user })
       .sort({ creationDate: -1 })
       .toArray();
+  }
+
+  /**
+   * Query: Retrieves all entries for a user with their responses, ordered by date descending.
+   */
+  async _getEntriesWithResponsesByUser(
+    { user }: { user: User },
+  ): Promise<Array<JournalEntryDoc & { responses: PromptResponseDoc[] }>> {
+    const entries = await this.journalEntries
+      .find({ user })
+      .sort({ creationDate: -1 })
+      .toArray();
+    
+    // Fetch responses for all entries
+    const entriesWithResponses = await Promise.all(
+      entries.map(async (entry) => {
+        const responses = await this.promptResponses
+          .find({ journalEntry: entry._id })
+          .sort({ position: 1 })
+          .toArray();
+        return { ...entry, responses };
+      })
+    );
+    
+    return entriesWithResponses;
   }
 
   /**
