@@ -26,6 +26,12 @@
     a OneOffWindows set of CallWindows with
       a specificDate Date
 
+    # DayMode tracks whether a day uses recurring (default) or custom (one-off) windows
+    a set of DayModes with
+      a user User
+      a date Date
+      a useRecurring Flag  # true = show recurring windows, false = show one-off windows
+
   actions
     createRecurringCallWindow(user:User, dayOfWeek: MONDAY or TUESDAY or WEDNESDAY or THURSDAY or FRIDAY or SATURDAY or SUNDAY, startTime: DateTime, endTime:DateTime): CallWindow
       requires: 
@@ -79,5 +85,25 @@
         - cw_merged is added to the CallWindows set and OneOffWindows subset.
         - cw_merged is added to the user.callWindows relation.
         - The action returns cw_merged.
+
+    setDayModeCustom(user: User, date: Date): DayMode
+      requires: true
+      effect:
+        - If a DayMode exists for (user, date), sets useRecurring to false.
+        - Otherwise, creates new DayMode with useRecurring=false.
+        - Returns the DayMode.
+
+    setDayModeRecurring(user: User, date: Date): DayMode
+      requires: true
+      effect:
+        - If a DayMode exists for (user, date), sets useRecurring to true.
+        - Otherwise, creates new DayMode with useRecurring=true.
+        - Returns the DayMode.
+
+    shouldUseRecurring(user: User, date: Date): Flag
+      requires: true
+      effect:
+        - Returns true if no DayMode exists for (user, date) or if useRecurring is true.
+        - Returns false if DayMode exists and useRecurring is false.
 
 <concept_spec/>

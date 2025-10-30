@@ -51,11 +51,14 @@
     _getEntriesByUser(user: User): seq of JournalEntry
       effect: Returns entries ordered by creationDate descending.
 
+    _getEntriesWithResponsesByUser(user: User): seq of {JournalEntry, responses: seq of PromptResponse}
+      effect: Returns entries with their responses ordered by creationDate descending.
+
     _getEntriesByDateRange(user: User, startDate: Date, endDate: Date): seq of JournalEntry
       effect: Returns entries within date range ordered by creationDate.
 
     _getEntryByDate(user: User, date: Date): JournalEntry
-      effect: Returns entry for specific date, or error if none exists.
+      effect: Returns entry for specific date, or null if none exists.
 
     _getEntryResponses(entry: JournalEntry): seq of PromptResponse
       effect: Returns responses ordered by position.

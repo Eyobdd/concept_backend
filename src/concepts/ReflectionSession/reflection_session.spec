@@ -7,8 +7,8 @@
   principle
     When a reflection begins, a session captures the current prompt order and text. 
     As the user answers each prompt, responses are recorded with timestamps. 
-    The user provides a rating from -2 to 2. The session completes when all prompts 
-    are answered and a rating is provided, or is abandoned if interrupted.
+    The user may optionally provide a rating from -2 to 2. The session completes when 
+    all prompts are answered, or is abandoned if interrupted.
 
   state
     a set of ReflectionSessions with
@@ -30,7 +30,7 @@
 
   invariants
     At most one IN_PROGRESS ReflectionSession per user at any time.
-    For a COMPLETED session, rating must be an integer in {-2, -1, 0, 1, 2}.
+    If rating is set, it must be an integer in {-2, -1, 0, 1, 2}.
     PromptResponses for a session have unique position values forming sequence 1, 2, 3...
 
   actions
@@ -58,11 +58,10 @@
         - rating is integer in [-2, 2].
       effect: Sets session.rating to rating.
 
-    completeSession(session: ReflectionSession)
+    completeSession(session: ReflectionSession, expectedPromptCount: Number)
       requires: 
         - session.status is IN_PROGRESS.
-        - session.rating is set.
-        - All expected prompts have responses (based on prompt count at session start).
+        - All expected prompts have responses (based on expectedPromptCount).
       effect: 
         - Sets status to COMPLETED.
         - Sets endedAt to current time.
@@ -80,6 +79,9 @@
       effect: Returns all sessions for user ordered by startedAt descending.
 
     _getActiveSession(user: User): ReflectionSession
-      effect: Returns IN_PROGRESS session for user, or error if none exists.
+      effect: Returns IN_PROGRESS session for user, or null if none exists.
+
+    _getSession(session: ReflectionSession): ReflectionSession
+      effect: Returns session, or null if not found.
 
 <concept_spec/>
