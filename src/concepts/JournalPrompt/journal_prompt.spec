@@ -25,14 +25,13 @@
     createDefaultPrompts(user: User)
       requires: User has no existing PromptTemplates.
       effect: 
-        - Creates 5 default PromptTemplates with standard questions:
+        - Creates 4 default PromptTemplates with standard questions:
           1. "What are you grateful for today?"
           2. "What did you do today?"
           3. "What are you proud of today?"
           4. "What do you want to do tomorrow?"
-          5. "Any other thoughts or reflections?"
         - All prompts are set to isActive=true.
-        - Positions are set to 1, 2, 3, 4, 5 respectively.
+        - Positions are set to 1, 2, 3, 4 respectively.
 
     updatePromptText(user: User, position: Number, newText: String)
       requires: 

@@ -83,9 +83,26 @@
         - Removes Credentials for user.
 
     _getSessionUser(token: String): User
-      effect: Returns user for token, or error if invalid/expired.
+      effect: Returns user for token, or null if invalid/expired.
 
     _getUserByPhone(phoneNumber: String): User
-      effect: Returns user for phoneNumber, or error if not found.
+      effect: Returns user for phoneNumber, or null if not found.
+
+    _getUserSessions(user: User): seq of Session
+      effect: Returns all active sessions for user.
+
+    _getVerificationCode(phoneNumber: String): String
+      effect: Returns verification code for phoneNumber, or null if none exists. (For testing only)
+
+    createVerifiedCredentials(user: User, phoneNumber: String, code: String): (token: String)
+      requires:
+        - No Credentials exist with phoneNumber.
+        - Valid non-expired VerificationCode exists for phoneNumber.
+        - code matches stored code.
+      effect:
+        - Creates Credentials with phoneNumber, isVerified=true.
+        - Creates Session with fresh random token.
+        - Removes VerificationCode.
+        - Returns token.
 
 <concept_spec/>

@@ -15,6 +15,7 @@
       a displayName String
       a phoneNumber String       # E.164 format: +1234567890
       a timezone String          # IANA timezone: "America/New_York"
+      a includeRating Flag       # Whether to include day rating prompt in reflection calls
       a updatedAt DateTime
 
   invariants
@@ -29,6 +30,7 @@
         - timezone is valid IANA timezone string.
       effect: 
         - Creates new Profile.
+        - Sets includeRating to true (default).
         - Sets updatedAt to current time.
         - Returns the profile.
 
@@ -56,11 +58,20 @@
         - Updates profile.timezone.
         - Sets updatedAt to current time.
 
+    updateRatingPreference(user: User, includeRating: Flag)
+      requires: Profile exists for user.
+      effect:
+        - Updates profile.includeRating.
+        - Sets updatedAt to current time.
+
     deleteProfile(user: User)
       requires: Profile exists for user.
       effect: Removes profile.
 
     _getProfile(user: User): Profile
-      effect: Returns profile for user, or error if none exists.
+      effect: Returns profile for user, or null if none exists.
+
+    _getAllProfiles(): seq of Profile
+      effect: Returns all profiles.
 
 <concept_spec/>
