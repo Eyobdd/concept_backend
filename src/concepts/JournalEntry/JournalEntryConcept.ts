@@ -43,10 +43,35 @@ interface PromptResponseDoc {
 export default class JournalEntryConcept {
   journalEntries: Collection<JournalEntryDoc>;
   promptResponses: Collection<PromptResponseDoc>;
+  profiles: Collection<any>; // Access to Profile collection for timezone
 
   constructor(private readonly db: Db) {
     this.journalEntries = this.db.collection(PREFIX + "journalEntries");
     this.promptResponses = this.db.collection(PREFIX + "promptResponses");
+    this.profiles = this.db.collection("Profile.profiles");
+  }
+
+  /**
+   * Helper: Converts a UTC timestamp to a date string in the user's timezone.
+   * @param timestamp - The UTC timestamp
+   * @param timezone - IANA timezone string (e.g., "America/New_York")
+   * @returns Date string in YYYY-MM-DD format in the user's timezone
+   */
+  private formatDateInTimezone(timestamp: Date, timezone: string): string {
+    // Use Intl.DateTimeFormat to convert to user's timezone
+    const formatter = new Intl.DateTimeFormat('en-US', {
+      timeZone: timezone,
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    });
+    
+    const parts = formatter.formatToParts(timestamp);
+    const year = parts.find(p => p.type === 'year')?.value;
+    const month = parts.find(p => p.type === 'month')?.value;
+    const day = parts.find(p => p.type === 'day')?.value;
+    
+    return `${year}-${month}-${day}`;
   }
 
   /**
@@ -77,8 +102,12 @@ export default class JournalEntryConcept {
       ? new Date(sessionData.endedAt) 
       : sessionData.endedAt;
     
-    // Extract date from endedAt
-    const creationDate = endedAtDate.toISOString().split("T")[0];
+    // Get user's timezone from profile
+    const profile = await this.profiles.findOne({ user: sessionData.user });
+    const userTimezone = profile?.timezone || 'UTC'; // Default to UTC if no timezone set
+    
+    // Extract date in user's timezone (not UTC)
+    const creationDate = this.formatDateInTimezone(endedAtDate, userTimezone);
 
     // Check for existing entry on this date
     const existingEntry = await this.journalEntries.findOne({
