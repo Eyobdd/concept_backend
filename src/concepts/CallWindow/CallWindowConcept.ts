@@ -49,6 +49,16 @@ interface OneOffWindowDoc extends CallWindowDoc {
 }
 
 /**
+ * State: DayMode - tracks whether a day uses recurring (default) or custom (one-off) windows
+ */
+interface DayModeDoc {
+  _id: ID;
+  user: User;
+  date: string; // Date stored as ISO string (YYYY-MM-DD)
+  useRecurring: boolean; // true = show recurring windows, false = show one-off windows
+}
+
+/**
  * Union type for all window documents
  */
 type AnyCallWindowDoc = RecurringWindowDoc | OneOffWindowDoc;
@@ -59,9 +69,11 @@ type AnyCallWindowDoc = RecurringWindowDoc | OneOffWindowDoc;
  */
 export default class CallWindowConcept {
   callWindows: Collection<AnyCallWindowDoc>;
+  dayModes: Collection<DayModeDoc>;
 
   constructor(private readonly db: Db) {
     this.callWindows = this.db.collection(PREFIX + "callWindows");
+    this.dayModes = this.db.collection(PREFIX + "dayModes");
   }
 
   /**
@@ -371,5 +383,73 @@ export default class CallWindowConcept {
 
     await this.callWindows.insertOne(mergedWindow);
     return { callWindow: windowId };
+  }
+
+  /**
+   * Action: Set day mode to custom (use one-off windows, not recurring)
+   * @effects Sets or updates the day mode to use one-off windows
+   */
+  async setDayModeCustom({ user, date }: { user: User; date: string }) {
+    const existing = await this.dayModes.findOne({ user, date });
+    
+    if (existing) {
+      // Update existing
+      await this.dayModes.updateOne(
+        { user, date },
+        { $set: { useRecurring: false } }
+      );
+      return { dayMode: existing._id };
+    }
+
+    // Create new
+    const dayModeId = freshID();
+    const dayMode: DayModeDoc = {
+      _id: dayModeId,
+      user,
+      date,
+      useRecurring: false,
+    };
+
+    await this.dayModes.insertOne(dayMode);
+    return { dayMode: dayModeId };
+  }
+
+  /**
+   * Action: Set day mode to recurring (use recurring windows, default mode)
+   * @effects Sets or updates the day mode to use recurring windows
+   */
+  async setDayModeRecurring({ user, date }: { user: User; date: string }) {
+    const existing = await this.dayModes.findOne({ user, date });
+    
+    if (existing) {
+      // Update existing
+      await this.dayModes.updateOne(
+        { user, date },
+        { $set: { useRecurring: true } }
+      );
+      return { dayMode: existing._id };
+    }
+
+    // Create new
+    const dayModeId = freshID();
+    const dayMode: DayModeDoc = {
+      _id: dayModeId,
+      user,
+      date,
+      useRecurring: true,
+    };
+
+    await this.dayModes.insertOne(dayMode);
+    return { dayMode: dayModeId };
+  }
+
+  /**
+   * Query: Check if a day should use recurring windows
+   * @returns true if should use recurring (default), false if should use one-off (custom)
+   */
+  async shouldUseRecurring({ user, date }: { user: User; date: string }): Promise<boolean> {
+    const dayMode = await this.dayModes.findOne({ user, date });
+    // Default to true (use recurring) if no mode is set
+    return dayMode === null ? true : dayMode.useRecurring;
   }
 }
