@@ -78,8 +78,12 @@ export default class CallWindowConcept {
       endTime: Date;
     },
   ): Promise<{ callWindow: CallWindow } | { error: string }> {
+    // Convert string dates to Date objects if needed
+    const start = startTime instanceof Date ? startTime : new Date(startTime);
+    const end = endTime instanceof Date ? endTime : new Date(endTime);
+    
     // Validate time ordering
-    if (endTime <= startTime) {
+    if (end <= start) {
       return { error: "endTime must be later than startTime." };
     }
 
@@ -88,13 +92,13 @@ export default class CallWindowConcept {
       user,
       windowType: "RECURRING",
       dayOfWeek,
-      startTime,
+      startTime: start,
     } as Partial<RecurringWindowDoc>);
 
     if (existing) {
       return {
         error:
-          `A recurring window already exists for user ${user} on ${dayOfWeek} at ${startTime.toISOString()}.`,
+          `A recurring window already exists for user ${user} on ${dayOfWeek} at ${start.toISOString()}.`,
       };
     }
 
@@ -104,8 +108,8 @@ export default class CallWindowConcept {
       user,
       windowType: "RECURRING",
       dayOfWeek,
-      startTime,
-      endTime,
+      startTime: start,
+      endTime: end,
     };
 
     await this.callWindows.insertOne(newWindow);
@@ -126,8 +130,12 @@ export default class CallWindowConcept {
       endTime: Date;
     },
   ): Promise<{ callWindow: CallWindow } | { error: string }> {
+    // Convert string dates to Date objects if needed
+    const start = startTime instanceof Date ? startTime : new Date(startTime);
+    const end = endTime instanceof Date ? endTime : new Date(endTime);
+    
     // Validate time ordering
-    if (endTime <= startTime) {
+    if (end <= start) {
       return { error: "endTime must be later than startTime." };
     }
 
@@ -136,13 +144,13 @@ export default class CallWindowConcept {
       user,
       windowType: "ONEOFF",
       specificDate,
-      startTime,
+      startTime: start,
     } as Partial<OneOffWindowDoc>);
 
     if (existing) {
       return {
         error:
-          `A one-off window already exists for user ${user} on ${specificDate} at ${startTime.toISOString()}.`,
+          `A one-off window already exists for user ${user} on ${specificDate} at ${start.toISOString()}.`,
       };
     }
 
@@ -152,8 +160,8 @@ export default class CallWindowConcept {
       user,
       windowType: "ONEOFF",
       specificDate,
-      startTime,
-      endTime,
+      startTime: start,
+      endTime: end,
     };
 
     await this.callWindows.insertOne(newWindow);
@@ -172,17 +180,20 @@ export default class CallWindowConcept {
       startTime: Date;
     },
   ): Promise<Empty | { error: string }> {
+    // Convert string date to Date object if needed
+    const start = startTime instanceof Date ? startTime : new Date(startTime);
+    
     const result = await this.callWindows.deleteOne({
       user,
       windowType: "RECURRING",
       dayOfWeek,
-      startTime,
+      startTime: start,
     } as Partial<RecurringWindowDoc>);
 
     if (result.deletedCount === 0) {
       return {
         error:
-          `No recurring window found for user ${user} on ${dayOfWeek} at ${startTime.toISOString()}.`,
+          `No recurring window found for user ${user} on ${dayOfWeek} at ${start.toISOString()}.`,
       };
     }
 
@@ -201,17 +212,20 @@ export default class CallWindowConcept {
       startTime: Date;
     },
   ): Promise<Empty | { error: string }> {
+    // Convert string date to Date object if needed
+    const start = startTime instanceof Date ? startTime : new Date(startTime);
+    
     const result = await this.callWindows.deleteOne({
       user,
       windowType: "ONEOFF",
       specificDate,
-      startTime,
+      startTime: start,
     } as Partial<OneOffWindowDoc>);
 
     if (result.deletedCount === 0) {
       return {
         error:
-          `No one-off window found for user ${user} on ${specificDate} at ${startTime.toISOString()}.`,
+          `No one-off window found for user ${user} on ${specificDate} at ${start.toISOString()}.`,
       };
     }
 
@@ -293,8 +307,12 @@ export default class CallWindowConcept {
       endTime: Date;
     },
   ): Promise<{ callWindow: CallWindow } | { error: string }> {
+    // Convert string dates to Date objects if needed
+    const start = startTime instanceof Date ? startTime : new Date(startTime);
+    const end = endTime instanceof Date ? endTime : new Date(endTime);
+    
     // Validate time ordering
-    if (endTime <= startTime) {
+    if (end <= start) {
       return { error: "endTime must be later than startTime." };
     }
 
@@ -307,8 +325,11 @@ export default class CallWindowConcept {
 
     // Filter to only overlapping windows
     const overlappingWindows = allWindows.filter((window) => {
+      // Convert window times to Date objects if needed
+      const windowStart = window.startTime instanceof Date ? window.startTime : new Date(window.startTime);
+      const windowEnd = window.endTime instanceof Date ? window.endTime : new Date(window.endTime);
       // Two windows overlap if: window.start < endTime AND window.end > startTime
-      return window.startTime < endTime && window.endTime > startTime;
+      return windowStart < end && windowEnd > start;
     });
 
     if (overlappingWindows.length === 0) {
@@ -319,8 +340,15 @@ export default class CallWindowConcept {
     }
 
     // Calculate merged time range
-    const allStartTimes = [...overlappingWindows.map((w) => w.startTime), startTime];
-    const allEndTimes = [...overlappingWindows.map((w) => w.endTime), endTime];
+    // Convert all times to Date objects and get timestamps
+    const allStartTimes = [
+      ...overlappingWindows.map((w) => w.startTime instanceof Date ? w.startTime : new Date(w.startTime)),
+      start
+    ];
+    const allEndTimes = [
+      ...overlappingWindows.map((w) => w.endTime instanceof Date ? w.endTime : new Date(w.endTime)),
+      end
+    ];
     
     const mergedStartTime = new Date(Math.min(...allStartTimes.map((t) => t.getTime())));
     const mergedEndTime = new Date(Math.max(...allEndTimes.map((t) => t.getTime())));
