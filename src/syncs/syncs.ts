@@ -4,10 +4,15 @@
 
 import type { Sync } from "@engine";
 
-
+import * as sync_authentication from "./authentication.sync.ts";
 
 const allSyncs: Record<string, Sync> = {};
 
 
+for (const [name, func] of Object.entries(sync_authentication)) {
+  if (typeof func === "function") {
+    allSyncs[`authentication.${name}`] = func as Sync;
+  }
+}
 
 export default allSyncs;
