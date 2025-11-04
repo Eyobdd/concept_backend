@@ -34,8 +34,12 @@ export const inclusions: Record<string, string> = {
   "/api/UserAuthentication/login": "public endpoint for user login",
   "/api/UserAuthentication/authenticate": "needed to validate session tokens",
   "/api/UserAuthentication/logout": "needed to invalidate session tokens",
+  "/api/UserAuthentication/createVerifiedCredentials": "public endpoint for completing registration with verified phone",
   "/api/UserAuthentication/_getUserByPhone": "needed to check if user exists during registration",
   "/api/UserAuthentication/_getVerificationCode": "testing/debug endpoint for verification codes",
+  
+  // ReflectionSession - Session-based endpoints (no user auth needed, just session ID)
+  "/api/ReflectionSession/setRating": "sets rating for a reflection session using session ID only",
 };
 
 /**
@@ -69,10 +73,9 @@ export const exclusions: Array<string> = [
   "/api/JournalPrompt/_getUserPrompts",
   "/api/JournalPrompt/_getActivePrompts",
   
-  // ReflectionSession - All require authentication
+  // ReflectionSession - All require authentication (except setRating which is in inclusions)
   "/api/ReflectionSession/startSession",
   "/api/ReflectionSession/recordResponse",
-  "/api/ReflectionSession/setRating",
   "/api/ReflectionSession/completeSession",
   "/api/ReflectionSession/abandonSession",
   "/api/ReflectionSession/_getSessionResponses",
@@ -115,7 +118,6 @@ export const exclusions: Array<string> = [
   "/api/UserAuthentication/deleteAccount",
   "/api/UserAuthentication/_getSessionUser",
   "/api/UserAuthentication/_getUserSessions",
-  "/api/UserAuthentication/createVerifiedCredentials",
   
   // User - Authenticated actions
   "/api/User/deleteUser",

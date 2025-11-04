@@ -249,8 +249,9 @@ export default class CallWindowConcept {
    */
   async _getUserCallWindows(
     { user }: { user: User },
-  ): Promise<AnyCallWindowDoc[]> {
-    return await this.callWindows.find({ user }).toArray();
+  ): Promise<{ windows: AnyCallWindowDoc[] }[]> {
+    const windows = await this.callWindows.find({ user }).toArray();
+    return [{ windows }];
   }
 
   /**
@@ -258,12 +259,12 @@ export default class CallWindowConcept {
    */
   async _getUserRecurringWindows(
     { user }: { user: User },
-  ): Promise<RecurringWindowDoc[]> {
+  ): Promise<{ windows: RecurringWindowDoc[] }[]> {
     const results = await this.callWindows.find({
       user,
       windowType: "RECURRING",
     } as Partial<RecurringWindowDoc>).toArray();
-    return results as RecurringWindowDoc[];
+    return [{ windows: results as RecurringWindowDoc[] }];
   }
 
   /**
@@ -271,12 +272,12 @@ export default class CallWindowConcept {
    */
   async _getUserOneOffWindows(
     { user }: { user: User },
-  ): Promise<OneOffWindowDoc[]> {
+  ): Promise<{ windows: OneOffWindowDoc[] }[]> {
     const results = await this.callWindows.find({
       user,
       windowType: "ONEOFF",
     } as Partial<OneOffWindowDoc>).toArray();
-    return results as OneOffWindowDoc[];
+    return [{ windows: results as OneOffWindowDoc[] }];
   }
 
   /**
@@ -447,9 +448,10 @@ export default class CallWindowConcept {
    * Query: Check if a day should use recurring windows
    * @returns true if should use recurring (default), false if should use one-off (custom)
    */
-  async shouldUseRecurring({ user, date }: { user: User; date: string }): Promise<boolean> {
+  async shouldUseRecurring({ user, date }: { user: User; date: string }): Promise<{ useRecurring: boolean }[]> {
     const dayMode = await this.dayModes.findOne({ user, date });
     // Default to true (use recurring) if no mode is set
-    return dayMode === null ? true : dayMode.useRecurring;
+    const useRecurring = dayMode === null ? true : dayMode.useRecurring;
+    return [{ useRecurring }];
   }
 }

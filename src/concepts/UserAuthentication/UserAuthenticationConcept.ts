@@ -267,12 +267,12 @@ export default class UserAuthenticationConcept {
    */
   async _getSessionUser(
     { token }: { token: string },
-  ): Promise<User | null> {
+  ): Promise<{ user: User | null }[]> {
     const session = await this.sessions.findOne({ token });
     if (!session || new Date() > session.expiresAt) {
-      return null;
+      return [{ user: null }];
     }
-    return session.user;
+    return [{ user: session.user }];
   }
 
   /**

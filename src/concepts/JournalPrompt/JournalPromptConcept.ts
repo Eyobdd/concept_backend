@@ -249,11 +249,12 @@ export default class JournalPromptConcept {
    */
   async _getUserPrompts(
     { user }: { user: User },
-  ): Promise<PromptTemplateDoc[]> {
-    return await this.promptTemplates
+  ): Promise<{ prompts: PromptTemplateDoc[] }[]> {
+    const prompts = await this.promptTemplates
       .find({ user })
       .sort({ position: 1 })
       .toArray();
+    return [{ prompts }];
   }
 
   /**
@@ -261,10 +262,11 @@ export default class JournalPromptConcept {
    */
   async _getActivePrompts(
     { user }: { user: User },
-  ): Promise<PromptTemplateDoc[]> {
-    return await this.promptTemplates
+  ): Promise<{ prompts: PromptTemplateDoc[] }[]> {
+    const prompts = await this.promptTemplates
       .find({ user, isActive: true })
       .sort({ position: 1 })
       .toArray();
+    return [{ prompts }];
   }
 }

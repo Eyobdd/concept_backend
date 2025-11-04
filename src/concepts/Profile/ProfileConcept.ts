@@ -186,8 +186,9 @@ export default class ProfileConcept {
    */
   async _getProfile(
     { user }: { user: User },
-  ): Promise<ProfileDoc | null> {
-    return await this.profiles.findOne({ user });
+  ): Promise<{ profile: ProfileDoc | null }[]> {
+    const profile = await this.profiles.findOne({ user });
+    return [{ profile }];
   }
 
   /**

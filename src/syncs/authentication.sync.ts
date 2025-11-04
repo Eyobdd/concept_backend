@@ -28,7 +28,7 @@ export const CreateProfileRequest: Sync = ({ request, token, displayName, phoneN
   ]),
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
-    return frames.filter(($) => $[user] !== null);
+    return frames;
   },
   then: actions([Profile.createProfile, { user, displayName, phoneNumber, timezone }]),
 });
@@ -50,6 +50,7 @@ export const GetProfileRequest: Sync = ({ request, token, user, profile }) => ({
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
     frames = frames.filter(($) => $[user] !== null);
+    if (frames.length === 0) return frames;
     frames = await frames.query(Profile._getProfile, { user }, { profile });
     return frames;
   },
@@ -64,7 +65,7 @@ export const UpdateRatingPreferenceRequest: Sync = ({ request, token, includeRat
   ]),
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
-    return frames.filter(($) => $[user] !== null);
+    return frames;
   },
   then: actions([Profile.updateRatingPreference, { user, includeRating }]),
 });
@@ -89,7 +90,7 @@ export const CreateDefaultPromptsRequest: Sync = ({ request, token, user }) => (
   ]),
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
-    return frames.filter(($) => $[user] !== null);
+    return frames;
   },
   then: actions([JournalPrompt.createDefaultPrompts, { user }]),
 });
@@ -111,6 +112,7 @@ export const GetUserPromptsRequest: Sync = ({ request, token, user, prompts }) =
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
     frames = frames.filter(($) => $[user] !== null);
+    if (frames.length === 0) return frames;
     frames = await frames.query(JournalPrompt._getUserPrompts, { user }, { prompts });
     return frames;
   },
@@ -126,6 +128,7 @@ export const GetActivePromptsRequest: Sync = ({ request, token, user, prompts })
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
     frames = frames.filter(($) => $[user] !== null);
+    if (frames.length === 0) return frames;
     frames = await frames.query(JournalPrompt._getActivePrompts, { user }, { prompts });
     return frames;
   },
@@ -140,7 +143,7 @@ export const AddPromptRequest: Sync = ({ request, token, promptText, user }) => 
   ]),
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
-    return frames.filter(($) => $[user] !== null);
+    return frames;
   },
   then: actions([JournalPrompt.addPrompt, { user, promptText }]),
 });
@@ -161,7 +164,7 @@ export const UpdatePromptTextRequest: Sync = ({ request, token, position, newTex
   ]),
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
-    return frames.filter(($) => $[user] !== null);
+    return frames;
   },
   then: actions([JournalPrompt.updatePromptText, { user, position, newText }]),
 });
@@ -182,7 +185,7 @@ export const TogglePromptActiveRequest: Sync = ({ request, token, position, user
   ]),
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
-    return frames.filter(($) => $[user] !== null);
+    return frames;
   },
   then: actions([JournalPrompt.togglePromptActive, { user, position }]),
 });
@@ -203,7 +206,7 @@ export const DeletePromptRequest: Sync = ({ request, token, position, user }) =>
   ]),
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
-    return frames.filter(($) => $[user] !== null);
+    return frames;
   },
   then: actions([JournalPrompt.deletePrompt, { user, position }]),
 });
@@ -224,7 +227,7 @@ export const ReorderPromptsRequest: Sync = ({ request, token, newOrder, user }) 
   ]),
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
-    return frames.filter(($) => $[user] !== null);
+    return frames;
   },
   then: actions([JournalPrompt.reorderPrompts, { user, newOrder }]),
 });
@@ -249,7 +252,7 @@ export const CreateRecurringCallWindowRequest: Sync = ({ request, token, dayOfWe
   ]),
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
-    return frames.filter(($) => $[user] !== null);
+    return frames;
   },
   then: actions([CallWindow.createRecurringCallWindow, { user, dayOfWeek, startTime, endTime }]),
 });
@@ -270,7 +273,7 @@ export const CreateOneOffCallWindowRequest: Sync = ({ request, token, specificDa
   ]),
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
-    return frames.filter(($) => $[user] !== null);
+    return frames;
   },
   then: actions([CallWindow.createOneOffCallWindow, { user, specificDate, startTime, endTime }]),
 });
@@ -283,6 +286,43 @@ export const CreateOneOffCallWindowResponse: Sync = ({ request, callWindow }) =>
   then: actions([Requesting.respond, { request, callWindow }]),
 });
 
+export const CreateOneOffCallWindowError: Sync = ({ request, error }) => ({
+  when: actions(
+    [Requesting.request, { path: "/CallWindow/createOneOffCallWindow" }, { request }],
+    [CallWindow.createOneOffCallWindow, {}, { error }],
+  ),
+  then: actions([Requesting.respond, { request, error }]),
+});
+
+export const MergeOverlappingOneOffWindowsRequest: Sync = ({ request, token, user, specificDate, startTime, endTime }) => ({
+  when: actions([
+    Requesting.request,
+    { path: "/CallWindow/mergeOverlappingOneOffWindows", token, specificDate, startTime, endTime },
+    { request },
+  ]),
+  where: async (frames) => {
+    frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
+    return frames;
+  },
+  then: actions([CallWindow.mergeOverlappingOneOffWindows, { user, specificDate, startTime, endTime }]),
+});
+
+export const MergeOverlappingOneOffWindowsResponse: Sync = ({ request, callWindow }) => ({
+  when: actions(
+    [Requesting.request, { path: "/CallWindow/mergeOverlappingOneOffWindows" }, { request }],
+    [CallWindow.mergeOverlappingOneOffWindows, {}, { callWindow }],
+  ),
+  then: actions([Requesting.respond, { request, callWindow }]),
+});
+
+export const MergeOverlappingOneOffWindowsError: Sync = ({ request, error }) => ({
+  when: actions(
+    [Requesting.request, { path: "/CallWindow/mergeOverlappingOneOffWindows" }, { request }],
+    [CallWindow.mergeOverlappingOneOffWindows, {}, { error }],
+  ),
+  then: actions([Requesting.respond, { request, error }]),
+});
+
 export const GetUserCallWindowsRequest: Sync = ({ request, token, user, windows }) => ({
   when: actions([
     Requesting.request,
@@ -292,7 +332,40 @@ export const GetUserCallWindowsRequest: Sync = ({ request, token, user, windows 
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
     frames = frames.filter(($) => $[user] !== null);
+    if (frames.length === 0) return frames;
     frames = await frames.query(CallWindow._getUserCallWindows, { user }, { windows });
+    return frames;
+  },
+  then: actions([Requesting.respond, { request, windows }]),
+});
+
+export const GetUserRecurringWindowsRequest: Sync = ({ request, token, user, windows }) => ({
+  when: actions([
+    Requesting.request,
+    { path: "/CallWindow/_getUserRecurringWindows", token },
+    { request },
+  ]),
+  where: async (frames) => {
+    frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
+    frames = frames.filter(($) => $[user] !== null);
+    if (frames.length === 0) return frames;
+    frames = await frames.query(CallWindow._getUserRecurringWindows, { user }, { windows });
+    return frames;
+  },
+  then: actions([Requesting.respond, { request, windows }]),
+});
+
+export const GetUserOneOffWindowsRequest: Sync = ({ request, token, user, windows }) => ({
+  when: actions([
+    Requesting.request,
+    { path: "/CallWindow/_getUserOneOffWindows", token },
+    { request },
+  ]),
+  where: async (frames) => {
+    frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
+    frames = frames.filter(($) => $[user] !== null);
+    if (frames.length === 0) return frames;
+    frames = await frames.query(CallWindow._getUserOneOffWindows, { user }, { windows });
     return frames;
   },
   then: actions([Requesting.respond, { request, windows }]),
@@ -306,7 +379,7 @@ export const DeleteRecurringCallWindowRequest: Sync = ({ request, token, dayOfWe
   ]),
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
-    return frames.filter(($) => $[user] !== null);
+    return frames;
   },
   then: actions([CallWindow.deleteRecurringCallWindow, { user, dayOfWeek, startTime }]),
 });
@@ -327,7 +400,7 @@ export const DeleteOneOffCallWindowRequest: Sync = ({ request, token, specificDa
   ]),
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
-    return frames.filter(($) => $[user] !== null);
+    return frames;
   },
   then: actions([CallWindow.deleteOneOffCallWindow, { user, specificDate, startTime }]),
 });
@@ -348,7 +421,7 @@ export const SetDayModeCustomRequest: Sync = ({ request, token, date, user }) =>
   ]),
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
-    return frames.filter(($) => $[user] !== null);
+    return frames;
   },
   then: actions([CallWindow.setDayModeCustom, { user, date }]),
 });
@@ -357,6 +430,27 @@ export const SetDayModeCustomResponse: Sync = ({ request, dayMode }) => ({
   when: actions(
     [Requesting.request, { path: "/CallWindow/setDayModeCustom" }, { request }],
     [CallWindow.setDayModeCustom, {}, { dayMode }],
+  ),
+  then: actions([Requesting.respond, { request, dayMode }]),
+});
+
+export const SetDayModeRecurringRequest: Sync = ({ request, token, date, user }) => ({
+  when: actions([
+    Requesting.request,
+    { path: "/CallWindow/setDayModeRecurring", token, date },
+    { request },
+  ]),
+  where: async (frames) => {
+    frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
+    return frames;
+  },
+  then: actions([CallWindow.setDayModeRecurring, { user, date }]),
+});
+
+export const SetDayModeRecurringResponse: Sync = ({ request, dayMode }) => ({
+  when: actions(
+    [Requesting.request, { path: "/CallWindow/setDayModeRecurring" }, { request }],
+    [CallWindow.setDayModeRecurring, {}, { dayMode }],
   ),
   then: actions([Requesting.respond, { request, dayMode }]),
 });
@@ -370,6 +464,7 @@ export const ShouldUseRecurringRequest: Sync = ({ request, token, date, user, us
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
     frames = frames.filter(($) => $[user] !== null);
+    if (frames.length === 0) return frames;
     frames = await frames.query(CallWindow.shouldUseRecurring, { user, date }, { useRecurring });
     return frames;
   },
@@ -388,7 +483,7 @@ export const StartSessionRequest: Sync = ({ request, token, callSession, prompts
   ]),
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
-    return frames.filter(($) => $[user] !== null);
+    return frames;
   },
   then: actions([ReflectionSession.startSession, { user, callSession, prompts }]),
 });
@@ -409,7 +504,7 @@ export const RecordResponseRequest: Sync = ({ request, token, session, promptId,
   ]),
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
-    return frames.filter(($) => $[user] !== null);
+    return frames;
   },
   then: actions([ReflectionSession.recordResponse, { session, promptId, promptText, position, responseText }]),
 });
@@ -430,7 +525,7 @@ export const CompleteSessionRequest: Sync = ({ request, token, session, expected
   ]),
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
-    return frames.filter(($) => $[user] !== null);
+    return frames;
   },
   then: actions([ReflectionSession.completeSession, { session, expectedPromptCount }]),
 });
@@ -452,6 +547,7 @@ export const GetSessionResponsesRequest: Sync = ({ request, token, session, user
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
     frames = frames.filter(($) => $[user] !== null);
+    if (frames.length === 0) return frames;
     frames = await frames.query(ReflectionSession._getSessionResponses, { session }, { responses });
     return frames;
   },
@@ -467,6 +563,7 @@ export const GetSessionRequest: Sync = ({ request, token, session, user, session
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
     frames = frames.filter(($) => $[user] !== null);
+    if (frames.length === 0) return frames;
     frames = await frames.query(ReflectionSession._getSession, { session }, { sessionData });
     return frames;
   },
@@ -485,7 +582,7 @@ export const CreateFromSessionRequest: Sync = ({ request, token, sessionData, se
   ]),
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
-    return frames.filter(($) => $[user] !== null);
+    return frames;
   },
   then: actions([JournalEntry.createFromSession, { sessionData, sessionResponses }]),
 });
@@ -507,6 +604,7 @@ export const GetEntriesByUserRequest: Sync = ({ request, token, user, entries })
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
     frames = frames.filter(($) => $[user] !== null);
+    if (frames.length === 0) return frames;
     frames = await frames.query(JournalEntry._getEntriesByUser, { user }, { entries });
     return frames;
   },
@@ -522,6 +620,7 @@ export const GetEntriesWithResponsesByUserRequest: Sync = ({ request, token, use
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
     frames = frames.filter(($) => $[user] !== null);
+    if (frames.length === 0) return frames;
     frames = await frames.query(JournalEntry._getEntriesWithResponsesByUser, { user }, { entries });
     return frames;
   },
@@ -537,6 +636,7 @@ export const GetEntryByDateRequest: Sync = ({ request, token, date, user, entry 
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
     frames = frames.filter(($) => $[user] !== null);
+    if (frames.length === 0) return frames;
     frames = await frames.query(JournalEntry._getEntryByDate, { user, date }, { entry });
     return frames;
   },
@@ -552,6 +652,7 @@ export const GetEntryResponsesRequest: Sync = ({ request, token, entry, user, re
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
     frames = frames.filter(($) => $[user] !== null);
+    if (frames.length === 0) return frames;
     frames = await frames.query(JournalEntry._getEntryResponses, { entry }, { responses });
     return frames;
   },

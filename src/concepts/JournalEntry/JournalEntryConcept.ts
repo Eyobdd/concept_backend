@@ -194,11 +194,12 @@ export default class JournalEntryConcept {
    */
   async _getEntriesByUser(
     { user }: { user: User },
-  ): Promise<JournalEntryDoc[]> {
-    return await this.journalEntries
+  ): Promise<{ entries: JournalEntryDoc[] }[]> {
+    const entries = await this.journalEntries
       .find({ user })
       .sort({ creationDate: -1 })
       .toArray();
+    return [{ entries }];
   }
 
   /**
@@ -206,7 +207,7 @@ export default class JournalEntryConcept {
    */
   async _getEntriesWithResponsesByUser(
     { user }: { user: User },
-  ): Promise<Array<JournalEntryDoc & { responses: PromptResponseDoc[] }>> {
+  ): Promise<{ entries: Array<JournalEntryDoc & { responses: PromptResponseDoc[] }> }[]> {
     const entries = await this.journalEntries
       .find({ user })
       .sort({ creationDate: -1 })
@@ -223,7 +224,7 @@ export default class JournalEntryConcept {
       })
     );
     
-    return entriesWithResponses;
+    return [{ entries: entriesWithResponses }];
   }
 
   /**
@@ -250,8 +251,9 @@ export default class JournalEntryConcept {
    */
   async _getEntryByDate(
     { user, date }: { user: User; date: string },
-  ): Promise<JournalEntryDoc | null> {
-    return await this.journalEntries.findOne({ user, creationDate: date });
+  ): Promise<{ entry: JournalEntryDoc | null }[]> {
+    const entry = await this.journalEntries.findOne({ user, creationDate: date });
+    return [{ entry }];
   }
 
   /**
@@ -259,10 +261,11 @@ export default class JournalEntryConcept {
    */
   async _getEntryResponses(
     { entry }: { entry: JournalEntry },
-  ): Promise<PromptResponseDoc[]> {
-    return await this.promptResponses
+  ): Promise<{ responses: PromptResponseDoc[] }[]> {
+    const responses = await this.promptResponses
       .find({ journalEntry: entry })
       .sort({ position: 1 })
       .toArray();
+    return [{ responses }];
   }
 }

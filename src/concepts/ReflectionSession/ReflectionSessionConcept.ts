@@ -260,11 +260,12 @@ export default class ReflectionSessionConcept {
    */
   async _getSessionResponses(
     { session }: { session: ReflectionSession },
-  ): Promise<PromptResponseDoc[]> {
-    return await this.promptResponses
+  ): Promise<{ responses: PromptResponseDoc[] }[]> {
+    const responses = await this.promptResponses
       .find({ reflectionSession: session })
       .sort({ position: 1 })
       .toArray();
+    return [{ responses }];
   }
 
   /**
@@ -296,7 +297,8 @@ export default class ReflectionSessionConcept {
    */
   async _getSession(
     { session }: { session: ReflectionSession },
-  ): Promise<ReflectionSessionDoc | null> {
-    return await this.reflectionSessions.findOne({ _id: session });
+  ): Promise<{ sessionData: ReflectionSessionDoc | null }[]> {
+    const sessionData = await this.reflectionSessions.findOne({ _id: session });
+    return [{ sessionData }];
   }
 }
