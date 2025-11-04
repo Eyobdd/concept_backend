@@ -32,6 +32,9 @@ export const inclusions: Record<string, string> = {
   "/api/UserAuthentication/requestVerificationCode": "public endpoint to request verification codes",
   "/api/UserAuthentication/register": "public endpoint for user registration",
   "/api/UserAuthentication/login": "public endpoint for user login",
+  "/api/UserAuthentication/authenticate": "needed to validate session tokens",
+  "/api/UserAuthentication/logout": "needed to invalidate session tokens",
+  "/api/UserAuthentication/_getUserByPhone": "needed to check if user exists during registration",
   "/api/UserAuthentication/_getVerificationCode": "testing/debug endpoint for verification codes",
 };
 
@@ -109,11 +112,8 @@ export const exclusions: Array<string> = [
   "/api/CallSession/_getUserSessions",
   
   // UserAuthentication - Authenticated actions
-  "/api/UserAuthentication/logout",
-  "/api/UserAuthentication/authenticate",
   "/api/UserAuthentication/deleteAccount",
   "/api/UserAuthentication/_getSessionUser",
-  "/api/UserAuthentication/_getUserByPhone",
   "/api/UserAuthentication/_getUserSessions",
   "/api/UserAuthentication/createVerifiedCredentials",
   
