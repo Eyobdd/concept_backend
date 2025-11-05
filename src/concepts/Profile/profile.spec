@@ -16,6 +16,8 @@
       a phoneNumber String       # E.164 format: +1234567890
       a timezone String          # IANA timezone: "America/New_York"
       a includeRating Flag       # Whether to include day rating prompt in reflection calls
+      an optional namePronunciation String  # Phonetic pronunciation guide for TTS
+      a maxRetries Number        # Maximum number of call retry attempts (minimum 1)
       a updatedAt DateTime
 
   invariants
@@ -31,6 +33,7 @@
       effect: 
         - Creates new Profile.
         - Sets includeRating to true (default).
+        - Sets maxRetries to 4 (default).
         - Sets updatedAt to current time.
         - Returns the profile.
 
@@ -62,6 +65,20 @@
       requires: Profile exists for user.
       effect:
         - Updates profile.includeRating.
+        - Sets updatedAt to current time.
+
+    updateNamePronunciation(user: User, namePronunciation: String)
+      requires: Profile exists for user.
+      effect:
+        - Updates profile.namePronunciation.
+        - Sets updatedAt to current time.
+
+    updateMaxRetries(user: User, maxRetries: Number)
+      requires: 
+        - Profile exists for user.
+        - maxRetries is at least 1.
+      effect:
+        - Updates profile.maxRetries.
         - Sets updatedAt to current time.
 
     deleteProfile(user: User)

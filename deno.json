@@ -2,10 +2,12 @@
     "imports": {
         "@concepts/": "./src/concepts/",
         "@concepts": "./src/concepts/concepts.ts",
+        "@google/generative-ai": "npm:@google/generative-ai@^0.24.1",
         "@test-concepts": "./src/concepts/test_concepts.ts",
         "@utils/": "./src/utils/",
         "@engine": "./src/engine/mod.ts",
-        "@syncs": "./src/syncs/syncs.ts"
+        "@syncs": "./src/syncs/syncs.ts",
+        "twilio": "npm:twilio@^5.10.4"
     },
     "tasks": {
         "start": "deno run --allow-net --allow-write --allow-read --allow-sys --allow-env src/main.ts",

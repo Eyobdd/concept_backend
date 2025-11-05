@@ -17,6 +17,8 @@ interface ProfileDoc {
   phoneNumber: string; // E.164 format: +1234567890
   timezone: string; // IANA timezone: "America/New_York"
   includeRating: boolean; // Whether to include day rating prompt in reflection calls
+  namePronunciation?: string; // Phonetic pronunciation guide for TTS
+  maxRetries: number; // Maximum number of call retry attempts (minimum 1)
   updatedAt: Date;
 }
 
@@ -66,6 +68,7 @@ export default class ProfileConcept {
       phoneNumber,
       timezone,
       includeRating: true, // Default to including rating prompt
+      maxRetries: 4, // Default to 4 retry attempts
       updatedAt: new Date(),
     });
 
@@ -196,5 +199,51 @@ export default class ProfileConcept {
    */
   async _getAllProfiles(): Promise<ProfileDoc[]> {
     return await this.profiles.find({}).toArray();
+  }
+
+  /**
+   * Action: Updates the name pronunciation for a user's profile.
+   * @requires Profile exists for user
+   * @effects Updates profile.namePronunciation and sets updatedAt to current time.
+   */
+  async updateNamePronunciation(
+    { user, namePronunciation }: { user: User; namePronunciation: string },
+  ): Promise<Empty | { error: string }> {
+    const profile = await this.profiles.findOne({ user });
+    if (!profile) {
+      return { error: `No profile found for user ${user}.` };
+    }
+
+    await this.profiles.updateOne(
+      { user },
+      { $set: { namePronunciation, updatedAt: new Date() } },
+    );
+
+    return {};
+  }
+
+  /**
+   * Action: Updates the maximum retry attempts for a user's profile.
+   * @requires Profile exists for user; maxRetries is at least 1
+   * @effects Updates profile.maxRetries and sets updatedAt to current time.
+   */
+  async updateMaxRetries(
+    { user, maxRetries }: { user: User; maxRetries: number },
+  ): Promise<Empty | { error: string }> {
+    if (!Number.isInteger(maxRetries) || maxRetries < 1) {
+      return { error: "maxRetries must be an integer of at least 1." };
+    }
+
+    const profile = await this.profiles.findOne({ user });
+    if (!profile) {
+      return { error: `No profile found for user ${user}.` };
+    }
+
+    await this.profiles.updateOne(
+      { user },
+      { $set: { maxRetries, updatedAt: new Date() } },
+    );
+
+    return {};
   }
 }

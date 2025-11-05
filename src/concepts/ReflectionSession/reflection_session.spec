@@ -18,6 +18,9 @@
       an optional endedAt DateTime
       a status of IN_PROGRESS or COMPLETED or ABANDONED
       an optional rating Number  # Integer -2 to 2, set when session completes
+      a method of PHONE or TEXT  # How the reflection was conducted
+      an optional transcript String  # Full transcript for phone reflections
+      an optional recordingUrl String  # Encrypted recording URL for phone reflections
 
     a set of PromptResponses with
       a reflectionSession ReflectionSession
@@ -34,12 +37,13 @@
     PromptResponses for a session have unique position values forming sequence 1, 2, 3...
 
   actions
-    startSession(user: User, callSession: CallSession, prompts: seq of {promptId: ID, promptText: String}): ReflectionSession
+    startSession(user: User, callSession: CallSession, method: String, prompts: seq of {promptId: ID, promptText: String}): ReflectionSession
       requires: 
         - No IN_PROGRESS session exists for user.
         - prompts sequence has 1-5 elements.
+        - method is either "PHONE" or "TEXT".
       effect: 
-        - Creates new ReflectionSession with IN_PROGRESS status.
+        - Creates new ReflectionSession with IN_PROGRESS status and specified method.
         - Sets startedAt to current time.
         - Returns the session.
 
@@ -83,5 +87,17 @@
 
     _getSession(session: ReflectionSession): ReflectionSession
       effect: Returns session, or null if not found.
+
+    setTranscript(session: ReflectionSession, transcript: String)
+      requires: 
+        - session.status is IN_PROGRESS.
+        - session.method is PHONE.
+      effect: Sets session.transcript to transcript.
+
+    setRecordingUrl(session: ReflectionSession, recordingUrl: String)
+      requires: 
+        - session.status is COMPLETED.
+        - session.method is PHONE.
+      effect: Sets session.recordingUrl to recordingUrl (encrypted).
 
 <concept_spec/>

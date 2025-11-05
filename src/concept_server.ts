@@ -4,6 +4,7 @@ import { getDb } from "@utils/database.ts";
 import { walk } from "jsr:@std/fs";
 import { parseArgs } from "jsr:@std/cli/parse-args";
 import { toFileUrl } from "jsr:@std/path/to-file-url";
+import { createTwilioWebhooks } from "./webhooks/twilio.ts";
 
 // Parse command-line arguments for port and base URL
 const flags = parseArgs(Deno.args, {
@@ -34,8 +35,14 @@ async function main() {
 
   app.get("/", (c) => c.text("Concept Server is running."));
 
+  // --- Twilio Webhooks ---
+  console.log("Registering Twilio webhooks...");
+  const twilioWebhooks = createTwilioWebhooks(db);
+  app.route("/webhooks/twilio", twilioWebhooks);
+  console.log("✓ Twilio webhooks registered at /webhooks/twilio");
+
   // --- Dynamic Concept Loading and Routing ---
-  console.log(`Scanning for concepts in ./${CONCEPTS_DIR}...`);
+  console.log(`\nScanning for concepts in ./${CONCEPTS_DIR}...`);
 
   for await (
     const entry of walk(CONCEPTS_DIR, {

@@ -27,7 +27,8 @@ Deno.test("Principle: User creates profile and updates information", async () =>
 
     // 2. Retrieve the profile
     console.log("\n2. Retrieving profile...");
-    const profile = await profileConcept._getProfile({ user: userAlice });
+    const profileResult = await profileConcept._getProfile({ user: userAlice });
+    const profile = profileResult[0].profile;
     assertNotEquals(profile, null, "Profile should exist");
     assertEquals(profile!.displayName, "Alice Smith", "Display name should match");
     assertEquals(profile!.phoneNumber, "+12025551234", "Phone number should match");
@@ -45,7 +46,8 @@ Deno.test("Principle: User creates profile and updates information", async () =>
     });
     assertEquals("error" in updateResult, false, "Update should succeed");
     
-    const updatedProfile = await profileConcept._getProfile({ user: userAlice });
+    const updatedProfileResult = await profileConcept._getProfile({ user: userAlice });
+    const updatedProfile = updatedProfileResult[0].profile;
     assertEquals(updatedProfile!.displayName, "Alice Johnson", "Display name should be updated");
     console.log(`   ✓ Display name updated to: ${updatedProfile!.displayName}`);
 
@@ -162,7 +164,8 @@ Deno.test("Action: updateDisplayName validates and updates correctly", async () 
     });
     assertEquals("error" in result1, false, "Valid update should succeed");
     
-    const profile1 = await profileConcept._getProfile({ user: userAlice });
+    const profile1Result = await profileConcept._getProfile({ user: userAlice });
+    const profile1 = profile1Result[0].profile;
     assertEquals(profile1!.displayName, "Alice Johnson", "Name should be updated");
     console.log("✓ Display name updated successfully");
 
@@ -218,7 +221,8 @@ Deno.test("Action: updatePhoneNumber validates and updates correctly", async () 
     });
     assertEquals("error" in result1, false, "Valid update should succeed");
     
-    const profile1 = await profileConcept._getProfile({ user: userAlice });
+    const profile1Result = await profileConcept._getProfile({ user: userAlice });
+    const profile1 = profile1Result[0].profile;
     assertEquals(profile1!.phoneNumber, "+13105559999", "Phone should be updated");
     console.log("✓ Phone number updated successfully");
 
@@ -258,7 +262,8 @@ Deno.test("Action: updateTimezone updates correctly", async () => {
     });
     assertEquals("error" in result, false, "Update should succeed");
     
-    const profile = await profileConcept._getProfile({ user: userAlice });
+    const profileResult = await profileConcept._getProfile({ user: userAlice });
+    const profile = profileResult[0].profile;
     assertEquals(profile!.timezone, "America/Los_Angeles", "Timezone should be updated");
     console.log("✓ Timezone updated successfully");
     console.log();
@@ -284,7 +289,8 @@ Deno.test("Action: deleteProfile removes profile", async () => {
     console.log("✓ Profile created");
 
     // Verify it exists
-    let profile = await profileConcept._getProfile({ user: userAlice });
+    let profileResult = await profileConcept._getProfile({ user: userAlice });
+    let profile = profileResult[0].profile;
     assertNotEquals(profile, null, "Profile should exist");
     console.log("✓ Profile exists");
 
@@ -294,7 +300,8 @@ Deno.test("Action: deleteProfile removes profile", async () => {
     console.log("✓ Profile deleted");
 
     // Verify it's gone
-    profile = await profileConcept._getProfile({ user: userAlice });
+    profileResult = await profileConcept._getProfile({ user: userAlice });
+    profile = profileResult[0].profile;
     assertEquals(profile, null, "Profile should be deleted");
     console.log("✓ Profile no longer exists");
 
@@ -360,7 +367,8 @@ Deno.test("Scenario: Profile updatedAt timestamp changes on updates", async () =
       timezone: "America/New_York",
     });
     
-    const profile1 = await profileConcept._getProfile({ user: userAlice });
+    const profile1Result = await profileConcept._getProfile({ user: userAlice });
+    const profile1 = profile1Result[0].profile;
     const originalTimestamp = profile1!.updatedAt.getTime();
     console.log(`✓ Profile created with timestamp: ${profile1!.updatedAt.toISOString()}`);
 
@@ -373,12 +381,155 @@ Deno.test("Scenario: Profile updatedAt timestamp changes on updates", async () =
       displayName: "Alice Updated",
     });
 
-    const profile2 = await profileConcept._getProfile({ user: userAlice });
+    const profile2Result = await profileConcept._getProfile({ user: userAlice });
+    const profile2 = profile2Result[0].profile;
     const newTimestamp = profile2!.updatedAt.getTime();
     
     assertEquals(newTimestamp > originalTimestamp, true, "Timestamp should be updated");
     console.log(`✓ Timestamp updated: ${profile2!.updatedAt.toISOString()}`);
     console.log(`✓ Time difference: ${newTimestamp - originalTimestamp}ms`);
+    console.log();
+  } finally {
+    await client.close();
+  }
+});
+
+Deno.test("Action: updateNamePronunciation updates correctly", async () => {
+  const [db, client] = await testDb();
+  const profileConcept = new ProfileConcept(db);
+
+  try {
+    console.log("\n=== Testing updateNamePronunciation ===");
+
+    // Create profile
+    await profileConcept.createProfile({
+      user: userAlice,
+      displayName: "Alice",
+      phoneNumber: "+12025551234",
+      timezone: "America/New_York",
+    });
+    console.log("✓ Profile created");
+
+    // Verify no pronunciation initially
+    let profileResult = await profileConcept._getProfile({ user: userAlice });
+    let profile = profileResult[0].profile;
+    assertEquals(profile!.namePronunciation, undefined, "Should have no pronunciation initially");
+    console.log("✓ No pronunciation initially");
+
+    // Set pronunciation
+    const result1 = await profileConcept.updateNamePronunciation({
+      user: userAlice,
+      namePronunciation: "AL-iss",
+    });
+    assertEquals("error" in result1, false, "Update should succeed");
+    
+    profileResult = await profileConcept._getProfile({ user: userAlice });
+    profile = profileResult[0].profile;
+    assertEquals(profile!.namePronunciation, "AL-iss", "Pronunciation should be set");
+    console.log("✓ Name pronunciation set successfully");
+
+    // Update pronunciation
+    const result2 = await profileConcept.updateNamePronunciation({
+      user: userAlice,
+      namePronunciation: "uh-LISS",
+    });
+    assertEquals("error" in result2, false, "Update should succeed");
+    
+    profileResult = await profileConcept._getProfile({ user: userAlice });
+    profile = profileResult[0].profile;
+    assertEquals(profile!.namePronunciation, "uh-LISS", "Pronunciation should be updated");
+    console.log("✓ Name pronunciation updated successfully");
+
+    // Try updating non-existent profile
+    const result3 = await profileConcept.updateNamePronunciation({
+      user: userBob,
+      namePronunciation: "bob",
+    });
+    assertEquals("error" in result3, true, "Non-existent profile should fail");
+    console.log("✓ Non-existent profile correctly rejected");
+    console.log();
+  } finally {
+    await client.close();
+  }
+});
+
+Deno.test("Action: updateMaxRetries validates and updates correctly", async () => {
+  const [db, client] = await testDb();
+  const profileConcept = new ProfileConcept(db);
+
+  try {
+    console.log("\n=== Testing updateMaxRetries ===");
+
+    // Create profile
+    await profileConcept.createProfile({
+      user: userAlice,
+      displayName: "Alice",
+      phoneNumber: "+12025551234",
+      timezone: "America/New_York",
+    });
+    console.log("✓ Profile created");
+
+    // Verify default maxRetries is 4
+    let profileResult = await profileConcept._getProfile({ user: userAlice });
+    let profile = profileResult[0].profile;
+    assertEquals(profile!.maxRetries, 4, "Default maxRetries should be 4");
+    console.log("✓ Default maxRetries is 4");
+
+    // Update to valid value
+    const result1 = await profileConcept.updateMaxRetries({
+      user: userAlice,
+      maxRetries: 2,
+    });
+    assertEquals("error" in result1, false, "Valid update should succeed");
+    
+    profileResult = await profileConcept._getProfile({ user: userAlice });
+    profile = profileResult[0].profile;
+    assertEquals(profile!.maxRetries, 2, "maxRetries should be updated");
+    console.log("✓ maxRetries updated to 2");
+
+    // Update to minimum value (1)
+    const result2 = await profileConcept.updateMaxRetries({
+      user: userAlice,
+      maxRetries: 1,
+    });
+    assertEquals("error" in result2, false, "Minimum value should succeed");
+    
+    profileResult = await profileConcept._getProfile({ user: userAlice });
+    profile = profileResult[0].profile;
+    assertEquals(profile!.maxRetries, 1, "maxRetries should be 1");
+    console.log("✓ maxRetries updated to minimum (1)");
+
+    // Try invalid value (0)
+    const result3 = await profileConcept.updateMaxRetries({
+      user: userAlice,
+      maxRetries: 0,
+    });
+    assertEquals("error" in result3, true, "Zero should fail");
+    console.log("✓ Zero maxRetries correctly rejected");
+
+    // Try negative value
+    const result4 = await profileConcept.updateMaxRetries({
+      user: userAlice,
+      maxRetries: -1,
+    });
+    assertEquals("error" in result4, true, "Negative should fail");
+    console.log("✓ Negative maxRetries correctly rejected");
+
+    // Try non-integer value
+    const result5 = await profileConcept.updateMaxRetries({
+      user: userAlice,
+      maxRetries: 2.5,
+    });
+    assertEquals("error" in result5, true, "Non-integer should fail");
+    console.log("✓ Non-integer maxRetries correctly rejected");
+
+    // Try updating non-existent profile
+    const result6 = await profileConcept.updateMaxRetries({
+      user: userBob,
+      maxRetries: 3,
+    });
+    assertEquals("error" in result6, true, "Non-existent profile should fail");
+    console.log("✓ Non-existent profile correctly rejected");
     console.log();
   } finally {
     await client.close();

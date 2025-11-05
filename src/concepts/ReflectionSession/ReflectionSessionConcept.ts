@@ -14,6 +14,9 @@ type PromptResponse = ID;
 // Enum for session status
 type SessionStatus = "IN_PROGRESS" | "COMPLETED" | "ABANDONED";
 
+// Enum for reflection method
+type ReflectionMethod = "PHONE" | "TEXT";
+
 /**
  * State: A set of ReflectionSessions tracking live reflection progress.
  */
@@ -25,6 +28,9 @@ interface ReflectionSessionDoc {
   endedAt?: Date;
   status: SessionStatus;
   rating?: number; // Integer -2 to 2, set when session completes
+  method: ReflectionMethod; // How the reflection was conducted
+  transcript?: string; // Full transcript for phone reflections
+  recordingUrl?: string; // Encrypted recording URL for phone reflections
 }
 
 /**
@@ -58,13 +64,14 @@ export default class ReflectionSessionConcept {
 
   /**
    * Action: Starts a new reflection session.
-   * @requires No IN_PROGRESS session exists for user; prompts sequence has 1-5 elements
-   * @effects Creates new ReflectionSession with IN_PROGRESS status
+   * @requires No IN_PROGRESS session exists for user; prompts sequence has 1-5 elements; method is PHONE or TEXT
+   * @effects Creates new ReflectionSession with IN_PROGRESS status and specified method
    */
   async startSession(
-    { user, callSession, prompts }: {
+    { user, callSession, method, prompts }: {
       user: User;
       callSession: CallSession;
+      method: ReflectionMethod;
       prompts: Array<{ promptId: ID; promptText: string }>;
     },
   ): Promise<{ session: ReflectionSession } | { error: string }> {
@@ -84,6 +91,11 @@ export default class ReflectionSessionConcept {
       return { error: "Prompts sequence must have 1-5 elements." };
     }
 
+    // Validate method
+    if (method !== "PHONE" && method !== "TEXT") {
+      return { error: 'Method must be either "PHONE" or "TEXT".'};
+    }
+
     const sessionId = freshID() as ReflectionSession;
     await this.reflectionSessions.insertOne({
       _id: sessionId,
@@ -91,6 +103,7 @@ export default class ReflectionSessionConcept {
       callSession,
       startedAt: new Date(),
       status: "IN_PROGRESS",
+      method,
     });
 
     return { session: sessionId };
@@ -300,5 +313,83 @@ export default class ReflectionSessionConcept {
   ): Promise<{ sessionData: ReflectionSessionDoc | null }[]> {
     const sessionData = await this.reflectionSessions.findOne({ _id: session });
     return [{ sessionData }];
+  }
+
+  /**
+   * Query: Retrieves a session by call session ID.
+   */
+  async _getSessionByCallSession(
+    { callSession }: { callSession: CallSession },
+  ): Promise<{ sessionData: ReflectionSessionDoc | null }[]> {
+    const sessionData = await this.reflectionSessions.findOne({ callSession });
+    return [{ sessionData }];
+  }
+
+  /**
+   * Action: Sets the transcript for a phone reflection session.
+   * @requires session.status is IN_PROGRESS; session.method is PHONE
+   * @effects Sets session.transcript
+   */
+  async setTranscript(
+    { session, transcript }: { session: ReflectionSession; transcript: string },
+  ): Promise<Empty | { error: string }> {
+    // Verify session exists and is IN_PROGRESS
+    const sessionDoc = await this.reflectionSessions.findOne({ _id: session });
+    if (!sessionDoc) {
+      return { error: `Session ${session} not found.` };
+    }
+
+    if (sessionDoc.status !== "IN_PROGRESS") {
+      return {
+        error: `Session ${session} is ${sessionDoc.status}, cannot set transcript.`,
+      };
+    }
+
+    if (sessionDoc.method !== "PHONE") {
+      return {
+        error: `Session ${session} method is ${sessionDoc.method}, transcript only for PHONE sessions.`,
+      };
+    }
+
+    await this.reflectionSessions.updateOne(
+      { _id: session },
+      { $set: { transcript } },
+    );
+
+    return {};
+  }
+
+  /**
+   * Action: Sets the encrypted recording URL for a completed phone reflection.
+   * @requires session.status is COMPLETED; session.method is PHONE
+   * @effects Sets session.recordingUrl
+   */
+  async setRecordingUrl(
+    { session, recordingUrl }: { session: ReflectionSession; recordingUrl: string },
+  ): Promise<Empty | { error: string }> {
+    // Verify session exists and is COMPLETED
+    const sessionDoc = await this.reflectionSessions.findOne({ _id: session });
+    if (!sessionDoc) {
+      return { error: `Session ${session} not found.` };
+    }
+
+    if (sessionDoc.status !== "COMPLETED") {
+      return {
+        error: `Session ${session} is ${sessionDoc.status}, can only set recording URL for COMPLETED sessions.`,
+      };
+    }
+
+    if (sessionDoc.method !== "PHONE") {
+      return {
+        error: `Session ${session} method is ${sessionDoc.method}, recording URL only for PHONE sessions.`,
+      };
+    }
+
+    await this.reflectionSessions.updateOne(
+      { _id: session },
+      { $set: { recordingUrl } },
+    );
+
+    return {};
   }
 }

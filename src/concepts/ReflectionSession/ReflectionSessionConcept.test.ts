@@ -28,6 +28,7 @@ Deno.test("Principle: User starts session, records responses, sets rating, and c
     const startResult = await reflectionConcept.startSession({
       user: userAlice,
       callSession: callSession1,
+      method: "TEXT",
       prompts: samplePrompts,
     });
     assertNotEquals("error" in startResult, true, "Start should succeed");
@@ -67,10 +68,11 @@ Deno.test("Principle: User starts session, records responses, sets rating, and c
     console.log("   ✓ Session completed");
 
     // 5. Verify final state
-    const sessionDoc = await reflectionConcept._getSession({ session });
-    assertEquals(sessionDoc!.status, "COMPLETED");
-    assertEquals(sessionDoc!.rating, 2);
-    assertNotEquals(sessionDoc!.endedAt, undefined);
+    const sessionResult = await reflectionConcept._getSession({ session });
+    const sessionDoc = sessionResult[0].sessionData!;
+    assertEquals(sessionDoc.status, "COMPLETED");
+    assertEquals(sessionDoc.rating, 2);
+    assertNotEquals(sessionDoc.endedAt, undefined);
     console.log("   ✓ Final state verified: COMPLETED with rating 2");
 
     console.log("\n=== Operational Principle Test Passed ===\n");
@@ -90,6 +92,7 @@ Deno.test("Action: startSession enforces one IN_PROGRESS session per user", asyn
     const result1 = await reflectionConcept.startSession({
       user: userAlice,
       callSession: callSession1,
+      method: "TEXT",
       prompts: samplePrompts,
     });
     assertEquals("error" in result1, false, "First session should succeed");
@@ -99,6 +102,7 @@ Deno.test("Action: startSession enforces one IN_PROGRESS session per user", asyn
     const result2 = await reflectionConcept.startSession({
       user: userAlice,
       callSession: "callSession:2" as ID,
+      method: "TEXT",
       prompts: samplePrompts,
     });
     assertEquals("error" in result2, true, "Second session should fail");
@@ -108,6 +112,7 @@ Deno.test("Action: startSession enforces one IN_PROGRESS session per user", asyn
     const result3 = await reflectionConcept.startSession({
       user: userBob,
       callSession: "callSession:3" as ID,
+      method: "TEXT",
       prompts: samplePrompts,
     });
     assertEquals("error" in result3, false, "Different user should succeed");
@@ -129,6 +134,7 @@ Deno.test("Action: startSession validates prompt count", async () => {
     const result1 = await reflectionConcept.startSession({
       user: userAlice,
       callSession: callSession1,
+      method: "TEXT",
       prompts: [],
     });
     assertEquals("error" in result1, true, "Empty prompts should fail");
@@ -139,6 +145,7 @@ Deno.test("Action: startSession validates prompt count", async () => {
     const result2 = await reflectionConcept.startSession({
       user: userAlice,
       callSession: callSession1,
+      method: "TEXT",
       prompts: tooMany,
     });
     assertEquals("error" in result2, true, "6 prompts should fail");
@@ -148,6 +155,7 @@ Deno.test("Action: startSession validates prompt count", async () => {
     const result3 = await reflectionConcept.startSession({
       user: userAlice,
       callSession: callSession1,
+      method: "TEXT",
       prompts: samplePrompts,
     });
     assertEquals("error" in result3, false, "3 prompts should succeed");
@@ -169,6 +177,7 @@ Deno.test("Action: recordResponse validates session state", async () => {
     const { session } = (await reflectionConcept.startSession({
       user: userAlice,
       callSession: callSession1,
+      method: "TEXT",
       prompts: samplePrompts,
     })) as { session: ID };
 
@@ -238,6 +247,7 @@ Deno.test("Action: setRating validates rating value", async () => {
     const { session } = (await reflectionConcept.startSession({
       user: userAlice,
       callSession: callSession1,
+      method: "TEXT",
       prompts: samplePrompts,
     })) as { session: ID };
 
@@ -270,6 +280,7 @@ Deno.test("Action: completeSession validates requirements", async () => {
     const { session } = (await reflectionConcept.startSession({
       user: userAlice,
       callSession: callSession1,
+      method: "TEXT",
       prompts: samplePrompts,
     })) as { session: ID };
 
@@ -324,6 +335,7 @@ Deno.test("Action: abandonSession works correctly", async () => {
     const { session } = (await reflectionConcept.startSession({
       user: userAlice,
       callSession: callSession1,
+      method: "TEXT",
       prompts: samplePrompts,
     })) as { session: ID };
 
@@ -343,9 +355,10 @@ Deno.test("Action: abandonSession works correctly", async () => {
     console.log("✓ Session abandoned");
 
     // Verify state
-    const sessionDoc = await reflectionConcept._getSession({ session });
-    assertEquals(sessionDoc!.status, "ABANDONED");
-    assertNotEquals(sessionDoc!.endedAt, undefined);
+    const sessionResult = await reflectionConcept._getSession({ session });
+    const sessionDoc = sessionResult[0].sessionData!;
+    assertEquals(sessionDoc.status, "ABANDONED");
+    assertNotEquals(sessionDoc.endedAt, undefined);
     console.log("✓ Status set to ABANDONED with endedAt");
 
     // Can't record more responses
@@ -374,6 +387,7 @@ Deno.test("Query: _getSessionResponses returns ordered responses", async () => {
     const { session } = (await reflectionConcept.startSession({
       user: userAlice,
       callSession: callSession1,
+      method: "TEXT",
       prompts: samplePrompts,
     })) as { session: ID };
 
@@ -401,11 +415,14 @@ Deno.test("Query: _getSessionResponses returns ordered responses", async () => {
     });
 
     // Retrieve responses
-    const responses = await reflectionConcept._getSessionResponses({ session });
+    const responsesResult = await reflectionConcept._getSessionResponses({
+      session,
+    });
+    const responses = responsesResult[0].responses;
     assertEquals(responses.length, 3);
-    assertEquals(responses[0].position, 1);
-    assertEquals(responses[1].position, 2);
-    assertEquals(responses[2].position, 3);
+    assertEquals(responses[0].promptId, samplePrompts[0].promptId);
+    assertEquals(responses[1].promptId, samplePrompts[1].promptId);
+    assertEquals(responses[2].promptId, samplePrompts[2].promptId);
     console.log("✓ Responses returned in correct order (1, 2, 3)");
     console.log();
   } finally {
@@ -424,6 +441,7 @@ Deno.test("Scenario: Complete reflection workflow", async () => {
     const { session } = (await reflectionConcept.startSession({
       user: userAlice,
       callSession: callSession1,
+      method: "TEXT",
       prompts: samplePrompts,
     })) as { session: ID };
     console.log("✓ Step 1: Session started");
@@ -449,18 +467,17 @@ Deno.test("Scenario: Complete reflection workflow", async () => {
     console.log("✓ Step 4: Session completed");
 
     // Verify final state
-    const sessionDoc = await reflectionConcept._getSession({ session });
-    const responses = await reflectionConcept._getSessionResponses({ session });
+    const sessionResult = await reflectionConcept._getSession({ session });
+    const sessionDoc = sessionResult[0].sessionData!;
+    assertEquals(sessionDoc.status, "COMPLETED");
+    assertEquals(sessionDoc.rating, 1);
+    console.log("✓ Session completed");
+    assertNotEquals(sessionDoc.endedAt, undefined);
+    console.log("✓ End time recorded");
 
-    assertEquals(sessionDoc!.status, "COMPLETED");
-    assertEquals(sessionDoc!.rating, 1);
-    assertEquals(responses.length, 3);
-    assertNotEquals(sessionDoc!.endedAt, undefined);
-
-    console.log("✓ Step 5: All data verified");
-    console.log(`  - Status: ${sessionDoc!.status}`);
-    console.log(`  - Rating: ${sessionDoc!.rating}`);
-    console.log(`  - Responses: ${responses.length}`);
+    console.log("\n4. Verifying final state...");
+    console.log(`  - Status: ${sessionDoc.status}`);
+    console.log(`  - Rating: ${sessionDoc.rating}`);
     console.log();
   } finally {
     await client.close();
