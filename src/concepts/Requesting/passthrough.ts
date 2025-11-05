@@ -40,6 +40,8 @@ export const inclusions: Record<string, string> = {
   
   // ReflectionSession - Session-based endpoints (no user auth needed, just session ID)
   "/api/ReflectionSession/setRating": "sets rating for a reflection session using session ID only",
+  "/api/ReflectionSession/abandonSession": "abandons a session directly without Requesting concept to avoid Engine timeout issues",
+  "/api/ReflectionSession/_getActiveSession": "checks for active session directly without Requesting concept to avoid Engine timeout issues",
 };
 
 /**
@@ -73,15 +75,14 @@ export const exclusions: Array<string> = [
   "/api/JournalPrompt/_getUserPrompts",
   "/api/JournalPrompt/_getActivePrompts",
   
-  // ReflectionSession - All require authentication (except setRating which is in inclusions)
+  // ReflectionSession - Most require authentication (abandonSession and _getActiveSession in inclusions to avoid timeout)
   "/api/ReflectionSession/startSession",
   "/api/ReflectionSession/recordResponse",
   "/api/ReflectionSession/completeSession",
-  "/api/ReflectionSession/abandonSession",
   "/api/ReflectionSession/_getSessionResponses",
   "/api/ReflectionSession/_getUserSessions",
-  "/api/ReflectionSession/_getActiveSession",
   "/api/ReflectionSession/_getSession",
+  "/api/ReflectionSession/getSessionStatus",
   
   // JournalEntry - All require authentication
   "/api/JournalEntry/formatDateInTimezone",

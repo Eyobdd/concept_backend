@@ -1,5 +1,6 @@
 import { Collection, Db } from "npm:mongodb";
 import { Empty, ID } from "@utils/types.ts";
+import { resolveUser } from "@utils/auth.ts";
 
 // Collection prefix to ensure namespace separation
 const PREFIX = "Profile" + ".";
@@ -39,13 +40,21 @@ export default class ProfileConcept {
    * @effects A new Profile is created with the provided information.
    */
   async createProfile(
-    { user, displayName, phoneNumber, timezone }: {
-      user: User;
+    { user, token, displayName, phoneNumber, timezone }: {
+      user?: User;
+      token?: string;
       displayName: string;
       phoneNumber: string;
       timezone: string;
     },
   ): Promise<{ profile: ID } | { error: string }> {
+    // Resolve user from either user parameter or token
+    const userResult = await resolveUser({ user, token });
+    if ("error" in userResult) {
+      return userResult;
+    }
+    user = userResult.user;
+    
     // Check if profile already exists for this user
     const existingProfile = await this.profiles.findOne({ user });
     if (existingProfile) {

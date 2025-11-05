@@ -10,7 +10,9 @@ import { Db } from "npm:mongodb";
 import PhoneCallConcept from "@concepts/PhoneCall/PhoneCallConcept.ts";
 import ReflectionSessionConcept from "@concepts/ReflectionSession/ReflectionSessionConcept.ts";
 import CallSchedulerConcept from "@concepts/CallScheduler/CallSchedulerConcept.ts";
+import JournalPromptConcept from "@concepts/JournalPrompt/JournalPromptConcept.ts";
 import { CallOrchestrator } from "../services/callOrchestrator.ts";
+import { ReflectionSessionManager } from "../services/reflectionSessionManager.ts";
 import { TwilioService, MockTwilioService } from "../services/twilio.ts";
 import { GeminiSemanticChecker, MockGeminiSemanticChecker } from "../services/gemini.ts";
 import { EncryptionService, MockEncryptionService } from "../services/encryption.ts";
@@ -25,6 +27,7 @@ export function createTwilioWebhooks(db: Db): Hono {
   const phoneCallConcept = new PhoneCallConcept(db);
   const reflectionSessionConcept = new ReflectionSessionConcept(db);
   const callSchedulerConcept = new CallSchedulerConcept(db);
+  const journalPromptConcept = new JournalPromptConcept(db);
 
   // Initialize services
   // Use mocks for testing, real services for production
@@ -50,6 +53,12 @@ export function createTwilioWebhooks(db: Db): Hono {
         masterSecret: Deno.env.get("ENCRYPTION_KEY")!,
       });
 
+  // Initialize session manager
+  const sessionManager = new ReflectionSessionManager(
+    reflectionSessionConcept,
+    callSchedulerConcept,
+  );
+
   // Initialize orchestrator
   const orchestrator = new CallOrchestrator({
     twilioService,
@@ -57,6 +66,7 @@ export function createTwilioWebhooks(db: Db): Hono {
     encryptionService,
     phoneCallConcept,
     reflectionSessionConcept,
+    callSchedulerConcept,
   });
 
   /**
@@ -72,18 +82,51 @@ export function createTwilioWebhooks(db: Db): Hono {
 
       console.log(`[Twilio Voice] CallSid: ${callSid}, Status: ${callStatus}`);
 
-      // Mark call as connected
+      // Mark call as connected in our system
       await orchestrator.handleCallConnected(callSid);
 
-      // Get the base URL from environment
+      // Get the phone call document that was created when the call was initiated
+      const phoneCallResult = await phoneCallConcept._getPhoneCall({ twilioCallSid: callSid });
+      const phoneCall = phoneCallResult[0]?.call;
+
+      if (!phoneCall) {
+        console.error(`[Twilio Voice] No phone call found for ${callSid}`);
+        return c.text(`<?xml version="1.0" encoding="UTF-8"?><Response><Say>Error: Call not found.</Say><Hangup/></Response>`, 200, { "Content-Type": "text/xml" });
+      }
+
+      // Get the associated reflection session
+      const sessionResult = await reflectionSessionConcept._getSession({ session: phoneCall.reflectionSession });
+      const sessionData = sessionResult[0]?.sessionData;
+
+      if (!sessionData) {
+        console.error(`[Twilio Voice] No session found for ${phoneCall.reflectionSession}`);
+        return c.text(`<?xml version="1.0" encoding="UTF-8"?><Response><Say>Error: Session not found.</Say><Hangup/></Response>`, 200, { "Content-Type": "text/xml" });
+      }
+
+      // Get the user's active prompts for this session
+      const promptsResult = await journalPromptConcept._getActivePrompts({ user: sessionData.user });
+      const prompts = promptsResult[0]?.prompts || [];
+
+      if (prompts.length === 0) {
+        console.error(`[Twilio Voice] No active prompts found for user ${sessionData.user}`);
+        return c.text(`<?xml version="1.0" encoding="UTF-8"?><Response><Say>Error: No active prompts configured.</Say><Hangup/></Response>`, 200, { "Content-Type": "text/xml" });
+      }
+
+      // Store the specific prompts for this call session on the PhoneCall document
+      await phoneCallConcept.setPrompts({
+        twilioCallSid: callSid,
+        prompts: prompts.map(p => ({ promptId: p._id, promptText: p.promptText })),
+      });
+
+      const firstPrompt = prompts[0];
       const baseUrl = Deno.env.get("BASE_URL") || "http://localhost:8000";
 
-      // Return TwiML to greet and start first prompt
+      // Return TwiML to greet the user and ask the first prompt
       const twiml = `<?xml version="1.0" encoding="UTF-8"?>
 <Response>
   <Say>Hello. This is your daily reflection call. Your responses will be recorded and encrypted for your privacy. Let's begin.</Say>
-  <Say>What are you grateful for today?</Say>
-  <Gather input="speech" timeout="3" speechTimeout="auto" action="${baseUrl}/webhooks/twilio/gather" method="POST">
+  <Say>${firstPrompt.promptText}</Say>
+  <Gather input="speech" timeout="10" speechTimeout="auto" action="${baseUrl}/webhooks/twilio/gather" method="POST">
     <Say>Please speak your response.</Say>
   </Gather>
   <Say>I didn't hear a response. Goodbye.</Say>
@@ -93,7 +136,30 @@ export function createTwilioWebhooks(db: Db): Hono {
       return c.text(twiml, 200, { "Content-Type": "text/xml" });
     } catch (error) {
       console.error("[Twilio Voice] Error:", error);
-      return c.json({ error: "Internal server error" }, 500);
+      console.error("[Twilio Voice] Error stack:", error.stack);
+      
+      // Try to abandon the session if we can identify it
+      try {
+        const body = await c.req.parseBody();
+        const callSid = body.CallSid as string;
+        
+        if (callSid) {
+          const phoneCallResult = await phoneCallConcept._getPhoneCall({ twilioCallSid: callSid });
+          const phoneCall = phoneCallResult[0]?.call;
+          
+          if (phoneCall?.reflectionSession) {
+            await sessionManager.abandonSessionSafely(
+              phoneCall.reflectionSession,
+              `Error during call setup: ${error.message}`,
+            );
+            console.log(`[Twilio Voice] Session abandoned due to error`);
+          }
+        }
+      } catch (abandonError) {
+        console.error("[Twilio Voice] Failed to abandon session after error:", abandonError);
+      }
+      
+      return c.text(`<?xml version="1.0" encoding="UTF-8"?><Response><Say>Sorry, an application error has occurred.</Say><Hangup/></Response>`, 200, { "Content-Type": "text/xml" });
     }
   });
 
@@ -123,8 +189,29 @@ export function createTwilioWebhooks(db: Db): Hono {
 
           if (call) {
             if (callStatus === "completed") {
-              // Normal completion - orchestrator should have handled this
-              console.log(`[Twilio Status] Call completed normally`);
+              // Check if session is still IN_PROGRESS (user hung up early)
+              if (call.reflectionSession) {
+                const sessionResult = await reflectionSessionConcept._getSession({
+                  session: call.reflectionSession,
+                });
+                const sessionData = sessionResult[0]?.sessionData;
+
+                if (sessionData && sessionData.status === "IN_PROGRESS") {
+                  // User hung up before completing all prompts - abandon session using manager
+                  await sessionManager.abandonSessionSafely(
+                    call.reflectionSession,
+                    "User hung up before completing reflection",
+                  );
+                  console.log(`[Twilio Status] Session abandoned (user hung up early)`);
+                } else if (sessionData && sessionData.status === "COMPLETED") {
+                  // Session completed successfully - mark scheduler as complete using manager
+                  await sessionManager.completeSessionSafely(
+                    call.reflectionSession,
+                  );
+                  console.log(`[Twilio Status] Scheduler marked as complete`);
+                }
+              }
+              console.log(`[Twilio Status] Call completed`);
             } else {
               // Call failed or was not answered
               const reason = `Call ${callStatus}`;
@@ -232,6 +319,7 @@ export function createTwilioWebhooks(db: Db): Hono {
   /**
    * POST /webhooks/twilio/gather
    * Receives user input after a <Gather> verb
+   * Dynamically handles all prompts
    */
   app.post("/gather", async (c) => {
     try {
@@ -242,8 +330,96 @@ export function createTwilioWebhooks(db: Db): Hono {
 
       console.log(`[Twilio Gather] CallSid: ${callSid}, Speech: ${speechResult || '(no speech)'}`);
 
-      // If no speech, end the call
-      if (!speechResult) {
+      // Get phone call to find session
+      const phoneCallResult = await phoneCallConcept._getPhoneCall({ twilioCallSid: callSid });
+      const phoneCall = phoneCallResult[0]?.call;
+
+      if (!phoneCall) {
+        console.error(`[Twilio Gather] No phone call found for ${callSid}`);
+        return c.text(`<?xml version="1.0" encoding="UTF-8"?><Response><Say>Error: Call not found.</Say><Hangup/></Response>`, 200, { "Content-Type": "text/xml" });
+      }
+
+      // Get session
+      const sessionResult = await reflectionSessionConcept._getSession({ session: phoneCall.reflectionSession });
+      const sessionData = sessionResult[0]?.sessionData;
+
+      if (!sessionData) {
+        console.error(`[Twilio Gather] No session found`);
+        return c.text(`<?xml version="1.0" encoding="UTF-8"?><Response><Say>Error: Session not found.</Say><Hangup/></Response>`, 200, { "Content-Type": "text/xml" });
+      }
+
+      const prompts = phoneCall.prompts || [];
+
+      // Current prompt index (what we just answered)
+      const currentIndex = phoneCall.currentPromptIndex;
+      const currentPrompt = prompts[currentIndex];
+
+      if (!currentPrompt) {
+        console.error(`[Twilio Gather] No prompt at index ${currentIndex}`);
+        return c.text(`<?xml version="1.0" encoding="UTF-8"?><Response><Say>Error: Prompt not found.</Say><Hangup/></Response>`, 200, { "Content-Type": "text/xml" });
+      }
+
+      // If we have speech, record the response
+      if (speechResult) {
+        await orchestrator.handleSpeechInput(callSid, speechResult);
+        
+        // Record response in PromptResponse
+        await reflectionSessionConcept.recordResponse({
+          session: phoneCall.reflectionSession,
+          promptId: currentPrompt._id,
+          promptText: currentPrompt.promptText,
+          position: currentIndex + 1, // 1-indexed
+          responseText: speechResult,
+        });
+        console.log(`[Twilio Gather] Recorded response for prompt ${currentIndex + 1}`);
+
+        // Move to next prompt
+        await phoneCallConcept.advanceToNextPrompt({ twilioCallSid: callSid });
+        const nextIndex = currentIndex + 1;
+
+        // Check if there are more prompts
+        if (nextIndex < prompts.length) {
+          const nextPrompt = prompts[nextIndex];
+          
+          const twiml = `<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+  <Say>Thank you.</Say>
+  <Say>${nextPrompt.promptText}</Say>
+  <Gather input="speech" timeout="10" speechTimeout="auto" action="${baseUrl}/webhooks/twilio/gather" method="POST">
+    <Say>Please speak your response.</Say>
+  </Gather>
+  <Say>I didn't hear a response. Goodbye.</Say>
+  <Hangup/>
+</Response>`;
+          return c.text(twiml, 200, { "Content-Type": "text/xml" });
+        } else {
+          // All prompts completed
+          const completeResult = await reflectionSessionConcept.completeSession({
+            session: phoneCall.reflectionSession,
+            expectedPromptCount: prompts.length,
+          });
+
+          if ("error" in completeResult) {
+            console.error(`[Twilio Gather] Failed to complete session: ${completeResult.error}`);
+          } else {
+            console.log(`[Twilio Gather] Session completed: ${phoneCall.reflectionSession}`);
+          }
+
+          const twiml = `<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+  <Say>Thank you for completing your reflection. Your responses have been recorded. Goodbye.</Say>
+  <Hangup/>
+</Response>`;
+          return c.text(twiml, 200, { "Content-Type": "text/xml" });
+        }
+      } else {
+        // No speech detected - abandon session
+        await sessionManager.abandonSessionSafely(
+          phoneCall.reflectionSession,
+          "No speech detected - timeout",
+        );
+        console.log(`[Twilio Gather] Session abandoned (no speech detected)`);
+        
         const twiml = `<?xml version="1.0" encoding="UTF-8"?>
 <Response>
   <Say>I didn't hear a response. Goodbye.</Say>
@@ -251,59 +427,34 @@ export function createTwilioWebhooks(db: Db): Hono {
 </Response>`;
         return c.text(twiml, 200, { "Content-Type": "text/xml" });
       }
-
-      // Handle gathered speech
-      await orchestrator.handleSpeechInput(callSid, speechResult);
-
-      // For now, ask the second prompt (hardcoded)
-      // TODO: Track which prompt we're on and iterate through them
-      const twiml = `<?xml version="1.0" encoding="UTF-8"?>
-<Response>
-  <Say>Thank you.</Say>
-  <Say>What is one thing you learned today?</Say>
-  <Gather input="speech" timeout="3" speechTimeout="auto" action="${baseUrl}/webhooks/twilio/gather2" method="POST">
-    <Say>Please speak your response.</Say>
-  </Gather>
-  <Say>I didn't hear a response. Goodbye.</Say>
-  <Hangup/>
-</Response>`;
-
-      return c.text(twiml, 200, { "Content-Type": "text/xml" });
     } catch (error) {
       console.error("[Twilio Gather] Error:", error);
-      return c.json({ error: "Internal server error" }, 500);
-    }
-  });
-
-  /**
-   * POST /webhooks/twilio/gather2
-   * Second prompt response
-   */
-  app.post("/gather2", async (c) => {
-    try {
-      const body = await c.req.parseBody();
-      const callSid = body.CallSid as string;
-      const speechResult = body.SpeechResult as string;
-
-      console.log(`[Twilio Gather2] CallSid: ${callSid}, Speech: ${speechResult || '(no speech)'}`);
-
-      if (speechResult) {
-        await orchestrator.handleSpeechInput(callSid, speechResult);
+      
+      // Try to abandon the session if we can identify it
+      try {
+        const body = await c.req.parseBody();
+        const callSid = body.CallSid as string;
+        
+        if (callSid) {
+          const phoneCallResult = await phoneCallConcept._getPhoneCall({ twilioCallSid: callSid });
+          const phoneCall = phoneCallResult[0]?.call;
+          
+          if (phoneCall?.reflectionSession) {
+            await sessionManager.abandonSessionSafely(
+              phoneCall.reflectionSession,
+              `Error during call: ${error.message}`,
+            );
+            console.log(`[Twilio Gather] Session abandoned due to error`);
+          }
+        }
+      } catch (abandonError) {
+        console.error("[Twilio Gather] Failed to abandon session after error:", abandonError);
       }
-
-      // End the call
-      const twiml = `<?xml version="1.0" encoding="UTF-8"?>
-<Response>
-  <Say>Thank you for completing your reflection. Your responses have been recorded. Goodbye.</Say>
-  <Hangup/>
-</Response>`;
-
-      return c.text(twiml, 200, { "Content-Type": "text/xml" });
-    } catch (error) {
-      console.error("[Twilio Gather2] Error:", error);
+      
       return c.json({ error: "Internal server error" }, 500);
     }
   });
+
 
   return app;
 }

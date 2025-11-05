@@ -1,6 +1,8 @@
 import { Collection, Db } from "npm:mongodb";
 import { Empty, ID } from "@utils/types.ts";
 import { freshID } from "@utils/database.ts";
+import { resolveUser } from "@utils/auth.ts";
+import { withTimeout } from "@utils/async.ts";
 
 // Collection prefix to ensure namespace separation
 const PREFIX = "ReflectionSession" + ".";
@@ -27,6 +29,7 @@ interface ReflectionSessionDoc {
   startedAt: Date;
   endedAt?: Date;
   status: SessionStatus;
+  prompts: Array<{ promptId: ID; promptText: string }>;
   rating?: number; // Integer -2 to 2, set when session completes
   method: ReflectionMethod; // How the reflection was conducted
   transcript?: string; // Full transcript for phone reflections
@@ -68,13 +71,20 @@ export default class ReflectionSessionConcept {
    * @effects Creates new ReflectionSession with IN_PROGRESS status and specified method
    */
   async startSession(
-    { user, callSession, method, prompts }: {
-      user: User;
+    { user, token, callSession, method, prompts }: {
+      user?: User;
+      token?: string;
       callSession: CallSession;
       method: ReflectionMethod;
       prompts: Array<{ promptId: ID; promptText: string }>;
     },
   ): Promise<{ session: ReflectionSession } | { error: string }> {
+    // Resolve user from either user parameter or token
+    const userResult = await resolveUser({ user, token });
+    if ("error" in userResult) {
+      return userResult;
+    }
+    user = userResult.user;
     // Check for existing IN_PROGRESS session
     const existingSession = await this.reflectionSessions.findOne({
       user,
@@ -104,6 +114,7 @@ export default class ReflectionSessionConcept {
       startedAt: new Date(),
       status: "IN_PROGRESS",
       method,
+      prompts,
     });
 
     return { session: sessionId };
@@ -196,27 +207,31 @@ export default class ReflectionSessionConcept {
 
   /**
    * Action: Completes a session.
-   * @requires session.status is IN_PROGRESS; session.rating is set; all expected prompts have responses
-   * @effects Sets status to COMPLETED; sets endedAt to current time
+   * @requires session exists; all expected prompts have responses
+   * @effects Sets status to COMPLETED; sets endedAt to current time (idempotent - succeeds if already completed)
    */
   async completeSession(
-    { session, expectedPromptCount }: {
-      session: ReflectionSession;
-      expectedPromptCount: number;
-    },
+    { session }: { session: ReflectionSession },
   ): Promise<Empty | { error: string }> {
-    // Verify session exists and is IN_PROGRESS
+    // Verify session exists
     const sessionDoc = await this.reflectionSessions.findOne({ _id: session });
     if (!sessionDoc) {
       return { error: `Session ${session} not found.` };
     }
 
-    if (sessionDoc.status !== "IN_PROGRESS") {
+    // Idempotent: If already completed, return success
+    if (sessionDoc.status === "COMPLETED") {
+      return {};
+    }
+
+    // Cannot complete if abandoned
+    if (sessionDoc.status === "ABANDONED") {
       return {
-        error: `Session ${session} is already ${sessionDoc.status}.`,
+        error: `Session ${session} is ABANDONED and cannot be completed.`,
       };
     }
 
+    // Must be IN_PROGRESS at this point
     // Rating is optional - only verify if it was set that it's valid
     // (Rating validation happens in setRating method)
 
@@ -225,10 +240,10 @@ export default class ReflectionSessionConcept {
       .find({ reflectionSession: session })
       .toArray();
 
-    if (responses.length !== expectedPromptCount) {
+    if (responses.length !== sessionDoc.prompts.length) {
       return {
         error:
-          `Expected ${expectedPromptCount} responses, but found ${responses.length}.`,
+          `Expected ${sessionDoc.prompts.length} responses, but found ${responses.length}.`,
       };
     }
 
@@ -242,28 +257,39 @@ export default class ReflectionSessionConcept {
 
   /**
    * Action: Abandons a session.
-   * @requires session.status is IN_PROGRESS
-   * @effects Sets status to ABANDONED; sets endedAt to current time
+   * @requires session exists
+   * @effects Sets status to ABANDONED; sets endedAt to current time (idempotent - succeeds if already abandoned)
    */
   async abandonSession(
     { session }: { session: ReflectionSession },
   ): Promise<Empty | { error: string }> {
-    // Verify session exists and is IN_PROGRESS
+    // Verify session exists
     const sessionDoc = await this.reflectionSessions.findOne({ _id: session });
     if (!sessionDoc) {
       return { error: `Session ${session} not found.` };
     }
 
-    if (sessionDoc.status !== "IN_PROGRESS") {
+    // Idempotent: If already abandoned, return success
+    if (sessionDoc.status === "ABANDONED") {
+      return {};
+    }
+
+    // Cannot abandon if completed
+    if (sessionDoc.status === "COMPLETED") {
       return {
-        error: `Session ${session} is already ${sessionDoc.status}.`,
+        error: `Session ${session} is COMPLETED and cannot be abandoned.`,
       };
     }
 
-    await this.reflectionSessions.updateOne(
-      { _id: session },
-      { $set: { status: "ABANDONED", endedAt: new Date() } },
-    );
+    // Must be IN_PROGRESS at this point
+    try {
+      await withTimeout(this.reflectionSessions.updateOne(
+        { _id: session },
+        { $set: { status: "ABANDONED", endedAt: new Date() } },
+      ), 5000); // 5-second timeout
+    } catch (e) {
+      return { error: `Failed to abandon session due to a timeout or other error: ${e.message}` };
+    }
 
     return {};
   }
@@ -295,14 +321,40 @@ export default class ReflectionSessionConcept {
 
   /**
    * Query: Retrieves the active (IN_PROGRESS) session for a user.
+   * Can be called with either { user } (authenticated via Requesting) or { token } (passthrough).
    */
   async _getActiveSession(
-    { user }: { user: User },
-  ): Promise<ReflectionSessionDoc | null> {
-    return await this.reflectionSessions.findOne({
-      user,
-      status: "IN_PROGRESS",
-    });
+    params: { user?: User; token?: string },
+  ): Promise<{ session: ReflectionSessionDoc | null }[]> {
+    try {
+      let userId: User;
+      
+      // Handle passthrough calls with token
+      if (params.token && !params.user) {
+        const UserAuthentication = (await import("@concepts")).UserAuthentication;
+        const authResult = await UserAuthentication.authenticate({ token: params.token });
+        if ('error' in authResult || !authResult.user) {
+          return [{ session: null }];
+        }
+        userId = authResult.user;
+      } else if (params.user) {
+        userId = params.user;
+      } else {
+        return [{ session: null }];
+      }
+      
+      const session = await withTimeout(
+        this.reflectionSessions.findOne({
+          user: userId,
+          status: "IN_PROGRESS",
+        }),
+        5000 // 5-second timeout
+      );
+      return [{ session }];
+    } catch (e) {
+      console.error(`[_getActiveSession] Timeout or error:`, e);
+      return [{ session: null }];
+    }
   }
 
   /**
@@ -323,6 +375,43 @@ export default class ReflectionSessionConcept {
   ): Promise<{ sessionData: ReflectionSessionDoc | null }[]> {
     const sessionData = await this.reflectionSessions.findOne({ callSession });
     return [{ sessionData }];
+  }
+
+  /**
+   * Query: Gets detailed status information about a session.
+   * @returns Status, completion readiness, and response counts
+   */
+  async getSessionStatus(
+    { session }: { session: ReflectionSession },
+  ): Promise<{
+    status: SessionStatus;
+    canComplete: boolean;
+    canAbandon: boolean;
+    responseCount: number;
+    expectedResponseCount: number;
+  } | { error: string }> {
+    const sessionDoc = await this.reflectionSessions.findOne({ _id: session });
+    if (!sessionDoc) {
+      return { error: `Session ${session} not found.` };
+    }
+
+    const responses = await this.promptResponses
+      .find({ reflectionSession: session })
+      .toArray();
+
+    const responseCount = responses.length;
+    const expectedResponseCount = sessionDoc.prompts.length;
+    const canComplete = sessionDoc.status === "IN_PROGRESS" && 
+                       responseCount === expectedResponseCount;
+    const canAbandon = sessionDoc.status === "IN_PROGRESS";
+
+    return {
+      status: sessionDoc.status,
+      canComplete,
+      canAbandon,
+      responseCount,
+      expectedResponseCount,
+    };
   }
 
   /**

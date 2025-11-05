@@ -1,6 +1,7 @@
 import { Collection, Db } from "npm:mongodb";
 import { Empty, ID } from "@utils/types.ts";
 import { freshID } from "@utils/database.ts";
+import { resolveUser } from "@utils/auth.ts";
 
 // Collection prefix to ensure namespace separation
 const PREFIX = "CallWindow" + ".";
@@ -83,13 +84,20 @@ export default class CallWindowConcept {
    * @effects A new recurring CallWindow is created and returned.
    */
   async createRecurringCallWindow(
-    { user, dayOfWeek, startTime, endTime }: {
-      user: User;
+    { user, token, dayOfWeek, startTime, endTime }: {
+      user?: User;
+      token?: string;
       dayOfWeek: DayOfWeek;
       startTime: Date;
       endTime: Date;
     },
   ): Promise<{ callWindow: CallWindow } | { error: string }> {
+    // Resolve user from either user parameter or token
+    const userResult = await resolveUser({ user, token });
+    if ("error" in userResult) {
+      return userResult;
+    }
+    user = userResult.user;
     // Convert string dates to Date objects if needed
     const start = startTime instanceof Date ? startTime : new Date(startTime);
     const end = endTime instanceof Date ? endTime : new Date(endTime);
@@ -135,13 +143,20 @@ export default class CallWindowConcept {
    * @effects A new one-off CallWindow is created and returned.
    */
   async createOneOffCallWindow(
-    { user, specificDate, startTime, endTime }: {
-      user: User;
+    { user, token, specificDate, startTime, endTime }: {
+      user?: User;
+      token?: string;
       specificDate: string; // ISO date string (YYYY-MM-DD)
       startTime: Date;
       endTime: Date;
     },
   ): Promise<{ callWindow: CallWindow } | { error: string }> {
+    // Resolve user from either user parameter or token
+    const userResult = await resolveUser({ user, token });
+    if ("error" in userResult) {
+      return userResult;
+    }
+    user = userResult.user;
     // Convert string dates to Date objects if needed
     const start = startTime instanceof Date ? startTime : new Date(startTime);
     const end = endTime instanceof Date ? endTime : new Date(endTime);
@@ -186,12 +201,18 @@ export default class CallWindowConcept {
    * @effects The recurring window is removed from the set.
    */
   async deleteRecurringCallWindow(
-    { user, dayOfWeek, startTime }: {
-      user: User;
+    { user, token, dayOfWeek, startTime }: {
+      user?: User;
+      token?: string;
       dayOfWeek: DayOfWeek;
       startTime: Date;
     },
   ): Promise<Empty | { error: string }> {
+    const userResult = await resolveUser({ user, token });
+    if ("error" in userResult) {
+      return userResult;
+    }
+    user = userResult.user;
     // Convert string date to Date object if needed
     const start = startTime instanceof Date ? startTime : new Date(startTime);
     
@@ -218,12 +239,18 @@ export default class CallWindowConcept {
    * @effects The one-off window is removed from the set.
    */
   async deleteOneOffCallWindow(
-    { user, specificDate, startTime }: {
-      user: User;
+    { user, token, specificDate, startTime }: {
+      user?: User;
+      token?: string;
       specificDate: string;
       startTime: Date;
     },
   ): Promise<Empty | { error: string }> {
+    const userResult = await resolveUser({ user, token });
+    if ("error" in userResult) {
+      return userResult;
+    }
+    user = userResult.user;
     // Convert string date to Date object if needed
     const start = startTime instanceof Date ? startTime : new Date(startTime);
     
@@ -248,8 +275,13 @@ export default class CallWindowConcept {
    * Query: Retrieves all call windows for a specific user.
    */
   async _getUserCallWindows(
-    { user }: { user: User },
+    { user, token }: { user?: User; token?: string },
   ): Promise<{ windows: AnyCallWindowDoc[] }[]> {
+    const userResult = await resolveUser({ user, token });
+    if ("error" in userResult) {
+      return [{ windows: [] }];
+    }
+    user = userResult.user;
     const windows = await this.callWindows.find({ user }).toArray();
     return [{ windows }];
   }
@@ -258,8 +290,13 @@ export default class CallWindowConcept {
    * Query: Retrieves all recurring call windows for a specific user.
    */
   async _getUserRecurringWindows(
-    { user }: { user: User },
+    { user, token }: { user?: User; token?: string },
   ): Promise<{ windows: RecurringWindowDoc[] }[]> {
+    const userResult = await resolveUser({ user, token });
+    if ("error" in userResult) {
+      return [{ windows: [] }];
+    }
+    user = userResult.user;
     const results = await this.callWindows.find({
       user,
       windowType: "RECURRING",
@@ -271,8 +308,13 @@ export default class CallWindowConcept {
    * Query: Retrieves all one-off call windows for a specific user.
    */
   async _getUserOneOffWindows(
-    { user }: { user: User },
+    { user, token }: { user?: User; token?: string },
   ): Promise<{ windows: OneOffWindowDoc[] }[]> {
+    const userResult = await resolveUser({ user, token });
+    if ("error" in userResult) {
+      return [{ windows: [] }];
+    }
+    user = userResult.user;
     const results = await this.callWindows.find({
       user,
       windowType: "ONEOFF",

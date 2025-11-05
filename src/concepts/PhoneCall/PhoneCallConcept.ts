@@ -22,6 +22,7 @@ interface PhoneCallDoc {
   reflectionSession: ReflectionSession;
   twilioCallSid: string;
   status: CallStatus;
+  prompts: Array<{ promptId: ID; promptText: string }>;
   currentPromptIndex: number;
   accumulatedTranscript: string;
   currentResponseBuffer: string;
@@ -81,6 +82,27 @@ export default class PhoneCallConcept {
     });
 
     return { phoneCall: phoneCallId };
+  }
+
+  /**
+   * Action: Sets the prompts for a call.
+   * @requires PhoneCall exists
+   * @effects Sets prompts array on the PhoneCall document
+   */
+  async setPrompts(
+    { twilioCallSid, prompts }: { twilioCallSid: string; prompts: Array<{ promptId: ID; promptText: string }> },
+  ): Promise<Empty | { error: string }> {
+    const call = await this.phoneCalls.findOne({ twilioCallSid });
+    if (!call) {
+      return { error: `Phone call with SID ${twilioCallSid} not found.` };
+    }
+
+    await this.phoneCalls.updateOne(
+      { twilioCallSid },
+      { $set: { prompts } },
+    );
+
+    return {};
   }
 
   /**
@@ -179,7 +201,7 @@ export default class PhoneCallConcept {
    * @effects Increments currentPromptIndex, clears buffer
    */
   async advanceToNextPrompt(
-    { twilioCallSid, totalPrompts }: { twilioCallSid: string; totalPrompts: number },
+    { twilioCallSid }: { twilioCallSid: string },
   ): Promise<Empty | { error: string }> {
     const call = await this.phoneCalls.findOne({ twilioCallSid });
     if (!call) {
@@ -192,9 +214,9 @@ export default class PhoneCallConcept {
       };
     }
 
-    if (call.currentPromptIndex >= totalPrompts - 1) {
+    if (call.currentPromptIndex >= call.prompts.length - 1) {
       return {
-        error: `Already on last prompt (${call.currentPromptIndex}/${totalPrompts - 1}).`,
+        error: `Already on last prompt (${call.currentPromptIndex}/${call.prompts.length - 1}).`,
       };
     }
 

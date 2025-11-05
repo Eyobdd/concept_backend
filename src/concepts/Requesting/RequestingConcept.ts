@@ -4,6 +4,7 @@ import { Collection, Db } from "npm:mongodb";
 import { freshID } from "@utils/database.ts";
 import { ID } from "@utils/types.ts";
 import { exclusions, inclusions } from "./passthrough.ts";
+import { createTwilioWebhooks } from "../../webhooks/twilio.ts";
 import "jsr:@std/dotenv/load";
 
 /**
@@ -200,6 +201,16 @@ export function startRequestingServer(
   );
 
   /**
+   * TWILIO WEBHOOKS
+   * 
+   * Register Twilio webhooks before other routes to ensure they're accessible
+   */
+  console.log("\nRegistering Twilio webhooks...");
+  const twilioWebhooks = createTwilioWebhooks(db);
+  app.route("/webhooks/twilio", twilioWebhooks);
+  console.log("✓ Twilio webhooks registered at /webhooks/twilio");
+
+  /**
    * PASSTHROUGH ROUTES
    *
    * These routes register against every concept action and query.
@@ -219,6 +230,7 @@ export function startRequestingServer(
       );
     for (const method of methods) {
       const route = `${REQUESTING_BASE_URL}/${conceptName}/${method}`;
+      console.log(`Checking route: ${route}, excluded: ${exclusions.includes(route)}`);
       if (exclusions.includes(route)) continue;
       const included = route in inclusions;
       if (!included) unverified = true;

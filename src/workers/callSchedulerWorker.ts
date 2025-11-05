@@ -19,7 +19,7 @@ import { EncryptionService, MockEncryptionService } from "../services/encryption
 import { ID } from "@utils/types.ts";
 
 export interface WorkerConfig {
-  pollIntervalSeconds?: number; // How often to check for pending calls (default: 60)
+  pollIntervalSeconds?: number; // How often to check for pending calls (default: 15)
   batchSize?: number; // Max calls to process per batch (default: 10)
 }
 
@@ -40,7 +40,7 @@ export class CallSchedulerWorker {
 
   constructor(db: Db, config: WorkerConfig = {}) {
     this.db = db;
-    this.pollInterval = (config.pollIntervalSeconds || 60) * 1000;
+    this.pollInterval = (config.pollIntervalSeconds || 15) * 1000;
     this.batchSize = config.batchSize || 10;
 
     // Initialize concepts
@@ -80,6 +80,7 @@ export class CallSchedulerWorker {
       encryptionService,
       phoneCallConcept: this.phoneCallConcept,
       reflectionSessionConcept: this.reflectionSessionConcept,
+      callSchedulerConcept: this.callSchedulerConcept,
     });
   }
 
@@ -231,7 +232,7 @@ export class CallSchedulerWorker {
       const callResult = await this.orchestrator.initiateReflectionCall(
         scheduledCall.user,
         scheduledCall.phoneNumber,
-        scheduledCall.callSession,
+        session._id,
         prompts,
       );
 
@@ -303,7 +304,7 @@ async function main() {
 
   // Create and start worker
   const worker = new CallSchedulerWorker(db, {
-    pollIntervalSeconds: 60, // Check every minute
+    pollIntervalSeconds: 15, // Check every 15 seconds
     batchSize: 10, // Process up to 10 calls per batch
   });
 

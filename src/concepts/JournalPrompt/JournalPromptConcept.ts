@@ -1,6 +1,7 @@
 import { Collection, Db } from "npm:mongodb";
 import { Empty, ID } from "@utils/types.ts";
 import { freshID } from "@utils/database.ts";
+import { resolveUser } from "@utils/auth.ts";
 
 // Collection prefix to ensure namespace separation
 const PREFIX = "JournalPrompt" + ".";
@@ -37,8 +38,14 @@ export default class JournalPromptConcept {
    * @effects Creates 5 default PromptTemplates with standard questions, all active
    */
   async createDefaultPrompts(
-    { user }: { user: User },
+    { user, token }: { user?: User; token?: string },
   ): Promise<Empty | { error: string }> {
+    // Resolve user from either user parameter or token
+    const userResult = await resolveUser({ user, token });
+    if ("error" in userResult) {
+      return userResult;
+    }
+    user = userResult.user;
     // Check if user already has prompts
     const existingPrompts = await this.promptTemplates.find({ user }).toArray();
     if (existingPrompts.length > 0) {
@@ -261,8 +268,14 @@ export default class JournalPromptConcept {
    * Query: Retrieves only active prompts for a user, ordered by position.
    */
   async _getActivePrompts(
-    { user }: { user: User },
+    { user, token }: { user?: User; token?: string },
   ): Promise<{ prompts: PromptTemplateDoc[] }[]> {
+    const userResult = await resolveUser({ user, token });
+    if ("error" in userResult) {
+      return [{ prompts: [] }];
+    }
+    user = userResult.user;
+    
     const prompts = await this.promptTemplates
       .find({ user, isActive: true })
       .sort({ position: 1 })

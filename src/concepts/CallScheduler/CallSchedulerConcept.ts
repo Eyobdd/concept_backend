@@ -1,6 +1,7 @@
 import { Collection, Db } from "npm:mongodb";
 import { Empty, ID } from "@utils/types.ts";
 import { freshID } from "@utils/database.ts";
+import { resolveUser } from "@utils/auth.ts";
 
 // Collection prefix to ensure namespace separation
 const PREFIX = "CallScheduler" + ".";
@@ -49,14 +50,22 @@ export default class CallSchedulerConcept {
    * @effects Creates new ScheduledCall with PENDING status
    */
   async scheduleCall(
-    { user, callSession, phoneNumber, scheduledFor, maxRetries }: {
-      user: User;
+    { user, token, callSession, phoneNumber, scheduledFor, maxRetries }: {
+      user?: User;
+      token?: string;
       callSession: CallSession;
       phoneNumber: string;
       scheduledFor: Date;
       maxRetries: number;
     },
   ): Promise<{ scheduledCall: ScheduledCall } | { error: string }> {
+    // Resolve user from either user parameter or token
+    const userResult = await resolveUser({ user, token });
+    if ("error" in userResult) {
+      return userResult;
+    }
+    user = userResult.user;
+    
     // Validate maxRetries
     if (!Number.isInteger(maxRetries) || maxRetries < 1) {
       return { error: "maxRetries must be an integer of at least 1." };
@@ -325,8 +334,14 @@ export default class CallSchedulerConcept {
    * Query: Retrieves all active calls for a user.
    */
   async _getActiveCallsForUser(
-    { user }: { user: User },
+    { user, token }: { user?: User; token?: string },
   ): Promise<ScheduledCallDoc[]> {
+    const userResult = await resolveUser({ user, token });
+    if ("error" in userResult) {
+      return [];
+    }
+    user = userResult.user;
+    
     return await this.scheduledCalls
       .find({
         user,

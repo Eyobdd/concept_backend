@@ -269,6 +269,7 @@ export default class UserAuthenticationConcept {
     { token }: { token: string },
   ): Promise<{ user: User | null }[]> {
     const session = await this.sessions.findOne({ token });
+    console.log("Session:", session, "Token:", token);
     if (!session || new Date() > session.expiresAt) {
       return [{ user: null }];
     }

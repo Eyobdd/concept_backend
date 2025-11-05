@@ -9,9 +9,11 @@
 import { ID } from "@utils/types.ts";
 import PhoneCallConcept from "@concepts/PhoneCall/PhoneCallConcept.ts";
 import ReflectionSessionConcept from "@concepts/ReflectionSession/ReflectionSessionConcept.ts";
+import CallSchedulerConcept from "@concepts/CallScheduler/CallSchedulerConcept.ts";
 import { TwilioService, MockTwilioService } from "./twilio.ts";
 import { GeminiSemanticChecker, MockGeminiSemanticChecker } from "./gemini.ts";
 import { EncryptionService, MockEncryptionService } from "./encryption.ts";
+import { ReflectionSessionManager } from "./reflectionSessionManager.ts";
 
 export interface CallOrchestratorConfig {
   twilioService: TwilioService | MockTwilioService;
@@ -19,6 +21,7 @@ export interface CallOrchestratorConfig {
   encryptionService: EncryptionService | MockEncryptionService;
   phoneCallConcept: PhoneCallConcept;
   reflectionSessionConcept: ReflectionSessionConcept;
+  callSchedulerConcept: CallSchedulerConcept;
   pauseThresholdSeconds?: number; // Default: 3 seconds
 }
 
@@ -36,6 +39,7 @@ export class CallOrchestrator {
   private encryptionService: EncryptionService | MockEncryptionService;
   private phoneCallConcept: PhoneCallConcept;
   private reflectionSessionConcept: ReflectionSessionConcept;
+  private sessionManager: ReflectionSessionManager;
   private pauseThreshold: number;
 
   // Track active call monitoring intervals
@@ -47,6 +51,10 @@ export class CallOrchestrator {
     this.encryptionService = config.encryptionService;
     this.phoneCallConcept = config.phoneCallConcept;
     this.reflectionSessionConcept = config.reflectionSessionConcept;
+    this.sessionManager = new ReflectionSessionManager(
+      config.reflectionSessionConcept,
+      config.callSchedulerConcept,
+    );
     this.pauseThreshold = config.pauseThresholdSeconds || 3;
   }
 
@@ -277,10 +285,11 @@ export class CallOrchestrator {
     // Mark PhoneCall as abandoned
     await this.phoneCallConcept.markAbandoned({ twilioCallSid, reason });
 
-    // Mark ReflectionSession as abandoned
-    await this.reflectionSessionConcept.abandonSession({
-      session: call.reflectionSession,
-    });
+    // Mark ReflectionSession as abandoned using manager (handles side effects)
+    await this.sessionManager.abandonSessionSafely(
+      call.reflectionSession,
+      reason,
+    );
   }
 
   /**
@@ -298,10 +307,11 @@ export class CallOrchestrator {
     // Mark PhoneCall as failed
     await this.phoneCallConcept.markFailed({ twilioCallSid, error });
 
-    // Mark ReflectionSession as abandoned
-    await this.reflectionSessionConcept.abandonSession({
-      session: call.reflectionSession,
-    });
+    // Mark ReflectionSession as abandoned using manager (handles side effects)
+    await this.sessionManager.abandonSessionSafely(
+      call.reflectionSession,
+      `Call failed: ${error}`,
+    );
   }
 
   /**

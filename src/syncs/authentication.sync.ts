@@ -27,7 +27,11 @@ export const CreateProfileRequest: Sync = ({ request, token, displayName, phoneN
     { request },
   ]),
   where: async (frames) => {
+    console.log("[CreateProfileRequest] Sync triggered, token:", token);
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
+    console.log("[CreateProfileRequest] After query, frames count:", frames.length);
+    frames = frames.filter(($) => $[user] !== null);
+    console.log("[CreateProfileRequest] After filter, frames count:", frames.length);
     return frames;
   },
   then: actions([Profile.createProfile, { user, displayName, phoneNumber, timezone }]),
@@ -65,6 +69,7 @@ export const UpdateRatingPreferenceRequest: Sync = ({ request, token, includeRat
   ]),
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
+    frames = frames.filter(($) => $[user] !== null);
     return frames;
   },
   then: actions([Profile.updateRatingPreference, { user, includeRating }]),
@@ -90,6 +95,7 @@ export const CreateDefaultPromptsRequest: Sync = ({ request, token, user }) => (
   ]),
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
+    frames = frames.filter(($) => $[user] !== null);
     return frames;
   },
   then: actions([JournalPrompt.createDefaultPrompts, { user }]),
@@ -143,6 +149,7 @@ export const AddPromptRequest: Sync = ({ request, token, promptText, user }) => 
   ]),
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
+    frames = frames.filter(($) => $[user] !== null);
     return frames;
   },
   then: actions([JournalPrompt.addPrompt, { user, promptText }]),
@@ -164,6 +171,7 @@ export const UpdatePromptTextRequest: Sync = ({ request, token, position, newTex
   ]),
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
+    frames = frames.filter(($) => $[user] !== null);
     return frames;
   },
   then: actions([JournalPrompt.updatePromptText, { user, position, newText }]),
@@ -185,6 +193,7 @@ export const TogglePromptActiveRequest: Sync = ({ request, token, position, user
   ]),
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
+    frames = frames.filter(($) => $[user] !== null);
     return frames;
   },
   then: actions([JournalPrompt.togglePromptActive, { user, position }]),
@@ -206,6 +215,7 @@ export const DeletePromptRequest: Sync = ({ request, token, position, user }) =>
   ]),
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
+    frames = frames.filter(($) => $[user] !== null);
     return frames;
   },
   then: actions([JournalPrompt.deletePrompt, { user, position }]),
@@ -227,6 +237,7 @@ export const ReorderPromptsRequest: Sync = ({ request, token, newOrder, user }) 
   ]),
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
+    frames = frames.filter(($) => $[user] !== null);
     return frames;
   },
   then: actions([JournalPrompt.reorderPrompts, { user, newOrder }]),
@@ -252,6 +263,7 @@ export const CreateRecurringCallWindowRequest: Sync = ({ request, token, dayOfWe
   ]),
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
+    frames = frames.filter(($) => $[user] !== null);
     return frames;
   },
   then: actions([CallWindow.createRecurringCallWindow, { user, dayOfWeek, startTime, endTime }]),
@@ -273,6 +285,7 @@ export const CreateOneOffCallWindowRequest: Sync = ({ request, token, specificDa
   ]),
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
+    frames = frames.filter(($) => $[user] !== null);
     return frames;
   },
   then: actions([CallWindow.createOneOffCallWindow, { user, specificDate, startTime, endTime }]),
@@ -302,6 +315,7 @@ export const MergeOverlappingOneOffWindowsRequest: Sync = ({ request, token, use
   ]),
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
+    frames = frames.filter(($) => $[user] !== null);
     return frames;
   },
   then: actions([CallWindow.mergeOverlappingOneOffWindows, { user, specificDate, startTime, endTime }]),
@@ -379,6 +393,7 @@ export const DeleteRecurringCallWindowRequest: Sync = ({ request, token, dayOfWe
   ]),
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
+    frames = frames.filter(($) => $[user] !== null);
     return frames;
   },
   then: actions([CallWindow.deleteRecurringCallWindow, { user, dayOfWeek, startTime }]),
@@ -400,6 +415,7 @@ export const DeleteOneOffCallWindowRequest: Sync = ({ request, token, specificDa
   ]),
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
+    frames = frames.filter(($) => $[user] !== null);
     return frames;
   },
   then: actions([CallWindow.deleteOneOffCallWindow, { user, specificDate, startTime }]),
@@ -421,6 +437,7 @@ export const SetDayModeCustomRequest: Sync = ({ request, token, date, user }) =>
   ]),
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
+    frames = frames.filter(($) => $[user] !== null);
     return frames;
   },
   then: actions([CallWindow.setDayModeCustom, { user, date }]),
@@ -442,6 +459,7 @@ export const SetDayModeRecurringRequest: Sync = ({ request, token, date, user })
   ]),
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
+    frames = frames.filter(($) => $[user] !== null);
     return frames;
   },
   then: actions([CallWindow.setDayModeRecurring, { user, date }]),
@@ -475,17 +493,18 @@ export const ShouldUseRecurringRequest: Sync = ({ request, token, date, user, us
 // REFLECTION SESSION SYNCS
 // ============================================================================
 
-export const StartSessionRequest: Sync = ({ request, token, callSession, prompts, user }) => ({
+export const StartSessionRequest: Sync = ({ request, token, callSession, prompts, method, user }) => ({
   when: actions([
     Requesting.request,
-    { path: "/ReflectionSession/startSession", token, callSession, prompts },
+    { path: "/ReflectionSession/startSession", token, callSession, prompts, method },
     { request },
   ]),
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
+    frames = frames.filter(($) => $[user] !== null);
     return frames;
   },
-  then: actions([ReflectionSession.startSession, { user, callSession, prompts }]),
+  then: actions([ReflectionSession.startSession, { user, callSession, prompts, method }]),
 });
 
 export const StartSessionResponse: Sync = ({ request, session }) => ({
@@ -496,6 +515,14 @@ export const StartSessionResponse: Sync = ({ request, session }) => ({
   then: actions([Requesting.respond, { request, session }]),
 });
 
+export const StartSessionError: Sync = ({ request, error }) => ({
+  when: actions(
+    [Requesting.request, { path: "/ReflectionSession/startSession" }, { request }],
+    [ReflectionSession.startSession, {}, { error }],
+  ),
+  then: actions([Requesting.respond, { request, error }]),
+});
+
 export const RecordResponseRequest: Sync = ({ request, token, session, promptId, promptText, position, responseText, user }) => ({
   when: actions([
     Requesting.request,
@@ -504,6 +531,7 @@ export const RecordResponseRequest: Sync = ({ request, token, session, promptId,
   ]),
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
+    frames = frames.filter(($) => $[user] !== null);
     return frames;
   },
   then: actions([ReflectionSession.recordResponse, { session, promptId, promptText, position, responseText }]),
@@ -525,6 +553,7 @@ export const CompleteSessionRequest: Sync = ({ request, token, session, expected
   ]),
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
+    frames = frames.filter(($) => $[user] !== null);
     return frames;
   },
   then: actions([ReflectionSession.completeSession, { session, expectedPromptCount }]),
@@ -582,6 +611,7 @@ export const CreateFromSessionRequest: Sync = ({ request, token, sessionData, se
   ]),
   where: async (frames) => {
     frames = await frames.query(UserAuthentication._getSessionUser, { token }, { user });
+    frames = frames.filter(($) => $[user] !== null);
     return frames;
   },
   then: actions([JournalEntry.createFromSession, { sessionData, sessionResponses }]),

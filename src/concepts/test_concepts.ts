@@ -13,6 +13,8 @@ import JournalPromptConcept from "./JournalPrompt/JournalPromptConcept.ts";
 import CallSessionConcept from "./CallSession/CallSessionConcept.ts";
 import UserConcept from "./User/UserConcept.ts";
 import ReflectionSessionConcept from "./ReflectionSession/ReflectionSessionConcept.ts";
+import PhoneCallConcept from "./PhoneCall/PhoneCallConcept.ts";
+import CallSchedulerConcept from "./CallScheduler/CallSchedulerConcept.ts";
 import ProfileConcept from "./Profile/ProfileConcept.ts";
 import RequestingConcept from "./Requesting/RequestingConcept.ts";
 import UserAuthenticationConcept from "./UserAuthentication/UserAuthenticationConcept.ts";
@@ -23,6 +25,8 @@ export type { default as JournalPromptConcept } from "./JournalPrompt/JournalPro
 export type { default as CallSessionConcept } from "./CallSession/CallSessionConcept.ts";
 export type { default as UserConcept } from "./User/UserConcept.ts";
 export type { default as ReflectionSessionConcept } from "./ReflectionSession/ReflectionSessionConcept.ts";
+export type { default as PhoneCallConcept } from "./PhoneCall/PhoneCallConcept.ts";
+export type { default as CallSchedulerConcept } from "./CallScheduler/CallSchedulerConcept.ts";
 export type { default as ProfileConcept } from "./Profile/ProfileConcept.ts";
 export type { default as RequestingConcept } from "./Requesting/RequestingConcept.ts";
 export type { default as UserAuthenticationConcept } from "./UserAuthentication/UserAuthenticationConcept.ts";
@@ -36,6 +40,8 @@ export const JournalPrompt = Engine.instrumentConcept(new JournalPromptConcept(d
 export const CallSession = Engine.instrumentConcept(new CallSessionConcept(db));
 export const User = Engine.instrumentConcept(new UserConcept(db));
 export const ReflectionSession = Engine.instrumentConcept(new ReflectionSessionConcept(db));
+export const PhoneCall = Engine.instrumentConcept(new PhoneCallConcept(db));
+export const CallScheduler = Engine.instrumentConcept(new CallSchedulerConcept(db));
 export const Profile = Engine.instrumentConcept(new ProfileConcept(db));
 export const Requesting = Engine.instrumentConcept(new RequestingConcept(db));
 export const UserAuthentication = Engine.instrumentConcept(new UserAuthenticationConcept(db));

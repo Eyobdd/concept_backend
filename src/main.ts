@@ -12,6 +12,8 @@ const { Engine } = concepts;
 import { Logging } from "@engine";
 import { startRequestingServer } from "@concepts/Requesting/RequestingConcept.ts";
 import syncs from "@syncs";
+import { CallSchedulerWorker } from "./workers/callSchedulerWorker.ts";
+import { getDb } from "@utils/database.ts";
 
 /**
  * Available logging levels:
@@ -26,3 +28,12 @@ Engine.register(syncs);
 
 // Start a server to provide the Requesting concept with external/system actions.
 startRequestingServer(concepts);
+
+// Start the call scheduler worker
+const [db] = await getDb();
+const callSchedulerWorker = new CallSchedulerWorker(db, {
+  pollIntervalSeconds: 15, // Check every 15 seconds (adjust as needed)
+  batchSize: 10, // Process up to 10 calls per batch
+});
+callSchedulerWorker.start();
+console.log("[Main] CallSchedulerWorker started");
