@@ -124,3 +124,18 @@ Requesting concept initialized with a timeout of 10000ms.
 
 Server listening on http://localhost:8000
 Listening on http://0.0.0.0:8000/ (http://localhost:8000/)
+[SMS] No Twilio service configured. Verification code for +18579996709: 502686
+[MongoDB] Reusing existing connection (singleton pattern)
+[MongoDB] Reusing existing connection (singleton pattern)
+[createDefaultPrompts] Checking prompts for user: 019a5d2f-48ef-7e38-add2-f4bca592653b
+[createDefaultPrompts] Found 0 existing prompts
+[createDefaultPrompts] Creating default prompts for user 019a5d2f-48ef-7e38-add2-f4bca592653b
+[MongoDB] Reusing existing connection (singleton pattern)
+[MongoDB] Reusing existing connection (singleton pattern)
+[MongoDB] Reusing existing connection (singleton pattern)
+[MongoDB] Reusing existing connection (singleton pattern)
+[MongoDB] Reusing existing connection (singleton pattern)
+[MongoDB] Reusing existing connection (singleton pattern)
+[MongoDB] Reusing existing connection (singleton pattern)
+[MongoDB] Reusing existing connection (singleton pattern)
+[MongoDB] Reusing existing connection (singleton pattern)

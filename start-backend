@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# Colors for output
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+# Check for --logs flag
+VERBOSE=false
+if [[ "$1" == "--logs" ]]; then
+  VERBOSE=true
+fi
+
+if [ "$VERBOSE" = true ]; then
+  echo -e "${BLUE}🚀 Starting Backend Server (Verbose Mode)${NC}"
+  echo "=========================================="
+  echo ""
+else
+  echo -e "${BLUE}🚀 Starting Backend Server (Quiet Mode)${NC}"
+  echo "=========================================="
+  echo ""
+fi
+
+# Kill any existing deno processes
+echo -e "${YELLOW}Stopping existing processes...${NC}"
+pkill -9 deno
+sleep 2
+
+if [ "$VERBOSE" = true ]; then
+  echo -e "${GREEN}✅ Starting backend server with full logging${NC}"
+  echo -e "${YELLOW}All logs and stack traces will be shown${NC}"
+  echo ""
+  echo -e "${YELLOW}Press Ctrl+C to stop the server${NC}"
+  echo ""
+  
+  # Start the server with full output
+  deno run start
+else
+  echo -e "${GREEN}✅ Starting backend server with minimal logging${NC}"
+  echo -e "${YELLOW}Stack traces and verbose logs will be suppressed${NC}"
+  echo -e "${YELLOW}Use './start-backend --logs' for verbose output${NC}"
+  echo ""
+  echo -e "${YELLOW}Press Ctrl+C to stop the server${NC}"
+  echo ""
+  
+  # Start the server and filter out stack traces and verbose logs
+  # Keep only important messages (errors, warnings, and server start info)
+  deno run start 2>&1 | grep -v "^\s*at " | grep -v "^    " | grep -v "^\[.*deno.*\]" | grep -v "Check file://"
+fi
+
+echo ""
+echo -e "${GREEN}✅ Server stopped${NC}"

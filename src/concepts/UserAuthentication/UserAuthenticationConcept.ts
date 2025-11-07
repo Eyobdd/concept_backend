@@ -1,5 +1,6 @@
 import { Collection, Db } from "npm:mongodb";
 import { Empty, ID } from "@utils/types.ts";
+import type { TwilioService, MockTwilioService } from "@services/twilio.ts";
 
 // Collection prefix to ensure namespace separation
 const PREFIX = "UserAuthentication" + ".";
@@ -47,8 +48,11 @@ export default class UserAuthenticationConcept {
   credentials: Collection<CredentialsDoc>;
   verificationCodes: Collection<VerificationCodeDoc>;
   sessions: Collection<SessionDoc>;
+  private twilioService?: TwilioService | MockTwilioService;
 
-  constructor(private readonly db: Db) {
+  constructor(private readonly db: Db, twilioService?: TwilioService | MockTwilioService) {
+    this.twilioService = twilioService;
+    console.log(`[UserAuthentication] Initialized with Twilio service: ${twilioService ? 'YES' : 'NO'}`);
     this.credentials = this.db.collection(PREFIX + "credentials");
     this.verificationCodes = this.db.collection(PREFIX + "verificationCodes");
     this.sessions = this.db.collection(PREFIX + "sessions");
@@ -73,14 +77,30 @@ export default class UserAuthenticationConcept {
       };
     }
 
-    // Remove any existing verification codes for this phone number
+    // Try Twilio Verify first (if configured), otherwise use direct SMS
+    if (this.twilioService && 'sendVerificationCode' in this.twilioService) {
+      try {
+        console.log(`[Verify] Attempting to send verification code via Twilio Verify to ${phoneNumber}`);
+        const verificationSid = await this.twilioService.sendVerificationCode(phoneNumber);
+        console.log(`[Verify] Successfully sent verification code. Verification SID: ${verificationSid}`);
+        return {};
+      } catch (error: any) {
+        // If Verify fails (e.g., no Service SID configured), fall back to direct SMS
+        if (error.message?.includes("Verify Service SID not configured")) {
+          console.log(`[Verify] Verify Service not configured, falling back to direct SMS`);
+        } else {
+          console.error(`[Verify] Failed to send via Twilio Verify:`, error);
+          console.log(`[Verify] Falling back to direct SMS`);
+        }
+      }
+    }
+
+    // Fallback: Use direct SMS with database-stored codes
     await this.verificationCodes.deleteMany({ phoneNumber });
-
-    // Generate random 6-digit code
+    
     const code = Math.floor(100000 + Math.random() * 900000).toString();
-
     const now = new Date();
-    const expiresAt = new Date(now.getTime() + 10 * 60 * 1000); // 10 minutes
+    const expiresAt = new Date(now.getTime() + 10 * 60 * 1000);
 
     await this.verificationCodes.insertOne({
       _id: crypto.randomUUID() as ID,
@@ -90,9 +110,20 @@ export default class UserAuthenticationConcept {
       expiresAt,
     });
 
-    // In production, send SMS here via Twilio/AWS SNS
-    // For MVP, just log to console
-    console.log(`[SMS] Verification code for ${phoneNumber}: ${code}`);
+    if (this.twilioService) {
+      try {
+        console.log(`[SMS] Attempting to send verification code via direct SMS to ${phoneNumber}`);
+        const messageSid = await this.twilioService.sendSMS(
+          phoneNumber,
+          `Your Zien verification code is: ${code}. This code will expire in 10 minutes.`
+        );
+        console.log(`[SMS] Successfully sent verification code. Message SID: ${messageSid}`);
+      } catch (error) {
+        console.error(`[SMS] Failed to send verification code:`, error);
+      }
+    } else {
+      console.log(`[SMS] No Twilio service configured. Verification code for ${phoneNumber}: ${code}`);
+    }
 
     return {};
   }
@@ -115,21 +146,37 @@ export default class UserAuthenticationConcept {
       return { error: `Phone number ${phoneNumber} is already registered.` };
     }
 
-    // Verify code
-    const verificationCode = await this.verificationCodes.findOne({
-      phoneNumber,
-    });
-    if (!verificationCode) {
-      return { error: "No verification code found. Please request a new code." };
+    // Try Twilio Verify first, then fall back to database
+    let verified = false;
+    
+    if (this.twilioService && 'verifyCode' in this.twilioService) {
+      try {
+        verified = await this.twilioService.verifyCode(phoneNumber, code);
+        if (verified) {
+          console.log(`[Verify] Code verified successfully via Twilio Verify`);
+        }
+      } catch (error: any) {
+        if (!error.message?.includes("Verify Service SID not configured")) {
+          console.error(`[Verify] Verification failed:`, error);
+        }
+        // Fall through to database check
+      }
     }
-
-    if (verificationCode.code !== code) {
-      return { error: "Invalid verification code." };
-    }
-
-    if (new Date() > verificationCode.expiresAt) {
+    
+    // If Verify didn't work, check database
+    if (!verified) {
+      const verificationCode = await this.verificationCodes.findOne({ phoneNumber });
+      if (!verificationCode) {
+        return { error: "No verification code found. Please request a new code." };
+      }
+      if (verificationCode.code !== code) {
+        return { error: "Invalid verification code." };
+      }
+      if (new Date() > verificationCode.expiresAt) {
+        await this.verificationCodes.deleteOne({ _id: verificationCode._id });
+        return { error: "Verification code has expired. Please request a new code." };
+      }
       await this.verificationCodes.deleteOne({ _id: verificationCode._id });
-      return { error: "Verification code has expired. Please request a new code." };
     }
 
     // Create user (via provided function from User concept)
@@ -142,9 +189,6 @@ export default class UserAuthenticationConcept {
       phoneNumber,
       isVerified: true,
     });
-
-    // Remove verification code
-    await this.verificationCodes.deleteOne({ _id: verificationCode._id });
 
     return { user };
   }
@@ -166,21 +210,37 @@ export default class UserAuthenticationConcept {
       return { error: `No verified account found for ${phoneNumber}.` };
     }
 
-    // Verify code
-    const verificationCode = await this.verificationCodes.findOne({
-      phoneNumber,
-    });
-    if (!verificationCode) {
-      return { error: "No verification code found. Please request a new code." };
+    // Try Twilio Verify first, then fall back to database
+    let verified = false;
+    
+    if (this.twilioService && 'verifyCode' in this.twilioService) {
+      try {
+        verified = await this.twilioService.verifyCode(phoneNumber, code);
+        if (verified) {
+          console.log(`[Verify] Code verified successfully via Twilio Verify`);
+        }
+      } catch (error: any) {
+        if (!error.message?.includes("Verify Service SID not configured")) {
+          console.error(`[Verify] Verification failed:`, error);
+        }
+        // Fall through to database check
+      }
     }
-
-    if (verificationCode.code !== code) {
-      return { error: "Invalid verification code." };
-    }
-
-    if (new Date() > verificationCode.expiresAt) {
+    
+    // If Verify didn't work, check database
+    if (!verified) {
+      const verificationCode = await this.verificationCodes.findOne({ phoneNumber });
+      if (!verificationCode) {
+        return { error: "No verification code found. Please request a new code." };
+      }
+      if (verificationCode.code !== code) {
+        return { error: "Invalid verification code." };
+      }
+      if (new Date() > verificationCode.expiresAt) {
+        await this.verificationCodes.deleteOne({ _id: verificationCode._id });
+        return { error: "Verification code has expired. Please request a new code." };
+      }
       await this.verificationCodes.deleteOne({ _id: verificationCode._id });
-      return { error: "Verification code has expired. Please request a new code." };
     }
 
     // Create session
@@ -195,9 +255,6 @@ export default class UserAuthenticationConcept {
       createdAt: now,
       expiresAt,
     });
-
-    // Remove verification code
-    await this.verificationCodes.deleteOne({ _id: verificationCode._id });
 
     return { token };
   }

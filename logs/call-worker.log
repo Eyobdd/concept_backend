@@ -2,53 +2,28 @@
 [MongoDB] Connected successfully with connection pooling (maxPoolSize: 10)
 [CallSchedulerWorker] Using Enhanced Call Orchestrator (Google Cloud STT/TTS)
 [CallSchedulerWorker] Starting (poll interval: 15s, batch size: 10)
-[CallSchedulerWorker] Checking for pending calls at 2025-11-07T03:47:53.007Z
-[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-07T03:47:53.007Z
+[CallSchedulerWorker] Checking for pending calls at 2025-11-07T07:18:41.208Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-07T07:18:41.208Z
 [CallSchedulerWorker] Running. Press Ctrl+C to stop.
 [CallScheduler] Found 0 pending calls
 [CallSchedulerWorker] No pending calls
-[CallSchedulerWorker] Checking for pending calls at 2025-11-07T03:48:08.011Z
-[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-07T03:48:08.011Z
+[CallSchedulerWorker] Checking for pending calls at 2025-11-07T07:18:56.210Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-07T07:18:56.210Z
 [CallScheduler] Found 0 pending calls
 [CallSchedulerWorker] No pending calls
-[CallSchedulerWorker] Checking for pending calls at 2025-11-07T03:48:23.012Z
-[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-07T03:48:23.012Z
+[CallSchedulerWorker] Checking for pending calls at 2025-11-07T07:19:11.212Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-07T07:19:11.212Z
 [CallScheduler] Found 0 pending calls
 [CallSchedulerWorker] No pending calls
-[CallSchedulerWorker] Checking for pending calls at 2025-11-07T03:48:38.013Z
-[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-07T03:48:38.013Z
-[CallScheduler] Found 1 pending calls
-[CallScheduler]   Call 1: call:1762487309618, scheduled: Thu Nov 06 2025 22:48:29 GMT-0500 (Eastern Standard Time), type: object
-[CallSchedulerWorker] Found 1 pending calls
-[CallSchedulerWorker] Processing call for session call:1762487309618
-[CallSchedulerWorker] Prompt order: 1. What are you grateful for toda... (rating=undefined), 2. What did you do today?... (rating=undefined), 3. What are you proud of today?... (rating=undefined), 4. What do you want to do tomorro... (rating=undefined), 5. On a scale from negative 2 to ... (rating=true)
-[CallSchedulerWorker] Updating session 019a5c6e-1564-7bde-a4f8-3360d2f7f558 with 5 prompts
-[CallSchedulerWorker] Successfully updated session prompts: 5 prompts
-[EnhancedOrchestrator] Initiating call to +18579996709 for user 019a5c68-b965-750e-a099-dd93a695fef1
-[EnhancedOrchestrator] Received prompts in order: 1. What are you grateful for toda... (rating=false), 2. What did you do today?... (rating=false), 3. What are you proud of today?... (rating=false), 4. What do you want to do tomorro... (rating=false), 5. On a scale from negative 2 to ... (rating=true)
-[EnhancedOrchestrator] Initiating Twilio call to +18579996709
-[EnhancedOrchestrator] Twilio call initiated with SID: CA8bbd485ee89bc64be3cf961c1f5fc6ec
-[EnhancedOrchestrator] Failed to create PhoneCall record: User 019a5c68-b965-750e-a099-dd93a695fef1 already has an IN_PROGRESS phone call: 019a5c68-e6e6-70c6-8aee-0d9cdf18c2e8
-[EnhancedOrchestrator] Failed to initiate call: Error: User 019a5c68-b965-750e-a099-dd93a695fef1 already has an IN_PROGRESS phone call: 019a5c68-e6e6-70c6-8aee-0d9cdf18c2e8
-    at EnhancedCallOrchestrator.initiateCall (file:///Users/eyobdavidoff/Documents/GitHub/6.1040/concept_backend/src/services/enhancedCallOrchestrator.ts:117:15)
-    at Object.runMicrotasks (ext:core/01_core.js:693:26)
-    at processTicksAndRejections (ext:deno_node/_next_tick.ts:59:10)
-    at runNextTicks (ext:deno_node/_next_tick.ts:76:3)
-    at eventLoopTick (ext:core/01_core.js:186:21)
-    at async CallSchedulerWorker.processCall (file:///Users/eyobdavidoff/Documents/GitHub/6.1040/concept_backend/src/workers/callSchedulerWorker.ts:301:25)
-    at async CallSchedulerWorker.processPendingCalls (file:///Users/eyobdavidoff/Documents/GitHub/6.1040/concept_backend/src/workers/callSchedulerWorker.ts:193:9)
-[CallSchedulerWorker] Error processing call call:1762487309618: Error: User 019a5c68-b965-750e-a099-dd93a695fef1 already has an IN_PROGRESS phone call: 019a5c68-e6e6-70c6-8aee-0d9cdf18c2e8
-    at EnhancedCallOrchestrator.initiateCall (file:///Users/eyobdavidoff/Documents/GitHub/6.1040/concept_backend/src/services/enhancedCallOrchestrator.ts:117:15)
-    at Object.runMicrotasks (ext:core/01_core.js:693:26)
-    at processTicksAndRejections (ext:deno_node/_next_tick.ts:59:10)
-    at runNextTicks (ext:deno_node/_next_tick.ts:76:3)
-    at eventLoopTick (ext:core/01_core.js:186:21)
-    at async CallSchedulerWorker.processCall (file:///Users/eyobdavidoff/Documents/GitHub/6.1040/concept_backend/src/workers/callSchedulerWorker.ts:301:25)
-    at async CallSchedulerWorker.processPendingCalls (file:///Users/eyobdavidoff/Documents/GitHub/6.1040/concept_backend/src/workers/callSchedulerWorker.ts:193:9)
-[CallSchedulerWorker] Processed 1 calls
-[CallSchedulerWorker] Checking for pending calls at 2025-11-07T03:48:53.015Z
-[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-07T03:48:53.015Z
+[CallSchedulerWorker] Checking for pending calls at 2025-11-07T07:19:26.213Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-07T07:19:26.213Z
 [CallScheduler] Found 0 pending calls
 [CallSchedulerWorker] No pending calls
-[CallSchedulerWorker] Shutting down...
-[CallSchedulerWorker] Stopped
+[CallSchedulerWorker] Checking for pending calls at 2025-11-07T07:19:41.215Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-07T07:19:41.215Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-07T07:19:56.217Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-07T07:19:56.217Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls

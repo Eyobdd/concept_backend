@@ -5,6 +5,7 @@
         "@google/generative-ai": "npm:@google/generative-ai@^0.24.1",
         "@test-concepts": "./src/concepts/test_concepts.ts",
         "@utils/": "./src/utils/",
+        "@services/": "./src/services/",
         "@engine": "./src/engine/mod.ts",
         "@syncs": "./src/syncs/syncs.ts",
         "twilio": "npm:twilio@^5.10.4"

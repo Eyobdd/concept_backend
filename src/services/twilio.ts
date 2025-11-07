@@ -12,6 +12,7 @@ export interface TwilioConfig {
   authToken: string;
   phoneNumber: string; // Twilio phone number to call from
   googleCloudApiKey?: string; // For STT/TTS
+  verifyServiceSid?: string; // Twilio Verify Service SID for SMS verification
 }
 
 export interface CallOptions {
@@ -39,12 +40,14 @@ export class TwilioService {
   private authToken: string;
   private phoneNumber: string;
   private googleApiKey?: string;
+  private verifyServiceSid?: string;
 
   constructor(config: TwilioConfig) {
     this.accountSid = config.accountSid;
     this.authToken = config.authToken;
     this.phoneNumber = config.phoneNumber;
     this.googleApiKey = config.googleCloudApiKey;
+    this.verifyServiceSid = config.verifyServiceSid;
   }
 
   /**
@@ -117,6 +120,49 @@ export class TwilioService {
       return `https://api.twilio.com${recordings[0].uri}`;
     }
     return null;
+  }
+
+  /**
+   * Sends an SMS message (direct)
+   */
+  async sendSMS(to: string, body: string): Promise<string> {
+    const client = twilio(this.accountSid, this.authToken);
+    const message = await client.messages.create({
+      from: this.phoneNumber,
+      to,
+      body,
+    });
+    return message.sid;
+  }
+
+  /**
+   * Sends a verification code using Twilio Verify
+   */
+  async sendVerificationCode(to: string): Promise<string> {
+    if (!this.verifyServiceSid) {
+      throw new Error("Twilio Verify Service SID not configured");
+    }
+    const client = twilio(this.accountSid, this.authToken);
+    const verification = await client.verify.v2
+      .services(this.verifyServiceSid)
+      .verifications
+      .create({ to, channel: 'sms' });
+    return verification.sid;
+  }
+
+  /**
+   * Verifies a code using Twilio Verify
+   */
+  async verifyCode(to: string, code: string): Promise<boolean> {
+    if (!this.verifyServiceSid) {
+      throw new Error("Twilio Verify Service SID not configured");
+    }
+    const client = twilio(this.accountSid, this.authToken);
+    const verificationCheck = await client.verify.v2
+      .services(this.verifyServiceSid)
+      .verificationChecks
+      .create({ to, code });
+    return verificationCheck.status === 'approved';
   }
 }
 
@@ -218,6 +264,32 @@ export class MockTwilioService {
     if (call) {
       call.status = status;
     }
+  }
+
+  /**
+   * Mock SMS - logs to console for testing
+   */
+  async sendSMS(to: string, body: string): Promise<string> {
+    const messageSid = `SM${Date.now()}`;
+    console.log(`[Mock SMS] To: ${to}, Body: ${body}`);
+    return messageSid;
+  }
+
+  /**
+   * Mock Verify - logs to console for testing
+   */
+  async sendVerificationCode(to: string): Promise<string> {
+    const verificationSid = `VE${Date.now()}`;
+    console.log(`[Mock Verify] Sending verification code to: ${to}`);
+    return verificationSid;
+  }
+
+  /**
+   * Mock Verify Check - always returns true for testing
+   */
+  async verifyCode(to: string, code: string): Promise<boolean> {
+    console.log(`[Mock Verify] Checking code ${code} for: ${to}`);
+    return true; // Always approve in mock mode
   }
 }
 

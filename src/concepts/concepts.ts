@@ -6,6 +6,7 @@ import { SyncConcept } from "@engine";
 export const Engine = new SyncConcept();
 
 import { getDb } from "@utils/database.ts";
+import { TwilioService, MockTwilioService } from "@services/twilio.ts";
 
 import JournalEntryConcept from "./JournalEntry/JournalEntryConcept.ts";
 import CallWindowConcept from "./CallWindow/CallWindowConcept.ts";
@@ -34,6 +35,18 @@ export type { default as UserAuthenticationConcept } from "./UserAuthentication/
 // Initialize the database connection
 export const [db, client] = await getDb();
 
+// Initialize Twilio service for SMS verification codes
+const useMocks = Deno.env.get("USE_MOCKS") === "true";
+console.log(`[Twilio] Initializing ${useMocks ? "Mock" : "Real"} Twilio service (USE_MOCKS=${useMocks})`);
+const twilioService = useMocks
+  ? new MockTwilioService()
+  : new TwilioService({
+      accountSid: Deno.env.get("TWILIO_ACCOUNT_SID")!,
+      authToken: Deno.env.get("TWILIO_AUTH_TOKEN")!,
+      phoneNumber: Deno.env.get("TWILIO_PHONE_NUMBER")!,
+      verifyServiceSid: Deno.env.get("TWILIO_VERIFY_SERVICE_SID"),
+    });
+
 export const JournalEntry = Engine.instrumentConcept(new JournalEntryConcept(db));
 export const CallWindow = Engine.instrumentConcept(new CallWindowConcept(db));
 export const JournalPrompt = Engine.instrumentConcept(new JournalPromptConcept(db));
@@ -44,4 +57,4 @@ export const PhoneCall = Engine.instrumentConcept(new PhoneCallConcept(db));
 export const CallScheduler = Engine.instrumentConcept(new CallSchedulerConcept(db));
 export const Profile = Engine.instrumentConcept(new ProfileConcept(db));
 export const Requesting = Engine.instrumentConcept(new RequestingConcept(db));
-export const UserAuthentication = Engine.instrumentConcept(new UserAuthenticationConcept(db));
+export const UserAuthentication = Engine.instrumentConcept(new UserAuthenticationConcept(db, twilioService));
