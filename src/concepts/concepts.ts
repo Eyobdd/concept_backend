@@ -36,29 +36,42 @@ export type { default as UserAuthenticationConcept } from "./UserAuthentication/
 export const [db, client] = await getDb();
 
 // Initialize Twilio service for SMS verification codes
+console.log("[Twilio] Starting Twilio service initialization...");
 const useMocks = Deno.env.get("USE_MOCKS") === "true";
 const mockVerifyOnly = Deno.env.get("MOCK_TWILIO_VERIFY") === "true";
 
+console.log(`[Twilio] Environment check: USE_MOCKS=${useMocks}, MOCK_TWILIO_VERIFY=${mockVerifyOnly}`);
+console.log(`[Twilio] TWILIO_ACCOUNT_SID: ${Deno.env.get("TWILIO_ACCOUNT_SID") ? "SET" : "NOT SET"}`);
+console.log(`[Twilio] TWILIO_AUTH_TOKEN: ${Deno.env.get("TWILIO_AUTH_TOKEN") ? "SET" : "NOT SET"}`);
+console.log(`[Twilio] TWILIO_PHONE_NUMBER: ${Deno.env.get("TWILIO_PHONE_NUMBER") ? "SET" : "NOT SET"}`);
+console.log(`[Twilio] TWILIO_VERIFY_SERVICE_SID: ${Deno.env.get("TWILIO_VERIFY_SERVICE_SID") ? "SET" : "NOT SET"}`);
+
 let twilioService;
-if (useMocks) {
-  console.log(`[Twilio] Initializing Mock Twilio service (USE_MOCKS=true)`);
-  twilioService = new MockTwilioService();
-} else if (mockVerifyOnly) {
-  console.log(`[Twilio] Initializing Hybrid Twilio service - Real calls/SMS, Mock Verify (MOCK_TWILIO_VERIFY=true)`);
-  twilioService = new TwilioServiceWithMockVerify({
-    accountSid: Deno.env.get("TWILIO_ACCOUNT_SID")!,
-    authToken: Deno.env.get("TWILIO_AUTH_TOKEN")!,
-    phoneNumber: Deno.env.get("TWILIO_PHONE_NUMBER")!,
-    verifyServiceSid: Deno.env.get("TWILIO_VERIFY_SERVICE_SID"),
-  });
-} else {
-  console.log(`[Twilio] Initializing Real Twilio service (all features enabled)`);
-  twilioService = new TwilioService({
-    accountSid: Deno.env.get("TWILIO_ACCOUNT_SID")!,
-    authToken: Deno.env.get("TWILIO_AUTH_TOKEN")!,
-    phoneNumber: Deno.env.get("TWILIO_PHONE_NUMBER")!,
-    verifyServiceSid: Deno.env.get("TWILIO_VERIFY_SERVICE_SID"),
-  });
+try {
+  if (useMocks) {
+    console.log(`[Twilio] Initializing Mock Twilio service (USE_MOCKS=true)`);
+    twilioService = new MockTwilioService();
+  } else if (mockVerifyOnly) {
+    console.log(`[Twilio] Initializing Hybrid Twilio service - Real calls/SMS, Mock Verify (MOCK_TWILIO_VERIFY=true)`);
+    twilioService = new TwilioServiceWithMockVerify({
+      accountSid: Deno.env.get("TWILIO_ACCOUNT_SID")!,
+      authToken: Deno.env.get("TWILIO_AUTH_TOKEN")!,
+      phoneNumber: Deno.env.get("TWILIO_PHONE_NUMBER")!,
+      verifyServiceSid: Deno.env.get("TWILIO_VERIFY_SERVICE_SID"),
+    });
+  } else {
+    console.log(`[Twilio] Initializing Real Twilio service (all features enabled)`);
+    twilioService = new TwilioService({
+      accountSid: Deno.env.get("TWILIO_ACCOUNT_SID")!,
+      authToken: Deno.env.get("TWILIO_AUTH_TOKEN")!,
+      phoneNumber: Deno.env.get("TWILIO_PHONE_NUMBER")!,
+      verifyServiceSid: Deno.env.get("TWILIO_VERIFY_SERVICE_SID"),
+    });
+  }
+  console.log("[Twilio] ✅ Twilio service initialized successfully");
+} catch (error) {
+  console.error("[Twilio] ❌ Failed to initialize Twilio service:", error);
+  throw error;
 }
 
 export const JournalEntry = Engine.instrumentConcept(new JournalEntryConcept(db));
