@@ -10,6 +10,12 @@ WORKDIR /app
 # The Requesting concept defaults to PORT 10000.
 EXPOSE 10000
 
+# Copy dependency files first for better caching
+COPY --chown=deno:deno deno.json deno.lock ./
+
+# Install dependencies into node_modules (required for MongoDB TLS support)
+RUN deno install --allow-scripts
+
 # Copy all application files into the working directory.
 # CRITICAL FIX: Use --chown to ensure the 'deno' user owns the files.
 # This grants the necessary write permissions for the build step.
