@@ -9,3 +9,4 @@ ctx.exe
 zien-service-account.json
 *-service-account.json
 google_app_key.json
+*.log
