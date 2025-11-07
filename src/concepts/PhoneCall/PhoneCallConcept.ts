@@ -30,6 +30,12 @@ interface PhoneCallDoc {
   createdAt: Date;
   completedAt?: Date;
   errorMessage?: string;
+  // Pregenerated audio for prompts (base64-encoded MP3)
+  pregeneratedAudio?: {
+    greeting?: string;
+    prompts?: string[]; // Array of base64 audio, one per prompt
+    closing?: string;
+  };
 }
 
 /**
@@ -101,6 +107,32 @@ export default class PhoneCallConcept {
     await this.phoneCalls.updateOne(
       { twilioCallSid },
       { $set: { prompts } },
+    );
+
+    return {};
+  }
+
+  /**
+   * Action: Sets pregenerated audio for a call.
+   * @requires PhoneCall exists
+   * @effects Sets pregeneratedAudio on the PhoneCall document
+   */
+  async setPregeneratedAudio(
+    { twilioCallSid, greeting, prompts, closing }: {
+      twilioCallSid: string;
+      greeting?: string;
+      prompts?: string[];
+      closing?: string;
+    },
+  ): Promise<Empty | { error: string }> {
+    const call = await this.phoneCalls.findOne({ twilioCallSid });
+    if (!call) {
+      return { error: `Phone call with SID ${twilioCallSid} not found.` };
+    }
+
+    await this.phoneCalls.updateOne(
+      { twilioCallSid },
+      { $set: { pregeneratedAudio: { greeting, prompts, closing } } },
     );
 
     return {};

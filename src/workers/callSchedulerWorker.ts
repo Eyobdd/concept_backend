@@ -208,18 +208,6 @@ export class CallSchedulerWorker {
         `[CallSchedulerWorker] Processing call for session ${scheduledCall.callSession}`,
       );
 
-      // Mark as in progress
-      const markResult = await this.callSchedulerConcept.markInProgress({
-        callSession: scheduledCall.callSession,
-      });
-
-      if ("error" in markResult) {
-        console.error(
-          `[CallSchedulerWorker] Failed to mark in progress: ${markResult.error}`,
-        );
-        return;
-      }
-
       // Get user profile for phone number and settings
       const profileResult = await this.profileConcept._getProfile({
         user: scheduledCall.user,
@@ -294,6 +282,37 @@ export class CallSchedulerWorker {
         console.log(`[CallSchedulerWorker] Successfully updated session prompts: ${prompts.length} prompts`);
       }
 
+      // Pregenerate audio for enhanced calls (happens BEFORE call initiation)
+      let pregeneratedAudio: { greeting?: string; prompts?: string[]; closing?: string } | undefined;
+      if (this.orchestrator instanceof EnhancedCallOrchestrator) {
+        console.log(`[CallSchedulerWorker] Pregenerating audio for all prompts...`);
+        try {
+          pregeneratedAudio = await this.orchestrator.pregenerateAudio(
+            profile.displayName,
+            profile.namePronunciation,
+            prompts.map(p => p.promptText),
+            profile.timezone || "America/New_York",
+          );
+          console.log(`[CallSchedulerWorker] ✅ Audio pregenerated: greeting + ${pregeneratedAudio.prompts?.length || 0} prompts + closing`);
+        } catch (audioError) {
+          console.error(`[CallSchedulerWorker] Failed to pregenerate audio (will fallback to real-time):`, audioError);
+          pregeneratedAudio = undefined;
+        }
+      }
+
+      // Mark as in progress NOW (after audio pregeneration, before call initiation)
+      console.log(`[CallSchedulerWorker] Marking call as IN_PROGRESS`);
+      const markResult = await this.callSchedulerConcept.markInProgress({
+        callSession: scheduledCall.callSession,
+      });
+
+      if ("error" in markResult) {
+        console.error(
+          `[CallSchedulerWorker] Failed to mark in progress: ${markResult.error}`,
+        );
+        return;
+      }
+
       // Initiate call via orchestrator
       // Enhanced orchestrator uses initiateCall, standard uses initiateReflectionCall
       let callResult;
@@ -303,6 +322,7 @@ export class CallSchedulerWorker {
           scheduledCall.phoneNumber,
           session._id,
           prompts,
+          pregeneratedAudio, // Pass pregenerated audio
         );
         callResult = { callSid };
       } else {

@@ -30,6 +30,7 @@ export const inclusions: Record<string, string> = {
   
   // UserAuthentication - Public endpoints for login/registration
   "/api/UserAuthentication/requestVerificationCode": "public endpoint to request verification codes",
+  "/api/UserAuthentication/verifyCode": "public endpoint to verify phone number codes",
   "/api/UserAuthentication/register": "public endpoint for user registration",
   "/api/UserAuthentication/login": "public endpoint for user login",
   "/api/UserAuthentication/authenticate": "needed to validate session tokens",
@@ -42,6 +43,10 @@ export const inclusions: Record<string, string> = {
   "/api/ReflectionSession/setRating": "sets rating for a reflection session using session ID only",
   "/api/ReflectionSession/abandonSession": "abandons a session directly without Requesting concept to avoid Engine timeout issues",
   "/api/ReflectionSession/_getActiveSession": "checks for active session directly without Requesting concept to avoid Engine timeout issues",
+  
+  // CallScheduler - Query endpoints (authenticated via token parameter)
+  "/api/CallScheduler/_getActiveCallsForUser": "query endpoint to check for active/pending calls, uses token parameter for auth",
+  "/api/CallScheduler/_getScheduledCall": "query endpoint to get specific scheduled call details, uses token parameter for auth",
 };
 
 /**
@@ -124,4 +129,35 @@ export const exclusions: Array<string> = [
   "/api/User/deleteUser",
   "/api/User/_getUser",
   "/api/User/_getAllUsers",
+  
+  // PhoneCall - Internal routes used by call orchestrator (no direct user access)
+  "/api/PhoneCall/initiateCall",
+  "/api/PhoneCall/setPrompts",
+  "/api/PhoneCall/setPregeneratedAudio",
+  "/api/PhoneCall/markConnected",
+  "/api/PhoneCall/startPrompting",
+  "/api/PhoneCall/appendToTranscript",
+  "/api/PhoneCall/advanceToNextPrompt",
+  "/api/PhoneCall/markCompleted",
+  "/api/PhoneCall/markAbandoned",
+  "/api/PhoneCall/markFailed",
+  "/api/PhoneCall/_getPhoneCall",
+  "/api/PhoneCall/_getActivePhoneCall",
+  "/api/PhoneCall/_getPhoneCallBySession",
+  
+  // Profile - Additional authenticated routes
+  "/api/Profile/updateNamePronunciation",
+  "/api/Profile/updateMaxRetries",
+  "/api/Profile/updateProfile",
+  
+  // JournalPrompt - Additional authenticated routes
+  "/api/JournalPrompt/ensureRatingPrompt",
+  "/api/JournalPrompt/_getRatingPrompt",
+  
+  // ReflectionSession - Additional authenticated routes
+  "/api/ReflectionSession/updateSessionPrompts",
+  "/api/ReflectionSession/_getSessionByCallSession",
+  "/api/ReflectionSession/setTranscript",
+  "/api/ReflectionSession/setRecordingUrl",
+  
 ];

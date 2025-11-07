@@ -76,6 +76,72 @@ export class EnhancedCallOrchestrator {
   }
 
   /**
+   * Pregenerates audio for greeting, all prompts, and closing message
+   * This happens BEFORE the call is initiated to eliminate TTS latency during the call
+   */
+  async pregenerateAudio(
+    userName: string,
+    namePronunciation: string | undefined,
+    promptTexts: string[],
+    timezone: string,
+  ): Promise<{ greeting: string; prompts: string[]; closing: string }> {
+    console.log(`[AudioPregen] Starting parallel audio pregeneration for ${promptTexts.length} prompts`);
+    
+    const BATCH_SIZE = 8; // Stay under 10/min limit with some buffer
+    const BATCH_DELAY_MS = 7000; // 7 second delay between batches
+    
+    // Prepare all text content
+    const greetingText = this.generateGreeting(userName, namePronunciation);
+    const closingText = this.generateClosingMessage(timezone, userName, namePronunciation);
+    
+    // Create all TTS tasks
+    const allTexts = [greetingText, ...promptTexts, closingText];
+    const allLabels = ['greeting', ...promptTexts.map((_, i) => `prompt ${i + 1}`), 'closing'];
+    
+    // Process in batches to respect rate limits
+    const allAudios: string[] = [];
+    for (let i = 0; i < allTexts.length; i += BATCH_SIZE) {
+      const batchTexts = allTexts.slice(i, i + BATCH_SIZE);
+      const batchLabels = allLabels.slice(i, i + BATCH_SIZE);
+      const batchNum = Math.floor(i / BATCH_SIZE) + 1;
+      const totalBatches = Math.ceil(allTexts.length / BATCH_SIZE);
+      
+      console.log(`[AudioPregen] Processing batch ${batchNum}/${totalBatches} (${batchTexts.length} items)`);
+      
+      // Generate all audio in this batch in parallel
+      const batchPromises = batchTexts.map((text, idx) => 
+        this.geminiChecker.textToSpeech(text)
+          .then(audio => {
+            console.log(`[AudioPregen] ✓ ${batchLabels[idx]} generated`);
+            return audio;
+          })
+      );
+      
+      const batchAudios = await Promise.all(batchPromises);
+      allAudios.push(...batchAudios);
+      
+      // Wait between batches (except after the last batch)
+      if (i + BATCH_SIZE < allTexts.length) {
+        console.log(`[AudioPregen] Waiting ${BATCH_DELAY_MS / 1000}s before next batch...`);
+        await new Promise(resolve => setTimeout(resolve, BATCH_DELAY_MS));
+      }
+    }
+    
+    console.log(`[AudioPregen] All audio pregenerated successfully in parallel`);
+    
+    // Split results back into greeting, prompts, and closing
+    const greetingAudio = allAudios[0];
+    const promptAudios = allAudios.slice(1, 1 + promptTexts.length);
+    const closingAudio = allAudios[allAudios.length - 1];
+    
+    return {
+      greeting: greetingAudio,
+      prompts: promptAudios,
+      closing: closingAudio,
+    };
+  }
+
+  /**
    * Initiates an outbound call
    */
   async initiateCall(
@@ -83,6 +149,7 @@ export class EnhancedCallOrchestrator {
     phoneNumber: string,
     reflectionSession: ID,
     prompts: CallPrompt[],
+    pregeneratedAudio?: { greeting?: string; prompts?: string[]; closing?: string },
   ): Promise<string> {
     try {
       console.log(`[EnhancedOrchestrator] Initiating call to ${phoneNumber} for user ${user}`);
@@ -135,6 +202,24 @@ export class EnhancedCallOrchestrator {
         throw new Error(setPromptsResult.error);
       }
 
+      // Store pregenerated audio if provided
+      if (pregeneratedAudio) {
+        console.log(`[EnhancedOrchestrator] Storing pregenerated audio for call ${twilioCallSid}`);
+        const setAudioResult = await this.phoneCallConcept.setPregeneratedAudio({
+          twilioCallSid,
+          greeting: pregeneratedAudio.greeting,
+          prompts: pregeneratedAudio.prompts,
+          closing: pregeneratedAudio.closing,
+        });
+
+        if ('error' in setAudioResult) {
+          console.error(`[EnhancedOrchestrator] Failed to store pregenerated audio: ${setAudioResult.error}`);
+          // Don't throw - call can still proceed with real-time TTS
+        } else {
+          console.log(`[EnhancedOrchestrator] ✅ Pregenerated audio stored successfully`);
+        }
+      }
+
       console.log(`[EnhancedOrchestrator] PhoneCall fully configured with SID: ${twilioCallSid}`);
 
       return twilioCallSid;
@@ -167,19 +252,35 @@ export class EnhancedCallOrchestrator {
     const wsProtocol = baseUrl.startsWith("https") ? "wss" : "ws";
     const wsHost = baseUrl.replace(/^https?:\/\//, "");
     const wsUrl = `${wsProtocol}://${wsHost}`;
-
-    // Generate greeting text
-    const greetingText = this.generateGreeting(userName, namePronunciation);
     
+    // Generate greeting text (needed for fallback) - MUST be outside try block
+    const greetingText = this.generateGreeting(userName, namePronunciation);
+
     try {
-      // Try to generate audio with Gemini TTS (cost-effective, good quality)
-      console.log("[TTS] Generating greeting audio with Gemini 2.5 Flash TTS...");
-      const greetingAudio = await this.geminiChecker.textToSpeech(greetingText);
+      // Check if we have pregenerated audio for this call
+      const callResult = await this.phoneCallConcept._getPhoneCall({ twilioCallSid });
+      const call = callResult[0]?.call;
       
+      let greetingAudio = "";
       let promptAudio = "";
-      if (firstPrompt) {
-        console.log("[TTS] Generating first prompt audio with Gemini 2.5 Flash TTS...");
-        promptAudio = await this.geminiChecker.textToSpeech(firstPrompt);
+      
+      if (call?.pregeneratedAudio?.greeting) {
+        console.log("[TTS] Using pregenerated greeting audio");
+        greetingAudio = call.pregeneratedAudio.greeting;
+        
+        if (call.pregeneratedAudio.prompts && call.pregeneratedAudio.prompts.length > 0) {
+          console.log("[TTS] Using pregenerated first prompt audio");
+          promptAudio = call.pregeneratedAudio.prompts[0];
+        }
+      } else {
+        // Fallback: Generate audio in real-time
+        console.log("[TTS] No pregenerated audio found, generating in real-time with Gemini TTS...");
+        greetingAudio = await this.geminiChecker.textToSpeech(greetingText);
+        
+        if (firstPrompt) {
+          console.log("[TTS] Generating first prompt audio with Gemini 2.5 Flash TTS...");
+          promptAudio = await this.geminiChecker.textToSpeech(firstPrompt);
+        }
       }
       
       // Store audio in memory for serving via HTTP endpoint
@@ -188,9 +289,9 @@ export class EnhancedCallOrchestrator {
         this.audioCache.set(`${twilioCallSid}-prompt`, promptAudio);
       }
       
-      console.log("[TTS] Audio generated successfully, using Gemini TTS");
+      console.log("[TTS] Audio ready for playback");
       
-      // TwiML with Google TTS audio
+      // TwiML with audio
       const twiml = `<?xml version="1.0" encoding="UTF-8"?>
 <Response>
   <Play>${baseUrl}/webhooks/twilio/audio/${twilioCallSid}/greeting</Play>
@@ -491,7 +592,7 @@ export class EnhancedCallOrchestrator {
   }
 
   /**
-   * Plays a prompt using Gemini TTS (with Twilio fallback)
+   * Plays a prompt using pregenerated or real-time TTS (with Twilio fallback)
    */
   private async playPrompt(twilioCallSid: string, promptText: string): Promise<void> {
     // Check if call is still active before trying to play prompt
@@ -504,12 +605,19 @@ export class EnhancedCallOrchestrator {
     }
 
     try {
-      console.log(`[TTS] Generating audio for next prompt with Gemini 2.5 Flash TTS...`);
+      let audioBase64 = "";
       
-      // Generate audio with Gemini TTS
-      const audioBase64 = await this.geminiChecker.textToSpeech(promptText);
-
-      console.log(`[TTS] Gemini TTS audio generated successfully`);
+      // Check if we have pregenerated audio for this prompt
+      const nextPromptIndex = call.currentPromptIndex;
+      if (call.pregeneratedAudio?.prompts && call.pregeneratedAudio.prompts[nextPromptIndex]) {
+        console.log(`[TTS] Using pregenerated audio for prompt ${nextPromptIndex + 1}`);
+        audioBase64 = call.pregeneratedAudio.prompts[nextPromptIndex];
+      } else {
+        // Fallback: Generate audio in real-time
+        console.log(`[TTS] No pregenerated audio for prompt ${nextPromptIndex + 1}, generating with Gemini TTS...`);
+        audioBase64 = await this.geminiChecker.textToSpeech(promptText);
+        console.log(`[TTS] Gemini TTS audio generated successfully`);
+      }
 
       // Store audio in cache
       this.audioCache.set(`${twilioCallSid}-next-prompt`, audioBase64);
@@ -560,19 +668,25 @@ export class EnhancedCallOrchestrator {
         return;
       }
 
-      console.log(`[Call Complete] Generating and playing closing message`);
+      console.log(`[Call Complete] Playing closing message`);
 
-      // Get user profile for timezone
-      const profileResult = await this.profileConcept._getProfile({ user: call.user });
-      const profile = profileResult[0]?.profile;
-
-      // Generate time-aware closing message
-      const closingText = this.generateClosingMessage(profile?.timezone || "America/New_York");
-      
-      // Generate closing audio BEFORE marking as complete
+      // Generate or use pregenerated closing audio
       try {
-        console.log(`[TTS] Generating closing message audio with Gemini 2.5 Flash TTS...`);
-        const closingAudio = await this.geminiChecker.textToSpeech(closingText);
+        let closingAudio = "";
+        
+        // Check if we have pregenerated closing audio
+        if (call.pregeneratedAudio?.closing) {
+          console.log(`[TTS] Using pregenerated closing audio`);
+          closingAudio = call.pregeneratedAudio.closing;
+        } else {
+          // Fallback: Generate in real-time
+          console.log(`[TTS] No pregenerated closing audio, generating with Gemini TTS...`);
+          const profileResult = await this.profileConcept._getProfile({ user: call.user });
+          const profile = profileResult[0]?.profile;
+          const closingText = this.generateClosingMessage(profile?.timezone || "America/New_York", profile?.displayName, profile?.namePronunciation);
+          closingAudio = await this.geminiChecker.textToSpeech(closingText);
+          console.log(`[TTS] Closing audio generated successfully`);
+        }
         
         // Store audio in cache
         this.audioCache.set(`${twilioCallSid}-closing`, closingAudio);
@@ -725,7 +839,7 @@ export class EnhancedCallOrchestrator {
   /**
    * Generates a time-aware closing message
    */
-  private generateClosingMessage(timezone: string): string {
+  private generateClosingMessage(timezone: string, userName?: string, namePronunciation?: string): string {
     try {
       // Get current time in user's timezone
       const now = new Date();
@@ -748,10 +862,12 @@ export class EnhancedCallOrchestrator {
         timeOfDay = "night";
       }
       
-      return `Thank you for taking the time to reflect. Have a wonderful ${timeOfDay}!`;
+      const name = namePronunciation || userName || "there";
+      return `Thank you for taking the time to reflect, ${name}. Have a wonderful ${timeOfDay}!`;
     } catch (error) {
       console.error(`[Closing] Error determining time of day:`, error);
-      return "Thank you for taking the time to reflect. Have a wonderful day!";
+      const name = namePronunciation || userName || "there";
+      return `Thank you for taking the time to reflect, ${name}. Have a wonderful day!`;
     }
   }
 

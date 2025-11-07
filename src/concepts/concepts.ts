@@ -6,7 +6,7 @@ import { SyncConcept } from "@engine";
 export const Engine = new SyncConcept();
 
 import { getDb } from "@utils/database.ts";
-import { TwilioService, MockTwilioService } from "@services/twilio.ts";
+import { TwilioService, MockTwilioService, TwilioServiceWithMockVerify } from "@services/twilio.ts";
 
 import JournalEntryConcept from "./JournalEntry/JournalEntryConcept.ts";
 import CallWindowConcept from "./CallWindow/CallWindowConcept.ts";
@@ -37,15 +37,29 @@ export const [db, client] = await getDb();
 
 // Initialize Twilio service for SMS verification codes
 const useMocks = Deno.env.get("USE_MOCKS") === "true";
-console.log(`[Twilio] Initializing ${useMocks ? "Mock" : "Real"} Twilio service (USE_MOCKS=${useMocks})`);
-const twilioService = useMocks
-  ? new MockTwilioService()
-  : new TwilioService({
-      accountSid: Deno.env.get("TWILIO_ACCOUNT_SID")!,
-      authToken: Deno.env.get("TWILIO_AUTH_TOKEN")!,
-      phoneNumber: Deno.env.get("TWILIO_PHONE_NUMBER")!,
-      verifyServiceSid: Deno.env.get("TWILIO_VERIFY_SERVICE_SID"),
-    });
+const mockVerifyOnly = Deno.env.get("MOCK_TWILIO_VERIFY") === "true";
+
+let twilioService;
+if (useMocks) {
+  console.log(`[Twilio] Initializing Mock Twilio service (USE_MOCKS=true)`);
+  twilioService = new MockTwilioService();
+} else if (mockVerifyOnly) {
+  console.log(`[Twilio] Initializing Hybrid Twilio service - Real calls/SMS, Mock Verify (MOCK_TWILIO_VERIFY=true)`);
+  twilioService = new TwilioServiceWithMockVerify({
+    accountSid: Deno.env.get("TWILIO_ACCOUNT_SID")!,
+    authToken: Deno.env.get("TWILIO_AUTH_TOKEN")!,
+    phoneNumber: Deno.env.get("TWILIO_PHONE_NUMBER")!,
+    verifyServiceSid: Deno.env.get("TWILIO_VERIFY_SERVICE_SID"),
+  });
+} else {
+  console.log(`[Twilio] Initializing Real Twilio service (all features enabled)`);
+  twilioService = new TwilioService({
+    accountSid: Deno.env.get("TWILIO_ACCOUNT_SID")!,
+    authToken: Deno.env.get("TWILIO_AUTH_TOKEN")!,
+    phoneNumber: Deno.env.get("TWILIO_PHONE_NUMBER")!,
+    verifyServiceSid: Deno.env.get("TWILIO_VERIFY_SERVICE_SID"),
+  });
+}
 
 export const JournalEntry = Engine.instrumentConcept(new JournalEntryConcept(db));
 export const CallWindow = Engine.instrumentConcept(new CallWindowConcept(db));

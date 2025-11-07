@@ -142,31 +142,20 @@ export function createEnhancedTwilioWebhooks(db: Db): Hono {
       const profileResult = await profileConcept._getProfile({ user: sessionData.user });
       const profile = profileResult[0]?.profile;
 
-      // Get prompts
-      const promptsResult = await journalPromptConcept._getActivePrompts({ user: sessionData.user });
-      const activePrompts = promptsResult[0]?.prompts || [];
+      // Use prompts that were already stored on the PhoneCall record
+      // These are the same prompts we pregenerated audio for
+      const prompts = phoneCall.prompts || [];
 
-      if (activePrompts.length === 0) {
-        console.error(`[Twilio Voice] No active prompts`);
+      if (prompts.length === 0) {
+        console.error(`[Twilio Voice] No prompts stored on PhoneCall record`);
         return c.text(
-          `<?xml version="1.0" encoding="UTF-8"?><Response><Say>Error: No active prompts configured.</Say><Hangup/></Response>`,
+          `<?xml version="1.0" encoding="UTF-8"?><Response><Say>Error: No prompts configured.</Say><Hangup/></Response>`,
           200,
           { "Content-Type": "text/xml" }
         );
       }
-
-      // Sort prompts: regular prompts first (by position), then rating prompts at the end
-      const regularPrompts = activePrompts.filter(p => !p.isRatingPrompt).sort((a, b) => a.position - b.position);
-      const ratingPrompts = activePrompts.filter(p => p.isRatingPrompt).sort((a, b) => a.position - b.position);
-      const prompts = [...regularPrompts, ...ratingPrompts];
       
-      console.log(`[Twilio Voice] Prompt order: ${prompts.map((p, i) => `${i+1}. ${p.promptText.substring(0, 30)}... (rating=${p.isRatingPrompt})`).join(', ')}`);
-
-      // Store prompts on PhoneCall (preserve isRatingPrompt flag)
-      await phoneCallConcept.setPrompts({
-        twilioCallSid: callSid,
-        prompts: prompts.map(p => ({ promptId: p._id, promptText: p.promptText, isRatingPrompt: p.isRatingPrompt })),
-      });
+      console.log(`[Twilio Voice] Using stored prompts (${prompts.length} total): ${prompts.map((p, i) => `${i+1}. ${p.promptText.substring(0, 30)}... (rating=${p.isRatingPrompt})`).join(', ')}`);
 
       // Generate TwiML with media streaming
       const userName = profile?.displayName || "there";

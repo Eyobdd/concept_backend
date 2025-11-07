@@ -299,3 +299,47 @@ interface MockCallState {
   startTime: Date;
   endTime?: Date;
 }
+
+/**
+ * Hybrid Twilio service: Real calls/SMS but mocked Verify
+ * Useful for development when you want to test calls but don't want to use Twilio Verify credits
+ */
+export class TwilioServiceWithMockVerify extends TwilioService {
+  private mockCodes: Map<string, string> = new Map();
+
+  /**
+   * Mock Verify - generates a code, logs to console, and returns fake SID
+   */
+  async sendVerificationCode(to: string): Promise<string> {
+    const verificationSid = `VE${Date.now()}`;
+    const code = Math.floor(100000 + Math.random() * 900000).toString();
+    
+    // Store the code for this phone number
+    this.mockCodes.set(to, code);
+    
+    console.log(`\n========================================`);
+    console.log(`[Mock Verify] 📱 Verification Code for ${to}`);
+    console.log(`[Mock Verify] 🔢 CODE: ${code}`);
+    console.log(`[Mock Verify] ⏰ Valid for 10 minutes`);
+    console.log(`[Mock Verify] ℹ️  Using mock mode - any code will be accepted`);
+    console.log(`========================================\n`);
+    
+    return verificationSid;
+  }
+
+  /**
+   * Mock Verify Check - always returns true for testing
+   */
+  async verifyCode(to: string, code: string): Promise<boolean> {
+    const storedCode = this.mockCodes.get(to);
+    console.log(`\n[Mock Verify] Verifying code for ${to}`);
+    console.log(`[Mock Verify] Provided code: ${code}`);
+    console.log(`[Mock Verify] Generated code was: ${storedCode || 'N/A'}`);
+    console.log(`[Mock Verify] ✅ Accepting (mock mode - all codes accepted)\n`);
+    
+    // Clean up the stored code
+    this.mockCodes.delete(to);
+    
+    return true; // Always approve in mock mode
+  }
+}
