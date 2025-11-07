@@ -1,6 +1,6 @@
 // This import loads the `.env` file as environment variables
 import "jsr:@std/dotenv/load";
-import { Db, MongoClient } from "npm:mongodb";
+import { Db, MongoClient, type MongoClientOptions } from "npm:mongodb";
 import { ID } from "@utils/types.ts";
 import { generate } from "jsr:@std/uuid/unstable-v7";
 
@@ -8,25 +8,82 @@ import { generate } from "jsr:@std/uuid/unstable-v7";
 let sharedClient: MongoClient | null = null;
 let sharedDb: Db | null = null;
 
+const DEFAULT_CA_PATHS = [
+  "/etc/ssl/certs/ca-certificates.crt",
+  "/etc/ssl/cert.pem",
+  "/etc/pki/tls/certs/ca-bundle.crt",
+];
+
+function parseBoolean(value: string | undefined, defaultValue: boolean) {
+  if (value === undefined) {
+    return defaultValue;
+  }
+  const normalized = value.trim().toLowerCase();
+  return ["true", "1", "yes", "on"].includes(normalized);
+}
+
+async function resolveTlsCAFile(): Promise<string | null> {
+  const envPath = Deno.env.get("MONGODB_TLS_CA_FILE");
+  const candidatePaths = envPath
+    ? [envPath, ...DEFAULT_CA_PATHS]
+    : DEFAULT_CA_PATHS;
+
+  for (const path of candidatePaths) {
+    try {
+      const stat = await Deno.stat(path);
+      if (stat.isFile) {
+        return path;
+      }
+    } catch (_error) {
+      // Ignore errors for missing files; we'll try the next candidate.
+    }
+  }
+
+  return null;
+}
+
 async function initMongoClient() {
   const DB_CONN = Deno.env.get("MONGODB_URL");
   if (DB_CONN === undefined) {
     throw new Error("Could not find environment variable: MONGODB_URL");
   }
-  
-  // Configure connection pool to prevent connection exhaustion
-  // TLS configuration added for Deno compatibility with MongoDB Atlas
-  const client = new MongoClient(DB_CONN, {
-    maxPoolSize: 10,              // Max 10 connections per client (reduced from default 100)
-    minPoolSize: 2,               // Keep 2 connections ready
-    maxIdleTimeMS: 30000,         // Close idle connections after 30s
+
+  const allowInvalidCertificates = parseBoolean(
+    Deno.env.get("MONGODB_ALLOW_INVALID_CERTS"),
+    false,
+  );
+  const allowInvalidHostnames = parseBoolean(
+    Deno.env.get("MONGODB_ALLOW_INVALID_HOSTNAMES"),
+    allowInvalidCertificates,
+  );
+
+  const clientOptions: MongoClientOptions = {
+    maxPoolSize: 10, // Max 10 connections per client (reduced from default 100)
+    minPoolSize: 2, // Keep 2 connections ready
+    maxIdleTimeMS: 30000, // Close idle connections after 30s
     serverSelectionTimeoutMS: 5000,
     socketTimeoutMS: 45000,
-    tls: true,                    // Force TLS/SSL
-    tlsAllowInvalidCertificates: false,
-    tlsAllowInvalidHostnames: false,
-  });
-  
+    tls: true, // Force TLS/SSL
+    tlsAllowInvalidCertificates: allowInvalidCertificates,
+    tlsAllowInvalidHostnames: allowInvalidHostnames,
+  };
+
+  if (!allowInvalidCertificates) {
+    const caFile = await resolveTlsCAFile();
+    if (caFile) {
+      clientOptions.tlsCAFile = caFile;
+      console.log(`[MongoDB] Using TLS CA file: ${caFile}`);
+    } else {
+      console.warn(
+        "[MongoDB] No TLS CA file found; relying on default certificate store",
+      );
+    }
+  }
+
+  // Configure connection pool to prevent connection exhaustion
+  // TLS configuration added for Deno compatibility with MongoDB Atlas
+  const client = new MongoClient(DB_CONN, clientOptions);
+
   try {
     await client.connect();
     console.log("[MongoDB] Connected successfully with connection pooling (maxPoolSize: 10)");
