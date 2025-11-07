@@ -20,10 +20,10 @@ import {
 // PROFILE SYNCS
 // ============================================================================
 
-export const CreateProfileRequest: Sync = ({ request, token, displayName, phoneNumber, timezone, user }) => ({
+export const CreateProfileRequest: Sync = ({ request, token, displayName, phoneNumber, timezone, namePronunciation, user }) => ({
   when: actions([
     Requesting.request,
-    { path: "/Profile/createProfile", token, displayName, phoneNumber, timezone },
+    { path: "/Profile/createProfile", token, displayName, phoneNumber, timezone, namePronunciation },
     { request },
   ]),
   where: async (frames) => {
@@ -34,7 +34,7 @@ export const CreateProfileRequest: Sync = ({ request, token, displayName, phoneN
     console.log("[CreateProfileRequest] After filter, frames count:", frames.length);
     return frames;
   },
-  then: actions([Profile.createProfile, { user, displayName, phoneNumber, timezone }]),
+  then: actions([Profile.createProfile, { user, displayName, phoneNumber, timezone, namePronunciation }]),
 });
 
 export const CreateProfileResponse: Sync = ({ request, profile }) => ({
@@ -185,10 +185,10 @@ export const UpdatePromptTextResponse: Sync = ({ request }) => ({
   then: actions([Requesting.respond, { request }]),
 });
 
-export const TogglePromptActiveRequest: Sync = ({ request, token, position, user }) => ({
+export const TogglePromptActiveRequest: Sync = ({ request, token, position, isRatingPrompt, user }) => ({
   when: actions([
     Requesting.request,
-    { path: "/JournalPrompt/togglePromptActive", token, position },
+    { path: "/JournalPrompt/togglePromptActive", token, position, isRatingPrompt },
     { request },
   ]),
   where: async (frames) => {
@@ -196,7 +196,7 @@ export const TogglePromptActiveRequest: Sync = ({ request, token, position, user
     frames = frames.filter(($) => $[user] !== null);
     return frames;
   },
-  then: actions([JournalPrompt.togglePromptActive, { user, position }]),
+  then: actions([JournalPrompt.togglePromptActive, { user, position, isRatingPrompt }]),
 });
 
 export const TogglePromptActiveResponse: Sync = ({ request }) => ({

@@ -1,0 +1,126 @@
+[MongoDB] Connected successfully with connection pooling (maxPoolSize: 10)
+Registering Twilio webhooks...
+✓ Enhanced Twilio webhooks registered at /webhooks/twilio (Google Cloud STT/TTS)
+
+Scanning for concepts in ./src/concepts...
+- Registering concept: JournalEntry at /api/JournalEntry
+  - Endpoint: POST /api/JournalEntry/formatDateInTimezone
+  - Endpoint: POST /api/JournalEntry/createFromSession
+  - Endpoint: POST /api/JournalEntry/deleteEntry
+  - Endpoint: POST /api/JournalEntry/_getEntriesByUser
+  - Endpoint: POST /api/JournalEntry/_getEntriesWithResponsesByUser
+  - Endpoint: POST /api/JournalEntry/_getEntriesByDateRange
+  - Endpoint: POST /api/JournalEntry/_getEntryByDate
+  - Endpoint: POST /api/JournalEntry/_getEntryResponses
+- Registering concept: CallWindow at /api/CallWindow
+  - Endpoint: POST /api/CallWindow/createRecurringCallWindow
+  - Endpoint: POST /api/CallWindow/createOneOffCallWindow
+  - Endpoint: POST /api/CallWindow/deleteRecurringCallWindow
+  - Endpoint: POST /api/CallWindow/deleteOneOffCallWindow
+  - Endpoint: POST /api/CallWindow/_getUserCallWindows
+  - Endpoint: POST /api/CallWindow/_getUserRecurringWindows
+  - Endpoint: POST /api/CallWindow/_getUserOneOffWindows
+  - Endpoint: POST /api/CallWindow/_getRecurringWindowsByDay
+  - Endpoint: POST /api/CallWindow/_getOneOffWindowsByDate
+  - Endpoint: POST /api/CallWindow/mergeOverlappingOneOffWindows
+  - Endpoint: POST /api/CallWindow/setDayModeCustom
+  - Endpoint: POST /api/CallWindow/setDayModeRecurring
+  - Endpoint: POST /api/CallWindow/shouldUseRecurring
+- Registering concept: JournalPrompt at /api/JournalPrompt
+  - Endpoint: POST /api/JournalPrompt/createDefaultPrompts
+  - Endpoint: POST /api/JournalPrompt/updatePromptText
+  - Endpoint: POST /api/JournalPrompt/reorderPrompts
+  - Endpoint: POST /api/JournalPrompt/togglePromptActive
+  - Endpoint: POST /api/JournalPrompt/deletePrompt
+  - Endpoint: POST /api/JournalPrompt/addPrompt
+  - Endpoint: POST /api/JournalPrompt/_getUserPrompts
+  - Endpoint: POST /api/JournalPrompt/_getActivePrompts
+  - Endpoint: POST /api/JournalPrompt/ensureRatingPrompt
+  - Endpoint: POST /api/JournalPrompt/_getRatingPrompt
+- Registering concept: CallSession at /api/CallSession
+  - Endpoint: POST /api/CallSession/createCallSession
+  - Endpoint: POST /api/CallSession/deleteCallSession
+  - Endpoint: POST /api/CallSession/enqueueCall
+  - Endpoint: POST /api/CallSession/markCallCompleted
+  - Endpoint: POST /api/CallSession/markCallMissed
+  - Endpoint: POST /api/CallSession/_getCallSession
+  - Endpoint: POST /api/CallSession/_getUserCallSessions
+  - Endpoint: POST /api/CallSession/_getCallQueue
+  - Endpoint: POST /api/CallSession/_getCallSessionsByStatus
+- Registering concept: User at /api/User
+  - Endpoint: POST /api/User/createUser
+  - Endpoint: POST /api/User/deleteUser
+  - Endpoint: POST /api/User/_getUser
+  - Endpoint: POST /api/User/_getAllUsers
+- Registering concept: ReflectionSession at /api/ReflectionSession
+  - Endpoint: POST /api/ReflectionSession/startSession
+  - Endpoint: POST /api/ReflectionSession/recordResponse
+  - Endpoint: POST /api/ReflectionSession/setRating
+  - Endpoint: POST /api/ReflectionSession/completeSession
+  - Endpoint: POST /api/ReflectionSession/updateSessionPrompts
+  - Endpoint: POST /api/ReflectionSession/abandonSession
+  - Endpoint: POST /api/ReflectionSession/_getSessionResponses
+  - Endpoint: POST /api/ReflectionSession/_getUserSessions
+  - Endpoint: POST /api/ReflectionSession/_getActiveSession
+  - Endpoint: POST /api/ReflectionSession/_getSession
+  - Endpoint: POST /api/ReflectionSession/_getSessionByCallSession
+  - Endpoint: POST /api/ReflectionSession/getSessionStatus
+  - Endpoint: POST /api/ReflectionSession/setTranscript
+  - Endpoint: POST /api/ReflectionSession/setRecordingUrl
+- Registering concept: PhoneCall at /api/PhoneCall
+  - Endpoint: POST /api/PhoneCall/initiateCall
+  - Endpoint: POST /api/PhoneCall/setPrompts
+  - Endpoint: POST /api/PhoneCall/markConnected
+  - Endpoint: POST /api/PhoneCall/startPrompting
+  - Endpoint: POST /api/PhoneCall/appendToTranscript
+  - Endpoint: POST /api/PhoneCall/advanceToNextPrompt
+  - Endpoint: POST /api/PhoneCall/markCompleted
+  - Endpoint: POST /api/PhoneCall/markAbandoned
+  - Endpoint: POST /api/PhoneCall/markFailed
+  - Endpoint: POST /api/PhoneCall/_getPhoneCall
+  - Endpoint: POST /api/PhoneCall/_getActivePhoneCall
+  - Endpoint: POST /api/PhoneCall/_getPhoneCallBySession
+- Registering concept: CallScheduler at /api/CallScheduler
+  - Endpoint: POST /api/CallScheduler/scheduleCall
+  - Endpoint: POST /api/CallScheduler/markInProgress
+  - Endpoint: POST /api/CallScheduler/markCompleted
+  - Endpoint: POST /api/CallScheduler/markFailedAndRetry
+  - Endpoint: POST /api/CallScheduler/markFailed
+  - Endpoint: POST /api/CallScheduler/cancelCall
+  - Endpoint: POST /api/CallScheduler/_getPendingCalls
+  - Endpoint: POST /api/CallScheduler/_getScheduledCall
+  - Endpoint: POST /api/CallScheduler/_getActiveCallsForUser
+- Registering concept: Profile at /api/Profile
+  - Endpoint: POST /api/Profile/createProfile
+  - Endpoint: POST /api/Profile/updateDisplayName
+  - Endpoint: POST /api/Profile/updatePhoneNumber
+  - Endpoint: POST /api/Profile/updateTimezone
+  - Endpoint: POST /api/Profile/updateRatingPreference
+  - Endpoint: POST /api/Profile/deleteProfile
+  - Endpoint: POST /api/Profile/_getProfile
+  - Endpoint: POST /api/Profile/_getAllProfiles
+  - Endpoint: POST /api/Profile/updateNamePronunciation
+  - Endpoint: POST /api/Profile/updateMaxRetries
+  - Endpoint: POST /api/Profile/updateProfile
+
+Requesting concept initialized with a timeout of 10000ms.
+- Registering concept: Requesting at /api/Requesting
+  - Endpoint: POST /api/Requesting/request
+  - Endpoint: POST /api/Requesting/respond
+  - Endpoint: POST /api/Requesting/_awaitResponse
+- Registering concept: UserAuthentication at /api/UserAuthentication
+  - Endpoint: POST /api/UserAuthentication/requestVerificationCode
+  - Endpoint: POST /api/UserAuthentication/register
+  - Endpoint: POST /api/UserAuthentication/login
+  - Endpoint: POST /api/UserAuthentication/logout
+  - Endpoint: POST /api/UserAuthentication/authenticate
+  - Endpoint: POST /api/UserAuthentication/deleteAccount
+  - Endpoint: POST /api/UserAuthentication/_getSessionUser
+  - Endpoint: POST /api/UserAuthentication/_getUserByPhone
+  - Endpoint: POST /api/UserAuthentication/verifyCode
+  - Endpoint: POST /api/UserAuthentication/_getUserSessions
+  - Endpoint: POST /api/UserAuthentication/_getVerificationCode
+  - Endpoint: POST /api/UserAuthentication/createVerifiedCredentials
+
+Server listening on http://localhost:8000
+Listening on http://0.0.0.0:8000/ (http://localhost:8000/)

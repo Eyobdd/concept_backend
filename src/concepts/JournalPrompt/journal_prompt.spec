@@ -15,23 +15,27 @@
       a promptText String
       a position Number      # Display order (1-5)
       a isActive Flag        # Can be disabled without deletion
+      a isRatingPrompt Flag  # Special flag for the day rating prompt
 
   invariants
-    Each user can have at most 5 PromptTemplates.
-    For each user, position values form a contiguous sequence starting at 1.
-    Active prompts for a user have unique position values.
+    Each user can have at most 5 regular PromptTemplates (isRatingPrompt=false).
+    Rating prompts (isRatingPrompt=true) do not count toward the 5-prompt limit.
+    For each user, position values for regular prompts form a contiguous sequence starting at 1.
+    Rating prompts have separate position values.
+    Active prompts for a user have unique position values within their type (regular vs rating).
 
   actions
     createDefaultPrompts(user: User)
       requires: User has no existing PromptTemplates.
       effect: 
-        - Creates 4 default PromptTemplates with standard questions:
+        - Creates 4 default regular PromptTemplates:
           1. "What are you grateful for today?"
           2. "What did you do today?"
           3. "What are you proud of today?"
           4. "What do you want to do tomorrow?"
+        - Creates 1 default rating prompt (position 1, isRatingPrompt=true):
+          "On a scale from negative 2 to positive 2, using whole numbers only, how would you rate your day?"
         - All prompts are set to isActive=true.
-        - Positions are set to 1, 2, 3, 4 respectively.
 
     updatePromptText(user: User, position: Number, newText: String)
       requires: 

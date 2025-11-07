@@ -1,0 +1,2946 @@
+[CallSchedulerWorker] Initializing...
+[CallSchedulerWorker] Using Enhanced Call Orchestrator (Google Cloud STT/TTS)
+[CallSchedulerWorker] Starting (poll interval: 15s, batch size: 10)
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:20:42.411Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:20:42.411Z
+[CallSchedulerWorker] Running. Press Ctrl+C to stop.
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:20:57.430Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:20:57.430Z
+[CallScheduler] Found 1 pending calls
+[CallScheduler]   Call 1: call:1762348549342, scheduled: Wed Nov 05 2025 08:15:49 GMT-0500 (Eastern Standard Time), type: object
+[CallSchedulerWorker] Found 1 pending calls
+[CallSchedulerWorker] Processing call for session call:1762348549342
+[CallSchedulerWorker] Error processing call call:1762348549342: TypeError: this.phoneCallConcept.createPhoneCall is not a function
+    at EnhancedCallOrchestrator.initiateCall (file:///Users/eyobdavidoff/Documents/GitHub/6.1040/concept_backend/src/services/enhancedCallOrchestrator.ts:73:33)
+    at CallSchedulerWorker.processCall (file:///Users/eyobdavidoff/Documents/GitHub/6.1040/concept_backend/src/workers/callSchedulerWorker.ts:261:49)
+    at eventLoopTick (ext:core/01_core.js:179:7)
+    at async CallSchedulerWorker.processPendingCalls (file:///Users/eyobdavidoff/Documents/GitHub/6.1040/concept_backend/src/workers/callSchedulerWorker.ts:181:9)
+[CallSchedulerWorker] Processed 1 calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:21:12.432Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:21:12.432Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:21:27.434Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:21:27.434Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:21:42.436Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:21:42.436Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:21:57.436Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:21:57.436Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:22:12.439Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:22:12.439Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:22:27.441Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:22:27.441Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:22:42.442Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:22:42.442Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:22:57.445Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:22:57.445Z
+[CallScheduler] Found 1 pending calls
+[CallScheduler]   Call 1: call:1762348971376, scheduled: Wed Nov 05 2025 08:22:51 GMT-0500 (Eastern Standard Time), type: object
+[CallSchedulerWorker] Found 1 pending calls
+[CallSchedulerWorker] Processing call for session call:1762348971376
+[CallSchedulerWorker] Error processing call call:1762348971376: TypeError: this.phoneCallConcept.createPhoneCall is not a function
+    at EnhancedCallOrchestrator.initiateCall (file:///Users/eyobdavidoff/Documents/GitHub/6.1040/concept_backend/src/services/enhancedCallOrchestrator.ts:73:33)
+    at CallSchedulerWorker.processCall (file:///Users/eyobdavidoff/Documents/GitHub/6.1040/concept_backend/src/workers/callSchedulerWorker.ts:261:49)
+    at eventLoopTick (ext:core/01_core.js:179:7)
+    at async CallSchedulerWorker.processPendingCalls (file://[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:23:06.321Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:23:12.445Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:23:21.321Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:23:27.446Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:23:36.323Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:23:42.449Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:23:51.324Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:23:57.450Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:24:06.326Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:24:12.452Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:24:21.328Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:24:27.454Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:24:36.330Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:24:42.455Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:24:51.331Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:24:57.457Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:25:06.332Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:25:12.460Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:25:21.334Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:25:27.461Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:25:36.336Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:25:42.463Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:25:51.339Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:25:57.465Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:26:06.340Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:26:12.468Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:26:21.342Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:26:27.469Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:26:36.344Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:26:42.470Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:26:51.346Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:26:57.472Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:27:06.348Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:27:12.472Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:27:21.350Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:27:27.474Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:27:36.351Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:27:42.477Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:27:51.353Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:27:57.478Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:28:06.356Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:28:12.482Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:28:21.359Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:28:27.483Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:28:36.359Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:28:42.489Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:28:51.365Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:28:57.488Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:29:06.363Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:29:12.489Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:29:21.368Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:29:27.490Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:29:36.369Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:29:42.491Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:29:51.371Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:29:57.493Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:30:06.373Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:30:12.498Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:30:21.375Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:30:27.499Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:30:36.377Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:30:42.501Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:30:51.378Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:30:57.503Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:31:06.380Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:31:12.505Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:31:21.382Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:31:27.506Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:31:36.384Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:31:42.509Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:31:51.385Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:31:57.510Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:32:06.388Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:32:12.512Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:32:21.390Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:32:27.513Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:32:36.391Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:32:42.516Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:32:51.393Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:32:57.517Z
+[CallScheduler] _[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:33:06.395Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:33:12.520Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:33:12.520Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:33:27.521Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:33:27.521Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:33:42.523Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:33:42.523Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:33:57.524Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:33:57.524Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:34:12.527Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:34:12.527Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:34:27.528Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:34:27.528Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:34:42.532Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:34:42.532Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:34:57.535Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:34:57.535Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:35:12.540Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:35:12.540Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:35:27.541Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:35:27.541Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:35:42.543Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:35:42.543Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:35:57.545Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:35:57.545Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:36:12.546Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:36:12.546Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:36:27.547Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:36:27.547Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:36:42.548Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:36:42.548Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:36:57.551Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:36:57.551Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:37:12.554Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:37:12.554Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:37:27.556Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:37:27.556Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:37:42.558Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:37:42.558Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:37:57.560Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:37:57.560Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:38:12.561Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:38:12.561Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:38:27.564Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:38:27.564Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:38:42.565Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:38:42.565Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:38:57.567Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:38:57.567Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:39:12.569Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:39:12.569Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:39:27.570Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:39:27.570Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:39:42.571Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:39:42.571Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:39:57.573Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:39:57.573Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:40:12.575Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:40:12.575Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:40:27.577Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:40:27.577Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:40:42.579Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:40:42.579Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:40:57.580Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:40:57.580Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:41:12.582Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:41:12.582Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:41:27.584Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:41:27.584Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:41:42.586Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:41:42.586Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:41:57.593Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:41:57.593Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:42:12.595Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:42:12.595Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:42:27.595Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:42:27.595Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:42:42.598Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:42:42.598Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:42:57.599Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:42:57.599Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:43:12.601Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:43:12.601Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:43:27.602Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:43:27.602Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:43:42.604Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:43:42.604Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:43:57.606Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:43:57.606Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:44:12.608Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:44:12.608Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:44:27.610Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:44:27.610Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:44:42.610Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:44:42.610Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:44:57.612Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:44:57.612Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:45:12.614Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:45:12.614Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:45:27.617Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:45:27.617Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:45:42.619Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:45:42.619Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:45:57.621Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:45:57.621Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:46:12.624Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:46:12.624Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:46:27.627Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:46:27.627Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:46:42.631Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:46:42.631Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:46:57.634Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:46:57.634Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:47:12.634Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:47:12.634Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:47:27.637Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:47:27.637Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:47:42.640Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:47:42.640Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:47:57.641Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:47:57.641Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:48:12.644Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:48:12.644Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:48:27.648Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:48:27.648Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:48:42.651Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:48:42.651Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:48:57.654Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:48:57.654Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:49:12.655Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:49:12.655Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:49:27.658Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:49:27.658Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:49:42.662Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:49:42.662Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:49:57.663Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:49:57.663Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:50:12.665Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:50:12.665Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:50:27.668Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:50:27.668Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:50:42.670Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:50:42.670Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:50:57.674Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:50:57.674Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:51:12.676Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:51:12.676Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:51:27.679Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:51:27.679Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:51:42.681Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:51:42.681Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:51:57.683Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:51:57.683Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:52:12.686Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:52:12.686Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:52:27.689Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:52:27.689Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:52:42.692Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:52:42.692Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:52:57.695Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:52:57.695Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:53:12.697Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:53:12.697Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:53:27.699Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:53:27.699Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:53:42.702Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:53:42.702Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:53:57.705Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:53:57.705Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:54:12.708Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:54:12.708Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:54:27.712Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:54:27.712Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:54:42.714Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:54:42.714Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:54:57.716Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:54:57.716Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:55:12.719Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:55:12.719Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:55:27.722Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:55:27.722Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:55:42.725Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:55:42.725Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:55:57.727Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:55:57.727Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:56:12.729Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:56:12.729Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:56:27.732Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:56:27.732Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:56:42.733Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:56:42.733Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:56:57.736Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:56:57.736Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:57:12.738Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:57:12.738Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:57:27.740Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:57:27.740Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:57:42.743Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:57:42.743Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:57:57.746Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:57:57.746Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:58:12.749Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:58:12.749Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:58:27.750Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:58:27.750Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:58:42.754Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:58:42.754Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:58:57.757Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:58:57.757Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:59:12.759Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:59:12.759Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:59:27.762Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:59:27.762Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:59:42.766Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:59:42.766Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T13:59:57.768Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T13:59:57.768Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:00:12.771Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:00:12.771Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:00:27.775Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:00:27.775Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:00:42.776Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:00:42.776Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:00:57.777Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:00:57.777Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:01:12.780Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:01:12.780Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:01:27.781Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:01:27.781Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:01:42.783Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:01:42.783Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:01:57.787Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:01:57.787Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:02:12.789Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:02:12.789Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:02:27.792Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:02:27.792Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:02:42.793Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:02:42.793Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:02:57.795Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:02:57.795Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:03:12.799Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:03:12.799Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:03:27.802Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:03:27.802Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:03:42.806Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:03:42.806Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:03:57.808Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:03:57.808Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:04:12.810Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:04:12.810Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:04:27.812Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:04:27.812Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:04:42.815Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:04:42.815Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:04:57.818Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:04:57.818Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:05:12.821Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:05:12.821Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:05:27.824Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:05:27.824Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:05:42.828Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:05:42.828Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:05:57.829Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:05:57.829Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:06:12.832Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:06:12.832Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:06:27.834Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:06:27.834Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:06:42.836Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:06:42.836Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:06:57.837Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:06:57.837Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:07:12.839Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:07:12.839Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:07:27.840Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:07:27.840Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:07:42.845Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:07:42.845Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:07:57.846Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:07:57.846Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:08:12.848Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:08:12.848Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:08:27.851Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:08:27.851Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:08:42.854Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:08:42.854Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:08:57.856Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:08:57.856Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:09:12.859Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:09:12.859Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:09:27.862Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:09:27.862Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:09:42.865Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:09:42.865Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:09:57.866Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:09:57.866Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:10:12.869Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:10:12.869Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:10:27.871Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:10:27.871Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:10:42.874Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:10:42.874Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:10:57.875Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:10:57.875Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:11:12.877Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:11:12.877Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:11:27.879Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:11:27.879Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:11:42.884Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:11:42.884Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:11:57.886Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:11:57.886Z
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:12:12.887Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:12:12.887Z
+[CallSchedulerWorker] Error processing calls: TimedOut: timed out
+    at async TlsConn.read (ext:deno_net/01_net.js:148:15)
+    at async TCP.#read (ext:deno_node/internal_binding/stream_wrap.ts:250:17) {
+  name: "TimedOut",
+  code: "ETIMEDOUT"
+}
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:12:27.889Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:12:27.889Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:12:42.893Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:12:42.893Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:12:57.895Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:12:57.895Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:13:12.898Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:13:12.898Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:13:27.899Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:13:27.899Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:13:42.901Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:13:42.901Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:13:57.902Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:13:57.902Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:14:12.903Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:14:12.903Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:14:27.904Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:14:27.904Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:14:42.907Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:14:42.907Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:14:57.907Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:14:57.907Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:15:12.910Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:15:12.910Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:15:27.912Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:15:27.912Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:15:42.915Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:15:42.915Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:15:57.915Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:15:57.915Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:16:12.917Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:16:12.917Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:16:27.918Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:16:27.918Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:16:42.920Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:16:42.920Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:16:57.921Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:16:57.921Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:17:12.923Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:17:12.923Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:17:27.924Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:17:27.924Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:17:42.925Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:17:42.925Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:17:57.926Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:17:57.926Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:18:12.928Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:18:12.928Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:18:27.931Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:18:27.931Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:18:42.936Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:18:42.936Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:18:57.938Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:18:57.938Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:19:12.940Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:19:12.940Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:19:27.942Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:19:27.942Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:19:42.945Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:19:42.945Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:19:57.945Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:19:57.945Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:20:12.947Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:20:12.947Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:20:27.947Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:20:27.947Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:20:42.950Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:20:42.950Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:20:57.950Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:20:57.950Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:21:12.952Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:21:12.952Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:21:27.952Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:21:27.952Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:21:42.955Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:21:42.955Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:21:57.956Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:21:57.956Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:22:12.960Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:22:12.960Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:22:27.961Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:22:27.961Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:22:42.961Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:22:42.961Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:22:57.963Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:22:57.963Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:23:12.963Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:23:12.963Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:23:27.966Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:23:27.966Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:23:42.967Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:23:42.967Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:23:57.969Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:23:57.969Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:24:12.971Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:24:12.971Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:24:27.972Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:24:27.972Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:24:42.975Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:24:42.975Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:24:57.975Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:24:57.975Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:25:12.978Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:25:12.978Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:25:27.978Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:25:27.978Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:25:42.979Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:25:42.979Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:25:57.981Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:25:57.981Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:26:12.984Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:26:12.984Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:26:27.984Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:26:27.984Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:26:42.987Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:26:42.987Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:26:57.990Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:26:57.990Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:27:12.990Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:27:12.990Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:27:27.992Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:27:27.992Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:27:42.993Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:27:42.993Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:27:57.995Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:27:57.995Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:28:12.996Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:28:12.996Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:28:27.998Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:28:27.998Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:28:43.000Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:28:43.000Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:28:58.001Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:28:58.001Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:29:13.003Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:29:13.003Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:29:28.003Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:29:28.003Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:29:43.005Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:29:43.005Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:29:58.006Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:29:58.006Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:30:13.007Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:30:13.007Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:30:28.008Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:30:28.008Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:30:43.010Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:30:43.010Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:30:58.010Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:30:58.010Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:31:13.012Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:31:13.012Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:31:28.013Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:31:28.013Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:31:43.015Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:31:43.015Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:31:58.016Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:31:58.016Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:36:33.948Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:36:33.948Z
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:36:48.943Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:36:48.943Z
+[CallSchedulerWorker] Error processing calls: TimedOut: timed out
+    at async TlsConn.read (ext:deno_net/01_net.js:148:15)
+    at async TCP.#read (ext:deno_node/internal_binding/stream_wrap.ts:250:17) {
+  name: "TimedOut",
+  code: "ETIMEDOUT"
+}
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:47:43.652Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:47:43.652Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T14:47:58.652Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T14:47:58.652Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T15:01:31.650Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T15:01:31.650Z
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T15:02:25.475Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T15:02:25.475Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Error processing calls: TimedOut: timed out
+    at async TlsConn.read (ext:deno_net/01_net.js:148:15)
+    at async TCP.#read (ext:deno_node/internal_binding/stream_wrap.ts:250:17) {
+  name: "TimedOut",
+  code: "ETIMEDOUT"
+}
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T15:11:18.071Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T15:11:18.071Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T15:16:06.866Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T15:16:06.866Z
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T15:23:27.791Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T15:23:27.791Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Error processing calls: TimedOut: timed out
+    at async TlsConn.read (ext:deno_net/01_net.js:148:15)
+    at async TCP.#read (ext:deno_node/internal_binding/stream_wrap.ts:250:17) {
+  name: "TimedOut",
+  code: "ETIMEDOUT"
+}
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T15:43:36.017Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T15:43:36.017Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T15:43:55.636Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T15:43:55.636Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T16:06:37.513Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T16:06:37.513Z
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T16:20:17.826Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T16:20:17.826Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T16:31:38.958Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T16:31:38.958Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T16:49:03.430Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T16:49:03.430Z
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T16:49:31.327Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T16:49:31.327Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Error processing calls: TimedOut: timed out
+    at async TlsConn.read (ext:deno_net/01_net.js:148:15)
+    at async TCP.#read (ext:deno_node/internal_binding/stream_wrap.ts:250:17) {
+  name: "TimedOut",
+  code: "ETIMEDOUT"
+}
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T16:57:17.138Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T16:57:17.138Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T16:58:42.141Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T16:58:42.141Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T17:01:14.445Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T17:01:14.445Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T17:23:18.852Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T17:23:18.852Z
+[CallSchedulerWorker] Error processing calls: TimedOut: timed out
+    at async TlsConn.read (ext:deno_net/01_net.js:148:15)
+    at async TCP.#read (ext:deno_node/internal_binding/stream_wrap.ts:250:17) {
+  name: "TimedOut",
+  code: "ETIMEDOUT"
+}
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T17:49:51.841Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T17:49:51.841Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T17:52:36.260Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T17:52:36.260Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T17:54:09.777Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T17:54:09.777Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T18:05:23.820Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T18:05:23.820Z
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T18:17:15.530Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T18:17:15.530Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Error processing calls: TimedOut: timed out
+    at async TlsConn.read (ext:deno_net/01_net.js:148:15)
+    at async TCP.#read (ext:deno_node/internal_binding/stream_wrap.ts:250:17) {
+  name: "TimedOut",
+  code: "ETIMEDOUT"
+}
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T18:23:30.941Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T18:23:30.941Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T18:28:30.540Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T18:28:30.540Z
+[CallSchedulerWorker] Error processing calls: TimedOut: timed out
+    at async TlsConn.read (ext:deno_net/01_net.js:148:15)
+    at async TCP.#read (ext:deno_node/internal_binding/stream_wrap.ts:250:17) {
+  name: "TimedOut",
+  code: "ETIMEDOUT"
+}
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T18:46:11.526Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T18:46:11.526Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T19:16:15.594Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T19:16:15.594Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T19:27:41.477Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T19:27:41.477Z
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T19:28:10.334Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T19:28:10.334Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Error processing calls: TimedOut: timed out
+    at async TlsConn.read (ext:deno_net/01_net.js:148:15)
+    at async TCP.#read (ext:deno_node/internal_binding/stream_wrap.ts:250:17) {
+  name: "TimedOut",
+  code: "ETIMEDOUT"
+}
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T19:29:50.312Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T19:29:50.312Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T19:30:08.959Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T19:30:08.959Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T19:59:54.949Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T19:59:54.949Z
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:02:51.383Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:02:51.383Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Error processing calls: TimedOut: timed out
+    at async TlsConn.read (ext:deno_net/01_net.js:148:15)
+    at async TCP.#read (ext:deno_node/internal_binding/stream_wrap.ts:250:17) {
+  name: "TimedOut",
+  code: "ETIMEDOUT"
+}
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:07:12.482Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:07:12.482Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:18:40.553Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:18:40.553Z
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:20:40.657Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:20:40.657Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Error processing calls: TimedOut: timed out
+    at async TlsConn.read (ext:deno_net/01_net.js:148:15)
+    at async TCP.#read (ext:deno_node/internal_binding/stream_wrap.ts:250:17) {
+  name: "TimedOut",
+  code: "ETIMEDOUT"
+}
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:23:12.587Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:23:12.587Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:23:27.588Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:23:27.588Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:23:42.589Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:23:42.589Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:23:57.591Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:23:57.591Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:24:12.592Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:24:12.592Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:24:27.591Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:24:27.591Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:24:42.594Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:24:42.594Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:24:57.595Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:24:57.595Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:25:12.596Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:25:12.596Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:25:27.596Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:25:27.596Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:25:42.596Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:25:42.596Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:25:57.599Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:25:57.599Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:26:12.600Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:26:12.600Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:26:27.601Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:26:27.601Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:26:42.603Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:26:42.603Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:26:57.605Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:26:57.605Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:27:12.607Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:27:12.607Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:27:27.609Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:27:27.609Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:27:42.610Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:27:42.610Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:27:57.611Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:27:57.611Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:28:12.612Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:28:12.612Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:28:27.614Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:28:27.614Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:28:42.616Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:28:42.616Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:28:57.616Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:28:57.616Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:29:12.617Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:29:12.617Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:29:27.619Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:29:27.619Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:29:42.622Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:29:42.622Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:29:57.622Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:29:57.622Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:30:12.624Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:30:12.624Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:30:27.624Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:30:27.624Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:30:42.626Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:30:42.626Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:30:57.628Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:30:57.628Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:31:12.629Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:31:12.629Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:31:27.631Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:31:27.631Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:31:42.633Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:31:42.633Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:31:57.635Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:31:57.635Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:32:12.634Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:32:12.634Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:32:27.637Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:32:27.637Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:32:42.639Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:32:42.639Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:32:57.641Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:32:57.641Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:33:12.642Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:33:12.642Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:33:27.643Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:33:27.643Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:33:42.644Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:33:42.644Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:33:57.646Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:33:57.646Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:34:12.649Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:34:12.649Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:34:27.650Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:34:27.650Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:34:42.652Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:34:42.652Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:34:57.653Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:34:57.653Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:35:12.655Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:35:12.655Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:35:27.655Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:35:27.655Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:35:42.656Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:35:42.656Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:35:57.657Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:35:57.657Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:36:12.658Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:36:12.658Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:36:27.660Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:36:27.660Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:36:42.661Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:36:42.661Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:36:57.663Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:36:57.663Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:37:12.665Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:37:12.665Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:37:27.666Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:37:27.666Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:37:42.667Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:37:42.667Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:37:57.669Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:37:57.669Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:38:12.670Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:38:12.670Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:38:27.673Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:38:27.673Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:38:42.673Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:38:42.673Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:38:57.674Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:38:57.674Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:39:12.676Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:39:12.676Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:39:27.677Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:39:27.677Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:39:42.680Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:39:42.680Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:39:57.680Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:39:57.680Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:40:12.681Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:40:12.681Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:40:27.683Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:40:27.683Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:40:42.684Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:40:42.684Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:40:57.687Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:40:57.687Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:41:12.814Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:41:12.814Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:41:27.692Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:41:27.692Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:41:42.694Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:41:42.694Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:41:57.695Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:41:57.695Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:42:12.696Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:42:12.696Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:42:27.697Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:42:27.697Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:42:42.699Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:42:42.699Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:42:57.701Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:42:57.701Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:43:12.703Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:43:12.703Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:43:27.714Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:43:27.714Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:43:42.707Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:43:42.707Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:43:57.709Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:43:57.709Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:44:12.711Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:44:12.711Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:44:27.713Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:44:27.713Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:44:42.715Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:44:42.715Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:44:57.716Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:44:57.716Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:45:12.718Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:45:12.718Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:45:27.719Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:45:27.719Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:45:42.721Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:45:42.721Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:45:57.721Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:45:57.721Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:46:12.724Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:46:12.724Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:46:27.724Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:46:27.724Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:46:42.726Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:46:42.726Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:46:57.727Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:46:57.727Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:47:12.728Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:47:12.728Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:47:27.729Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:47:27.729Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:47:42.731Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:47:42.731Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:47:57.733Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:47:57.733Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:48:12.736Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:48:12.736Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:48:27.736Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:48:27.736Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:48:42.738Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:48:42.738Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:48:57.739Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:48:57.739Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:49:12.741Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:49:12.741Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:49:27.742Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:49:27.742Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:49:42.743Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:49:42.743Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:49:57.744Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:49:57.744Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:50:12.746Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:50:12.746Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:50:27.747Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:50:27.747Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:50:42.749Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:50:42.749Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:50:57.750Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:50:57.750Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:51:12.751Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:51:12.751Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:51:27.754Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:51:27.754Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:51:42.754Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:51:42.754Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:51:57.760Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:51:57.760Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:52:12.758Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:52:12.758Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:52:27.759Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:52:27.759Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:52:42.761Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:52:42.761Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:52:57.762Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:52:57.762Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:53:12.764Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:53:12.764Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:53:27.765Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:53:27.765Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:53:42.777Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:53:42.777Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:53:57.770Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:53:57.770Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:54:12.771Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:54:12.771Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:54:27.773Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:54:27.773Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:54:42.774Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:54:42.774Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:54:57.776Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:54:57.776Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:55:12.777Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:55:12.777Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:55:27.778Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:55:27.778Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:55:42.781Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:55:42.781Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:55:57.782Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:55:57.782Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:56:12.783Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:56:12.783Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:56:27.785Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:56:27.785Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:56:42.793Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:56:42.793Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:56:57.788Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:56:57.788Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:57:12.790Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:57:12.790Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:57:27.791Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:57:27.791Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:57:42.793Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:57:42.793Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:57:57.794Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:57:57.794Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:58:12.795Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:58:12.795Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:58:27.798Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:58:27.798Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:58:42.799Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:58:42.799Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:58:57.800Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:58:57.800Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:59:12.802Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:59:12.802Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:59:27.794Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:59:27.794Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:59:42.790Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:59:42.790Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T20:59:57.790Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T20:59:57.790Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:00:12.791Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:00:12.791Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:00:27.792Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:00:27.792Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:00:42.794Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:00:42.794Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:00:57.795Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:00:57.795Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:01:12.797Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:01:12.797Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:01:27.798Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:01:27.798Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:01:42.800Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:01:42.800Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:01:57.814Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:01:57.814Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:02:12.809Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:02:12.809Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:02:27.810Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:02:27.810Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:02:42.812Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:02:42.812Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:02:57.812Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:02:57.812Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:03:12.813Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:03:12.813Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:03:27.813Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:03:27.813Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:03:42.815Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:03:42.815Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:03:57.817Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:03:57.817Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:04:12.854Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:04:12.854Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:04:27.824Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:04:27.824Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:04:42.825Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:04:42.825Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:04:57.825Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:04:57.825Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:05:12.827Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:05:12.827Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:05:27.829Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:05:27.829Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:05:42.830Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:05:42.830Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:05:57.832Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:05:57.832Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:06:12.833Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:06:12.833Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:06:27.834Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:06:27.834Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:06:42.835Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:06:42.835Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:06:57.836Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:06:57.836Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:07:12.840Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:07:12.840Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:07:27.841Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:07:27.841Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:07:42.842Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:07:42.842Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:07:57.846Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:07:57.846Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:08:12.848Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:08:12.848Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:08:27.860Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:08:27.860Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:08:42.854Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:08:42.854Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:08:57.855Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:08:57.855Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:09:12.856Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:09:12.856Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:09:27.856Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:09:27.856Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:09:42.858Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:09:42.858Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:09:57.859Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:09:57.859Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:10:12.859Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:10:12.859Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:10:27.862Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:10:27.862Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:10:42.863Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:10:42.863Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:10:57.864Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:10:57.864Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:11:12.865Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:11:12.865Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:11:27.865Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:11:27.865Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:11:42.867Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:11:42.867Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:11:57.868Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:11:57.868Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:12:12.870Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:12:12.870Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:12:27.872Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:12:27.872Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:12:42.872Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:12:42.872Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:12:57.873Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:12:57.873Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:13:12.875Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:13:12.875Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:13:27.876Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:13:27.876Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:13:42.878Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:13:42.878Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:13:57.879Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:13:57.879Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:14:12.880Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:14:12.880Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:14:27.883Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:14:27.883Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:14:42.883Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:14:42.883Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:14:57.885Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:14:57.885Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:15:12.887Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:15:12.887Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:15:27.888Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:15:27.888Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:15:42.888Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:15:42.888Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:15:57.890Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:15:57.890Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:16:12.892Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:16:12.892Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:16:27.892Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:16:27.892Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:16:42.894Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:16:42.894Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:16:57.895Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:16:57.895Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:17:12.897Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:17:12.897Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:17:27.896Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:17:27.896Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:17:42.897Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:17:42.897Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:17:57.899Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:17:57.899Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:18:12.900Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:18:12.900Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:18:27.906Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:18:27.906Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:18:42.903Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:18:42.903Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:18:57.904Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:18:57.904Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:19:12.906Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:19:12.906Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:19:27.907Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:19:27.907Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:19:42.908Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:19:42.908Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:19:57.909Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:19:57.909Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:20:12.910Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:20:12.910Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:20:27.911Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:20:27.911Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:20:42.912Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:20:42.912Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:20:57.912Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:20:57.912Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:21:12.914Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:21:12.914Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:21:27.915Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:21:27.915Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:21:42.917Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:21:42.917Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:21:57.919Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:21:57.919Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:22:12.918Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:22:12.918Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:22:27.920Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:22:27.920Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:22:42.922Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:22:42.922Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:22:57.922Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:22:57.922Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:23:12.925Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:23:12.925Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:23:27.925Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:23:27.925Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:23:42.927Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:23:42.927Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:23:57.927Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:23:57.927Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:24:12.928Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:24:12.928Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:24:27.930Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:24:27.930Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:24:42.934Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:24:42.934Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:24:57.935Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:24:57.935Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:25:12.936Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:25:12.936Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:25:27.941Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:25:27.941Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:25:42.942Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:25:42.942Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:25:57.943Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:25:57.943Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:26:12.945Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:26:12.945Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:26:27.945Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:26:27.945Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:26:42.946Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:26:42.946Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:26:57.948Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:26:57.948Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:27:12.950Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:27:12.950Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:27:27.951Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:27:27.951Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:27:42.951Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:27:42.951Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:27:57.953Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:27:57.953Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:28:12.955Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:28:12.955Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:28:27.955Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:28:27.955Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:28:42.956Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:28:42.956Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:28:57.956Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:28:57.956Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:29:12.957Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:29:12.957Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:29:27.958Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:29:27.958Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:29:42.960Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:29:42.960Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:29:57.985Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:29:57.985Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:30:12.997Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:30:12.997Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:30:28.003Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:30:28.003Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:30:43.007Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:30:43.007Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:30:58.008Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:30:58.008Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:31:13.012Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:31:13.012Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:31:28.012Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:31:28.012Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:31:43.013Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:31:43.013Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:31:58.014Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:31:58.014Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:32:13.015Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:32:13.015Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:32:28.018Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:32:28.018Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:32:43.018Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:32:43.018Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:32:58.021Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:32:58.021Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:33:13.022Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:33:13.022Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:33:28.023Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:33:28.023Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:33:43.024Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:33:43.024Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:33:58.025Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:33:58.025Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:34:13.026Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:34:13.026Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:34:28.027Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:34:28.027Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:34:43.029Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:34:43.029Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:34:58.030Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:34:58.030Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:35:13.031Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:35:13.031Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:35:28.032Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:35:28.032Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:35:43.035Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:35:43.035Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:35:58.036Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:35:58.036Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:36:13.037Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:36:13.037Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:36:28.038Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:36:28.038Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:36:43.041Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:36:43.041Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:36:58.041Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:36:58.041Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:37:13.043Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:37:13.043Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:37:28.044Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:37:28.044Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:37:43.047Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:37:43.047Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:37:58.047Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:37:58.047Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:38:13.049Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:38:13.049Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:38:28.051Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:38:28.051Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:38:43.054Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:38:43.054Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:38:58.055Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:38:58.055Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:39:13.056Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:39:13.056Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:39:28.058Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:39:28.058Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:39:43.062Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:39:43.062Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:39:58.063Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:39:58.063Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:40:13.063Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:40:13.063Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:40:28.065Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:40:28.065Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:40:43.067Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:40:43.067Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:40:58.068Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:40:58.068Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:41:13.070Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:41:13.070Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:41:28.071Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:41:28.071Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:41:43.072Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:41:43.072Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:41:58.074Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:41:58.074Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:42:13.076Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:42:13.076Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:42:28.077Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:42:28.077Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:42:43.079Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:42:43.079Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:42:58.080Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:42:58.080Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:43:13.083Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:43:13.083Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:43:28.084Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:43:28.084Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:43:43.087Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:43:43.087Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:43:58.088Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:43:58.088Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:44:13.090Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:44:13.090Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:44:28.092Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:44:28.092Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:44:43.094Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:44:43.094Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:44:58.097Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:44:58.097Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:45:13.097Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:45:13.097Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:45:28.100Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:45:28.100Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:45:43.102Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:45:43.102Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:45:58.105Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:45:58.105Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:46:13.107Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:46:13.107Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:46:28.107Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:46:28.107Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:46:43.110Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:46:43.110Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:46:58.110Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:46:58.110Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:47:13.111Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:47:13.111Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:47:28.112Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:47:28.112Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:47:43.114Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:47:43.114Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:47:58.114Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:47:58.114Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:48:13.117Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:48:13.117Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:48:28.119Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:48:28.119Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:48:43.118Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:48:43.118Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:48:58.120Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:48:58.120Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:49:13.122Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:49:13.122Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:49:28.124Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:49:28.124Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:49:43.125Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:49:43.125Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:49:58.126Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:49:58.126Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:50:13.128Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:50:13.128Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:50:28.129Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:50:28.129Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:50:43.131Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:50:43.131Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:50:58.139Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:50:58.139Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:51:13.138Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:51:13.138Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:51:28.139Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:51:28.139Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:51:43.142Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:51:43.142Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:51:58.142Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:51:58.142Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:52:13.144Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:52:13.144Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:52:28.145Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:52:28.145Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:52:43.147Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:52:43.147Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:52:58.148Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:52:58.148Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:53:13.150Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:53:13.150Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:53:28.150Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:53:28.150Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:53:43.152Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:53:43.152Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:53:58.153Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:53:58.153Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:54:13.155Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:54:13.155Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:54:28.156Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:54:28.156Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:54:43.158Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:54:43.158Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:54:58.159Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:54:58.159Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:55:13.161Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:55:13.161Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:55:28.162Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:55:28.162Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:55:43.163Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:55:43.163Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:55:58.165Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:55:58.165Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:56:13.166Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:56:13.166Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:56:28.166Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:56:28.166Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:56:43.169Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:56:43.169Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:56:58.172Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:56:58.172Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:57:13.174Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:57:13.174Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:57:28.175Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:57:28.175Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:57:43.177Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:57:43.177Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:57:58.179Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:57:58.179Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:58:13.179Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:58:13.179Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:58:28.181Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:58:28.181Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:58:43.183Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:58:43.183Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:58:58.185Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:58:58.185Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:59:13.187Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:59:13.187Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:59:28.189Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:59:28.189Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:59:43.201Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:59:43.201Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T21:59:58.207Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T21:59:58.207Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T22:00:13.211Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T22:00:13.211Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T22:00:28.213Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T22:00:28.213Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T22:00:43.214Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T22:00:43.214Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T22:00:58.216Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T22:00:58.216Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T22:01:13.235Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T22:01:13.235Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T22:01:28.231Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T22:01:28.231Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T22:01:43.233Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T22:01:43.233Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T22:01:58.234Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T22:01:58.234Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T22:02:13.234Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T22:02:13.234Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T22:02:28.236Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T22:02:28.236Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T22:02:43.237Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T22:02:43.237Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T22:02:58.238Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T22:02:58.238Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T22:03:13.241Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T22:03:13.241Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T22:03:28.241Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T22:03:28.241Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T22:03:43.243Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T22:03:43.243Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T22:03:58.243Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T22:03:58.243Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T22:04:13.245Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T22:04:13.245Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T22:04:28.246Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T22:04:28.246Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T22:04:43.248Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T22:04:43.248Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T22:04:58.250Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T22:04:58.250Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T22:05:13.252Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T22:05:13.252Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T22:05:28.254Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T22:05:28.254Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T22:05:43.255Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T22:05:43.255Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Shutting down...
+[CallSchedulerWorker] Stopped
+Calls called with beforeTime: 2025-11-05T22:04:37.312Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T22:04:52.314Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T22:04:52.314Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T22:05:07.316Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T22:05:07.316Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T22:05:22.316Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T22:05:22.316Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-05T22:05:37.318Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-05T22:05:37.318Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Shutting down...
+[CallSchedulerWorker] Stopped

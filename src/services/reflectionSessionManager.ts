@@ -113,7 +113,7 @@ export class ReflectionSessionManager {
 
     // Mark scheduler as complete
     try {
-      await this.callSchedulerConcept.markComplete({
+      await this.callSchedulerConcept.markCompleted({
         callSession: sessionId,
       });
       console.log(`[SessionManager] Session ${sessionId} completed successfully`);

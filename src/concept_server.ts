@@ -5,6 +5,7 @@ import { walk } from "jsr:@std/fs";
 import { parseArgs } from "jsr:@std/cli/parse-args";
 import { toFileUrl } from "jsr:@std/path/to-file-url";
 import { createTwilioWebhooks } from "./webhooks/twilio.ts";
+import { createEnhancedTwilioWebhooks } from "./webhooks/twilioEnhanced.ts";
 
 // Parse command-line arguments for port and base URL
 const flags = parseArgs(Deno.args, {
@@ -37,9 +38,19 @@ async function main() {
 
   // --- Twilio Webhooks ---
   console.log("Registering Twilio webhooks...");
-  const twilioWebhooks = createTwilioWebhooks(db);
-  app.route("/webhooks/twilio", twilioWebhooks);
-  console.log("✓ Twilio webhooks registered at /webhooks/twilio");
+  
+  // Use enhanced webhooks with Google Cloud STT/TTS
+  const useEnhancedCalls = Deno.env.get("USE_ENHANCED_CALLS") !== "false"; // Default to true
+  
+  if (useEnhancedCalls) {
+    const enhancedWebhooks = createEnhancedTwilioWebhooks(db);
+    app.route("/webhooks/twilio", enhancedWebhooks);
+    console.log("✓ Enhanced Twilio webhooks registered at /webhooks/twilio (Google Cloud STT/TTS)");
+  } else {
+    const twilioWebhooks = createTwilioWebhooks(db);
+    app.route("/webhooks/twilio", twilioWebhooks);
+    console.log("✓ Standard Twilio webhooks registered at /webhooks/twilio");
+  }
 
   // --- Dynamic Concept Loading and Routing ---
   console.log(`\nScanning for concepts in ./${CONCEPTS_DIR}...`);
@@ -112,5 +123,30 @@ async function main() {
   Deno.serve({ port: PORT }, app.fetch);
 }
 
+// Global error handlers
+globalThis.addEventListener("error", (event) => {
+  console.error("========== UNCAUGHT ERROR ==========");
+  console.error("Error:", event.error);
+  console.error("Message:", event.message);
+  console.error("Stack:", event.error?.stack);
+  console.error("====================================");
+});
+
+globalThis.addEventListener("unhandledrejection", (event) => {
+  console.error("========== UNHANDLED PROMISE REJECTION ==========");
+  console.error("Reason:", event.reason);
+  console.error("Promise:", event.promise);
+  if (event.reason?.stack) {
+    console.error("Stack:", event.reason.stack);
+  }
+  console.error("=================================================");
+});
+
 // Run the server
-main();
+main().catch((error) => {
+  console.error("========== FATAL ERROR IN MAIN ==========");
+  console.error("Error:", error);
+  console.error("Stack:", error?.stack);
+  console.error("=========================================");
+  Deno.exit(1);
+});

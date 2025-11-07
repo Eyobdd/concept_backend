@@ -16,6 +16,7 @@ import CallSchedulerConcept from "@concepts/CallScheduler/CallSchedulerConcept.t
 import ReflectionSessionConcept from "@concepts/ReflectionSession/ReflectionSessionConcept.ts";
 import ProfileConcept from "@concepts/Profile/ProfileConcept.ts";
 import JournalEntryConcept from "@concepts/JournalEntry/JournalEntryConcept.ts";
+import JournalPromptConcept from "@concepts/JournalPrompt/JournalPromptConcept.ts";
 
 interface WorkerConfig {
   pollIntervalMinutes?: number;
@@ -28,6 +29,7 @@ export class CallWindowScheduler {
   private reflectionSessionConcept: ReflectionSessionConcept;
   private profileConcept: ProfileConcept;
   private journalEntryConcept: JournalEntryConcept;
+  private journalPromptConcept: JournalPromptConcept;
   private pollInterval: number;
   private isRunning: boolean = false;
   private intervalId?: number;
@@ -42,6 +44,7 @@ export class CallWindowScheduler {
     this.reflectionSessionConcept = new ReflectionSessionConcept(db);
     this.profileConcept = new ProfileConcept(db);
     this.journalEntryConcept = new JournalEntryConcept(db);
+    this.journalPromptConcept = new JournalPromptConcept(db);
   }
 
   /**
@@ -183,13 +186,32 @@ export class CallWindowScheduler {
         return;
       }
 
-      // Create reflection session
-      const callSession = `auto:${user}:${Date.now()}`;
-      const prompts = [
-        { promptId: "prompt1", promptText: "What are you grateful for today?" },
-        { promptId: "prompt2", promptText: "What is one thing you learned today?" },
-      ];
+      // Fetch active prompts from database
+      const promptsResult = await this.journalPromptConcept._getActivePrompts({ user });
+      const activePrompts = promptsResult[0].prompts;
 
+      if (activePrompts.length === 0) {
+        console.log(`[CallWindowScheduler] User ${user} has no active prompts configured`);
+        return;
+      }
+
+      // Sort prompts: regular prompts first (by position), then rating prompts at the end
+      const regularPrompts = activePrompts.filter(p => !p.isRatingPrompt).sort((a, b) => a.position - b.position);
+      const ratingPrompts = activePrompts.filter(p => p.isRatingPrompt).sort((a, b) => a.position - b.position);
+      const sortedPrompts = [...regularPrompts, ...ratingPrompts];
+      
+      console.log(`[CallWindowScheduler] Prompt order: ${sortedPrompts.map((p, i) => `${i+1}. ${p.promptText.substring(0, 30)}... (rating=${p.isRatingPrompt})`).join(', ')}`);
+
+      // Convert to session prompt format (include all active prompts, rating prompts last)
+      const prompts = sortedPrompts.map(p => ({
+        promptId: p._id,
+        promptText: p.promptText,
+      }));
+
+      // Generate call session ID
+      const callSession = `auto:${user}:${Date.now()}`;
+
+      // Create reflection session with actual prompts
       const sessionResult = await this.reflectionSessionConcept.startSession({
         user,
         callSession,

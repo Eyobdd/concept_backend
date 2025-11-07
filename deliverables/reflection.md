@@ -1,0 +1,7 @@
+# Reflection
+
+I’ve been wanting to build Zien for a while now and I’ve definitely learned a lot from doing it. As always, the scope and complexity increased significantly from what I had initially thought it would be. Ultimately I implemented 11 backend concepts including my own authentication that handled One-Time-Passwords.
+
+Throughout the project implementation phase I used the agentic code IDE Windsurf. While initially it felt magical as it implemented features in seconds that would’ve taken me days, ultimately, the complex nature of this project resulted in a lot of failed attempts, restarts, and manual debugging and problem solving. A huge issue that I ran into during the final implementation steps was the amount of technical debt that Windsurf accrued, most notable in random .md files that it thought would be helpful. From this experience I learned how important upfront process setup is when undertaking a big project like this.
+
+When I used the Context tool in the early planning stage, I did not run into this issue as much. While the tool is less powerful than a coding agent in some respects, it affords control over the design and ideation of solutions that windsurf, conveniently abstracts. I don’t think I would’ve been able to build a project like this without windsurf, but in the future I will think long and hard about when I want to use it, and likely will turn to lighter weight solutions like the Context tool so that I can maintain the control I desire over my projects.

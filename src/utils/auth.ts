@@ -1,15 +1,24 @@
 import { ID } from "./types.ts";
+import { getDb } from "./database.ts";
 
 type User = ID;
 
 /**
  * Helper function to extract user from token
  * Used by concept actions that accept either user or token
+ * 
+ * Note: Queries database directly to avoid circular dependencies with UserAuthentication concept
  */
 export async function getUserFromToken(token: string): Promise<User | null> {
-  const { UserAuthentication } = await import("../concepts/concepts.ts");
-  const sessionResult = await UserAuthentication._getSessionUser({ token });
-  return sessionResult[0]?.user || null;
+  try {
+    const [db] = await getDb();
+    const sessions = db.collection("UserAuthentication.sessions");
+    const session = await sessions.findOne({ token });
+    return session?.user || null;
+  } catch (error) {
+    console.error("[getUserFromToken] Error:", error);
+    return null;
+  }
 }
 
 /**

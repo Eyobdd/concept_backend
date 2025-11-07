@@ -4,6 +4,7 @@ import { Collection, Db } from "npm:mongodb";
 import { freshID } from "@utils/database.ts";
 import { ID } from "@utils/types.ts";
 import { exclusions, inclusions } from "./passthrough.ts";
+import { createEnhancedTwilioWebhooks } from "../../webhooks/twilioEnhanced.ts";
 import { createTwilioWebhooks } from "../../webhooks/twilio.ts";
 import "jsr:@std/dotenv/load";
 
@@ -206,9 +207,19 @@ export function startRequestingServer(
    * Register Twilio webhooks before other routes to ensure they're accessible
    */
   console.log("\nRegistering Twilio webhooks...");
-  const twilioWebhooks = createTwilioWebhooks(db);
-  app.route("/webhooks/twilio", twilioWebhooks);
-  console.log("✓ Twilio webhooks registered at /webhooks/twilio");
+  
+  // Use enhanced webhooks with Gemini TTS/STT by default
+  const useEnhancedCalls = Deno.env.get("USE_ENHANCED_CALLS") !== "false";
+  
+  if (useEnhancedCalls) {
+    const enhancedWebhooks = createEnhancedTwilioWebhooks(db);
+    app.route("/webhooks/twilio", enhancedWebhooks);
+    console.log("✓ Enhanced Twilio webhooks registered at /webhooks/twilio (Gemini TTS)");
+  } else {
+    const twilioWebhooks = createTwilioWebhooks(db);
+    app.route("/webhooks/twilio", twilioWebhooks);
+    console.log("✓ Standard Twilio webhooks registered at /webhooks/twilio");
+  }
 
   /**
    * PASSTHROUGH ROUTES

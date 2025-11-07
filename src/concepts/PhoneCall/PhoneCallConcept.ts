@@ -22,7 +22,7 @@ interface PhoneCallDoc {
   reflectionSession: ReflectionSession;
   twilioCallSid: string;
   status: CallStatus;
-  prompts: Array<{ promptId: ID; promptText: string }>;
+  prompts: Array<{ promptId: ID; promptText: string; isRatingPrompt?: boolean }>;
   currentPromptIndex: number;
   accumulatedTranscript: string;
   currentResponseBuffer: string;
@@ -74,6 +74,7 @@ export default class PhoneCallConcept {
       reflectionSession,
       twilioCallSid,
       status: "INITIATED",
+      prompts: [], // Will be set via setPrompts action
       currentPromptIndex: 0,
       accumulatedTranscript: "",
       currentResponseBuffer: "",
@@ -90,7 +91,7 @@ export default class PhoneCallConcept {
    * @effects Sets prompts array on the PhoneCall document
    */
   async setPrompts(
-    { twilioCallSid, prompts }: { twilioCallSid: string; prompts: Array<{ promptId: ID; promptText: string }> },
+    { twilioCallSid, prompts }: { twilioCallSid: string; prompts: Array<{ promptId: ID; promptText: string; isRatingPrompt?: boolean }> },
   ): Promise<Empty | { error: string }> {
     const call = await this.phoneCalls.findOne({ twilioCallSid });
     if (!call) {

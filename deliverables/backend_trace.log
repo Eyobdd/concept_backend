@@ -1,0 +1,866 @@
+[0m[32mTask[0m [0m[36mstart[0m deno run --allow-net --allow-write --allow-read --allow-sys --allow-env src/main.ts
+[MongoDB] Connected successfully with connection pooling (maxPoolSize: 10)
+
+Requesting concept initialized with a timeout of 10000ms.
+
+Registering Twilio webhooks...
+✓ Enhanced Twilio webhooks registered at /webhooks/twilio (Gemini TTS)
+
+Registering concept passthrough routes.
+Checking route: /api/CallScheduler/scheduleCall, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/CallScheduler/scheduleCall
+Checking route: /api/CallScheduler/markInProgress, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/CallScheduler/markInProgress
+Checking route: /api/CallScheduler/markCompleted, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/CallScheduler/markCompleted
+Checking route: /api/CallScheduler/markFailedAndRetry, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/CallScheduler/markFailedAndRetry
+Checking route: /api/CallScheduler/markFailed, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/CallScheduler/markFailed
+Checking route: /api/CallScheduler/cancelCall, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/CallScheduler/cancelCall
+Checking route: /api/CallScheduler/_getPendingCalls, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/CallScheduler/_getPendingCalls
+Checking route: /api/CallScheduler/_getScheduledCall, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/CallScheduler/_getScheduledCall
+Checking route: /api/CallScheduler/_getActiveCallsForUser, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/CallScheduler/_getActiveCallsForUser
+Checking route: /api/CallSession/createCallSession, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/CallSession/createCallSession
+Checking route: /api/CallSession/deleteCallSession, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/CallSession/deleteCallSession
+Checking route: /api/CallSession/enqueueCall, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/CallSession/enqueueCall
+Checking route: /api/CallSession/markCallCompleted, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/CallSession/markCallCompleted
+Checking route: /api/CallSession/markCallMissed, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/CallSession/markCallMissed
+Checking route: /api/CallSession/_getCallSession, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/CallSession/_getCallSession
+Checking route: /api/CallSession/_getUserCallSessions, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/CallSession/_getUserCallSessions
+Checking route: /api/CallSession/_getCallQueue, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/CallSession/_getCallQueue
+Checking route: /api/CallSession/_getCallSessionsByStatus, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/CallSession/_getCallSessionsByStatus
+Checking route: /api/CallWindow/createRecurringCallWindow, excluded: true
+Checking route: /api/CallWindow/createOneOffCallWindow, excluded: true
+Checking route: /api/CallWindow/deleteRecurringCallWindow, excluded: true
+Checking route: /api/CallWindow/deleteOneOffCallWindow, excluded: true
+Checking route: /api/CallWindow/_getUserCallWindows, excluded: true
+Checking route: /api/CallWindow/_getUserRecurringWindows, excluded: true
+Checking route: /api/CallWindow/_getUserOneOffWindows, excluded: true
+Checking route: /api/CallWindow/_getRecurringWindowsByDay, excluded: true
+Checking route: /api/CallWindow/_getOneOffWindowsByDate, excluded: true
+Checking route: /api/CallWindow/mergeOverlappingOneOffWindows, excluded: true
+Checking route: /api/CallWindow/setDayModeCustom, excluded: true
+Checking route: /api/CallWindow/setDayModeRecurring, excluded: true
+Checking route: /api/CallWindow/shouldUseRecurring, excluded: true
+Checking route: /api/JournalEntry/formatDateInTimezone, excluded: true
+Checking route: /api/JournalEntry/createFromSession, excluded: true
+Checking route: /api/JournalEntry/deleteEntry, excluded: true
+Checking route: /api/JournalEntry/_getEntriesByUser, excluded: true
+Checking route: /api/JournalEntry/_getEntriesWithResponsesByUser, excluded: true
+Checking route: /api/JournalEntry/_getEntriesByDateRange, excluded: true
+Checking route: /api/JournalEntry/_getEntryByDate, excluded: true
+Checking route: /api/JournalEntry/_getEntryResponses, excluded: true
+Checking route: /api/JournalPrompt/createDefaultPrompts, excluded: true
+Checking route: /api/JournalPrompt/updatePromptText, excluded: true
+Checking route: /api/JournalPrompt/reorderPrompts, excluded: true
+Checking route: /api/JournalPrompt/togglePromptActive, excluded: true
+Checking route: /api/JournalPrompt/deletePrompt, excluded: true
+Checking route: /api/JournalPrompt/addPrompt, excluded: true
+Checking route: /api/JournalPrompt/_getUserPrompts, excluded: true
+Checking route: /api/JournalPrompt/_getActivePrompts, excluded: true
+Checking route: /api/JournalPrompt/ensureRatingPrompt, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/JournalPrompt/ensureRatingPrompt
+Checking route: /api/JournalPrompt/_getRatingPrompt, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/JournalPrompt/_getRatingPrompt
+Checking route: /api/PhoneCall/initiateCall, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/PhoneCall/initiateCall
+Checking route: /api/PhoneCall/setPrompts, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/PhoneCall/setPrompts
+Checking route: /api/PhoneCall/markConnected, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/PhoneCall/markConnected
+Checking route: /api/PhoneCall/startPrompting, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/PhoneCall/startPrompting
+Checking route: /api/PhoneCall/appendToTranscript, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/PhoneCall/appendToTranscript
+Checking route: /api/PhoneCall/advanceToNextPrompt, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/PhoneCall/advanceToNextPrompt
+Checking route: /api/PhoneCall/markCompleted, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/PhoneCall/markCompleted
+Checking route: /api/PhoneCall/markAbandoned, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/PhoneCall/markAbandoned
+Checking route: /api/PhoneCall/markFailed, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/PhoneCall/markFailed
+Checking route: /api/PhoneCall/_getPhoneCall, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/PhoneCall/_getPhoneCall
+Checking route: /api/PhoneCall/_getActivePhoneCall, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/PhoneCall/_getActivePhoneCall
+Checking route: /api/PhoneCall/_getPhoneCallBySession, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/PhoneCall/_getPhoneCallBySession
+Checking route: /api/Profile/createProfile, excluded: true
+Checking route: /api/Profile/updateDisplayName, excluded: true
+Checking route: /api/Profile/updatePhoneNumber, excluded: true
+Checking route: /api/Profile/updateTimezone, excluded: true
+Checking route: /api/Profile/updateRatingPreference, excluded: true
+Checking route: /api/Profile/deleteProfile, excluded: true
+Checking route: /api/Profile/_getProfile, excluded: true
+Checking route: /api/Profile/_getAllProfiles, excluded: true
+Checking route: /api/Profile/updateNamePronunciation, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/Profile/updateNamePronunciation
+Checking route: /api/Profile/updateMaxRetries, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/Profile/updateMaxRetries
+Checking route: /api/Profile/updateProfile, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/Profile/updateProfile
+Checking route: /api/ReflectionSession/startSession, excluded: true
+Checking route: /api/ReflectionSession/recordResponse, excluded: true
+Checking route: /api/ReflectionSession/setRating, excluded: false
+  -> /api/ReflectionSession/setRating
+Checking route: /api/ReflectionSession/completeSession, excluded: true
+Checking route: /api/ReflectionSession/updateSessionPrompts, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/ReflectionSession/updateSessionPrompts
+Checking route: /api/ReflectionSession/abandonSession, excluded: false
+  -> /api/ReflectionSession/abandonSession
+Checking route: /api/ReflectionSession/_getSessionResponses, excluded: true
+Checking route: /api/ReflectionSession/_getUserSessions, excluded: true
+Checking route: /api/ReflectionSession/_getActiveSession, excluded: false
+  -> /api/ReflectionSession/_getActiveSession
+Checking route: /api/ReflectionSession/_getSession, excluded: true
+Checking route: /api/ReflectionSession/_getSessionByCallSession, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/ReflectionSession/_getSessionByCallSession
+Checking route: /api/ReflectionSession/getSessionStatus, excluded: true
+Checking route: /api/ReflectionSession/setTranscript, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/ReflectionSession/setTranscript
+Checking route: /api/ReflectionSession/setRecordingUrl, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/ReflectionSession/setRecordingUrl
+Checking route: /api/User/createUser, excluded: false
+  -> /api/User/createUser
+Checking route: /api/User/deleteUser, excluded: true
+Checking route: /api/User/_getUser, excluded: true
+Checking route: /api/User/_getAllUsers, excluded: true
+Checking route: /api/UserAuthentication/requestVerificationCode, excluded: false
+  -> /api/UserAuthentication/requestVerificationCode
+Checking route: /api/UserAuthentication/register, excluded: false
+  -> /api/UserAuthentication/register
+Checking route: /api/UserAuthentication/login, excluded: false
+  -> /api/UserAuthentication/login
+Checking route: /api/UserAuthentication/logout, excluded: false
+  -> /api/UserAuthentication/logout
+Checking route: /api/UserAuthentication/authenticate, excluded: false
+  -> /api/UserAuthentication/authenticate
+Checking route: /api/UserAuthentication/deleteAccount, excluded: true
+Checking route: /api/UserAuthentication/_getSessionUser, excluded: true
+Checking route: /api/UserAuthentication/_getUserByPhone, excluded: false
+  -> /api/UserAuthentication/_getUserByPhone
+Checking route: /api/UserAuthentication/verifyCode, excluded: false
+WARNING - UNVERIFIED ROUTE: /api/UserAuthentication/verifyCode
+Checking route: /api/UserAuthentication/_getUserSessions, excluded: true
+Checking route: /api/UserAuthentication/_getVerificationCode, excluded: false
+  -> /api/UserAuthentication/_getVerificationCode
+Checking route: /api/UserAuthentication/createVerifiedCredentials, excluded: false
+  -> /api/UserAuthentication/createVerifiedCredentials
+FIX: Please verify routes in: ./src/concepts/Requesting/passthrough.ts
+
+🚀 Requesting server listening for POST requests at base path of /api/*
+Listening on http://0.0.0.0:8000/ (http://localhost:8000/)
+[MongoDB] Reusing existing connection (singleton pattern)
+[CallSchedulerWorker] Using Enhanced Call Orchestrator (Google Cloud STT/TTS)
+[CallSchedulerWorker] Starting (poll interval: 15s, batch size: 10)
+[CallSchedulerWorker] Checking for pending calls at 2025-11-07T04:07:18.869Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-07T04:07:18.869Z
+[Main] CallSchedulerWorker started
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[MongoDB] Reusing existing connection (singleton pattern)
+[MongoDB] Reusing existing connection (singleton pattern)
+[Requesting] Received request for path: /JournalEntry/_getEntryByDate
+[Requesting] Received request for path: /JournalEntry/_getEntryByDate
+
+Requesting.request {
+  token: 'b7da1eb3-b94d-47de-9727-e051625bb25d',
+  date: '2025-11-06',
+  path: '/JournalEntry/_getEntryByDate'
+} => { request: '019a5c7f-5998-7879-9256-0aa8064b0b34' }
+
+
+Requesting.request {
+  token: 'b7da1eb3-b94d-47de-9727-e051625bb25d',
+  date: '2025-11-06',
+  path: '/JournalEntry/_getEntryByDate'
+} => { request: '019a5c7f-5999-721d-9aa7-f4a10390d5e7' }
+
+Session: {
+  _id: "82860508-5a79-49fb-a8c6-e2e8b19f10a4",
+  user: "019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd",
+  token: "b7da1eb3-b94d-47de-9727-e051625bb25d",
+  createdAt: 2025-11-07T04:03:00.765Z,
+  expiresAt: 2025-12-07T04:03:00.765Z
+} Token: b7da1eb3-b94d-47de-9727-e051625bb25d
+Session: {
+  _id: "82860508-5a79-49fb-a8c6-e2e8b19f10a4",
+  user: "019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd",
+  token: "b7da1eb3-b94d-47de-9727-e051625bb25d",
+  createdAt: 2025-11-07T04:03:00.765Z,
+  expiresAt: 2025-12-07T04:03:00.765Z
+} Token: b7da1eb3-b94d-47de-9727-e051625bb25d
+
+Requesting.respond {
+  request: '019a5c7f-5999-721d-9aa7-f4a10390d5e7',
+  entry: {
+    _id: '019a5c7d-9d66-774c-ad73-39494af007c2',
+    user: '019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd',
+    creationDate: '2025-11-06',
+    reflectionSession: '019a5c7b-68c8-725f-a03a-9c25a01cae4c',
+    rating: 0
+  }
+} => { request: '019a5c7f-5999-721d-9aa7-f4a10390d5e7' }
+
+
+Requesting.respond {
+  request: '019a5c7f-5998-7879-9256-0aa8064b0b34',
+  entry: {
+    _id: '019a5c7d-9d66-774c-ad73-39494af007c2',
+    user: '019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd',
+    creationDate: '2025-11-06',
+    reflectionSession: '019a5c7b-68c8-725f-a03a-9c25a01cae4c',
+    rating: 0
+  }
+} => { request: '019a5c7f-5998-7879-9256-0aa8064b0b34' }
+
+[MongoDB] Reusing existing connection (singleton pattern)
+[MongoDB] Reusing existing connection (singleton pattern)
+[Requesting] Received request for path: /JournalEntry/_getEntryByDate
+[Requesting] Received request for path: /JournalEntry/_getEntryByDate
+
+Requesting.request {
+  token: 'b7da1eb3-b94d-47de-9727-e051625bb25d',
+  date: '2025-11-06',
+  path: '/JournalEntry/_getEntryByDate'
+} => { request: '019a5c7f-6d0e-7bc0-912f-b4736f17ad6b' }
+
+
+Requesting.request {
+  token: 'b7da1eb3-b94d-47de-9727-e051625bb25d',
+  date: '2025-11-06',
+  path: '/JournalEntry/_getEntryByDate'
+} => { request: '019a5c7f-6d0f-77b7-aa13-333fd1d2e9c5' }
+
+Session: {
+  _id: "82860508-5a79-49fb-a8c6-e2e8b19f10a4",
+  user: "019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd",
+  token: "b7da1eb3-b94d-47de-9727-e051625bb25d",
+  createdAt: 2025-11-07T04:03:00.765Z,
+  expiresAt: 2025-12-07T04:03:00.765Z
+} Token: b7da1eb3-b94d-47de-9727-e051625bb25d
+Session: {
+  _id: "82860508-5a79-49fb-a8c6-e2e8b19f10a4",
+  user: "019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd",
+  token: "b7da1eb3-b94d-47de-9727-e051625bb25d",
+  createdAt: 2025-11-07T04:03:00.765Z,
+  expiresAt: 2025-12-07T04:03:00.765Z
+} Token: b7da1eb3-b94d-47de-9727-e051625bb25d
+
+Requesting.respond {
+  request: '019a5c7f-6d0f-77b7-aa13-333fd1d2e9c5',
+  entry: {
+    _id: '019a5c7d-9d66-774c-ad73-39494af007c2',
+    user: '019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd',
+    creationDate: '2025-11-06',
+    reflectionSession: '019a5c7b-68c8-725f-a03a-9c25a01cae4c',
+    rating: 0
+  }
+} => { request: '019a5c7f-6d0f-77b7-aa13-333fd1d2e9c5' }
+
+
+Requesting.respond {
+  request: '019a5c7f-6d0e-7bc0-912f-b4736f17ad6b',
+  entry: {
+    _id: '019a5c7d-9d66-774c-ad73-39494af007c2',
+    user: '019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd',
+    creationDate: '2025-11-06',
+    reflectionSession: '019a5c7b-68c8-725f-a03a-9c25a01cae4c',
+    rating: 0
+  }
+} => { request: '019a5c7f-6d0e-7bc0-912f-b4736f17ad6b' }
+
+[MongoDB] Reusing existing connection (singleton pattern)
+[MongoDB] Reusing existing connection (singleton pattern)
+[Requesting] Received request for path: /JournalEntry/_getEntryByDate
+[Requesting] Received request for path: /JournalEntry/_getEntryByDate
+
+Requesting.request {
+  token: 'b7da1eb3-b94d-47de-9727-e051625bb25d',
+  date: '2025-11-06',
+  path: '/JournalEntry/_getEntryByDate'
+} => { request: '019a5c7f-8099-7b10-a7a6-8c7aac5b952d' }
+
+
+Requesting.request {
+  token: 'b7da1eb3-b94d-47de-9727-e051625bb25d',
+  date: '2025-11-06',
+  path: '/JournalEntry/_getEntryByDate'
+} => { request: '019a5c7f-809a-71ae-8f75-4a9984b291f1' }
+
+Session: {
+  _id: "82860508-5a79-49fb-a8c6-e2e8b19f10a4",
+  user: "019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd",
+  token: "b7da1eb3-b94d-47de-9727-e051625bb25d",
+  createdAt: 2025-11-07T04:03:00.765Z,
+  expiresAt: 2025-12-07T04:03:00.765Z
+} Token: b7da1eb3-b94d-47de-9727-e051625bb25d
+Session: {
+  _id: "82860508-5a79-49fb-a8c6-e2e8b19f10a4",
+  user: "019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd",
+  token: "b7da1eb3-b94d-47de-9727-e051625bb25d",
+  createdAt: 2025-11-07T04:03:00.765Z,
+  expiresAt: 2025-12-07T04:03:00.765Z
+} Token: b7da1eb3-b94d-47de-9727-e051625bb25d
+
+Requesting.respond {
+  request: '019a5c7f-8099-7b10-a7a6-8c7aac5b952d',
+  entry: {
+    _id: '019a5c7d-9d66-774c-ad73-39494af007c2',
+    user: '019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd',
+    creationDate: '2025-11-06',
+    reflectionSession: '019a5c7b-68c8-725f-a03a-9c25a01cae4c',
+    rating: 0
+  }
+} => { request: '019a5c7f-8099-7b10-a7a6-8c7aac5b952d' }
+
+
+Requesting.respond {
+  request: '019a5c7f-809a-71ae-8f75-4a9984b291f1',
+  entry: {
+    _id: '019a5c7d-9d66-774c-ad73-39494af007c2',
+    user: '019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd',
+    creationDate: '2025-11-06',
+    reflectionSession: '019a5c7b-68c8-725f-a03a-9c25a01cae4c',
+    rating: 0
+  }
+} => { request: '019a5c7f-809a-71ae-8f75-4a9984b291f1' }
+
+[CallSchedulerWorker] Checking for pending calls at 2025-11-07T04:07:33.873Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-07T04:07:33.873Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[MongoDB] Reusing existing connection (singleton pattern)
+[MongoDB] Reusing existing connection (singleton pattern)
+[Requesting] Received request for path: /JournalEntry/_getEntryByDate
+[Requesting] Received request for path: /JournalEntry/_getEntryByDate
+
+Requesting.request {
+  token: 'b7da1eb3-b94d-47de-9727-e051625bb25d',
+  date: '2025-11-06',
+  path: '/JournalEntry/_getEntryByDate'
+} => { request: '019a5c7f-941c-7c9b-99c2-4917c4a1973c' }
+
+
+Requesting.request {
+  token: 'b7da1eb3-b94d-47de-9727-e051625bb25d',
+  date: '2025-11-06',
+  path: '/JournalEntry/_getEntryByDate'
+} => { request: '019a5c7f-941d-7e8a-b215-9b9a7c60f9c2' }
+
+Session: {
+  _id: "82860508-5a79-49fb-a8c6-e2e8b19f10a4",
+  user: "019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd",
+  token: "b7da1eb3-b94d-47de-9727-e051625bb25d",
+  createdAt: 2025-11-07T04:03:00.765Z,
+  expiresAt: 2025-12-07T04:03:00.765Z
+} Token: b7da1eb3-b94d-47de-9727-e051625bb25d
+Session: {
+  _id: "82860508-5a79-49fb-a8c6-e2e8b19f10a4",
+  user: "019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd",
+  token: "b7da1eb3-b94d-47de-9727-e051625bb25d",
+  createdAt: 2025-11-07T04:03:00.765Z,
+  expiresAt: 2025-12-07T04:03:00.765Z
+} Token: b7da1eb3-b94d-47de-9727-e051625bb25d
+
+Requesting.respond {
+  request: '019a5c7f-941d-7e8a-b215-9b9a7c60f9c2',
+  entry: {
+    _id: '019a5c7d-9d66-774c-ad73-39494af007c2',
+    user: '019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd',
+    creationDate: '2025-11-06',
+    reflectionSession: '019a5c7b-68c8-725f-a03a-9c25a01cae4c',
+    rating: 0
+  }
+} => { request: '019a5c7f-941d-7e8a-b215-9b9a7c60f9c2' }
+
+
+Requesting.respond {
+  request: '019a5c7f-941c-7c9b-99c2-4917c4a1973c',
+  entry: {
+    _id: '019a5c7d-9d66-774c-ad73-39494af007c2',
+    user: '019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd',
+    creationDate: '2025-11-06',
+    reflectionSession: '019a5c7b-68c8-725f-a03a-9c25a01cae4c',
+    rating: 0
+  }
+} => { request: '019a5c7f-941c-7c9b-99c2-4917c4a1973c' }
+
+[MongoDB] Reusing existing connection (singleton pattern)
+[MongoDB] Reusing existing connection (singleton pattern)
+[Requesting] Received request for path: /JournalEntry/_getEntryByDate
+[Requesting] Received request for path: /JournalEntry/_getEntryByDate
+
+Requesting.request {
+  token: 'b7da1eb3-b94d-47de-9727-e051625bb25d',
+  date: '2025-11-06',
+  path: '/JournalEntry/_getEntryByDate'
+} => { request: '019a5c7f-a7b2-7b9b-b426-488a23c865c6' }
+
+
+Requesting.request {
+  token: 'b7da1eb3-b94d-47de-9727-e051625bb25d',
+  date: '2025-11-06',
+  path: '/JournalEntry/_getEntryByDate'
+} => { request: '019a5c7f-a7b4-7501-b210-c770f20cec92' }
+
+Session: {
+  _id: "82860508-5a79-49fb-a8c6-e2e8b19f10a4",
+  user: "019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd",
+  token: "b7da1eb3-b94d-47de-9727-e051625bb25d",
+  createdAt: 2025-11-07T04:03:00.765Z,
+  expiresAt: 2025-12-07T04:03:00.765Z
+} Token: b7da1eb3-b94d-47de-9727-e051625bb25d
+Session: {
+  _id: "82860508-5a79-49fb-a8c6-e2e8b19f10a4",
+  user: "019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd",
+  token: "b7da1eb3-b94d-47de-9727-e051625bb25d",
+  createdAt: 2025-11-07T04:03:00.765Z,
+  expiresAt: 2025-12-07T04:03:00.765Z
+} Token: b7da1eb3-b94d-47de-9727-e051625bb25d
+
+Requesting.respond {
+  request: '019a5c7f-a7b2-7b9b-b426-488a23c865c6',
+  entry: {
+    _id: '019a5c7d-9d66-774c-ad73-39494af007c2',
+    user: '019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd',
+    creationDate: '2025-11-06',
+    reflectionSession: '019a5c7b-68c8-725f-a03a-9c25a01cae4c',
+    rating: 0
+  }
+} => { request: '019a5c7f-a7b2-7b9b-b426-488a23c865c6' }
+
+
+Requesting.respond {
+  request: '019a5c7f-a7b4-7501-b210-c770f20cec92',
+  entry: {
+    _id: '019a5c7d-9d66-774c-ad73-39494af007c2',
+    user: '019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd',
+    creationDate: '2025-11-06',
+    reflectionSession: '019a5c7b-68c8-725f-a03a-9c25a01cae4c',
+    rating: 0
+  }
+} => { request: '019a5c7f-a7b4-7501-b210-c770f20cec92' }
+
+[MongoDB] Reusing existing connection (singleton pattern)
+[MongoDB] Reusing existing connection (singleton pattern)
+[Requesting] Received request for path: /JournalEntry/_getEntryByDate
+[Requesting] Received request for path: /JournalEntry/_getEntryByDate
+
+Requesting.request {
+  token: 'b7da1eb3-b94d-47de-9727-e051625bb25d',
+  date: '2025-11-06',
+  path: '/JournalEntry/_getEntryByDate'
+} => { request: '019a5c7f-bb39-734e-bfac-c910d8ff168c' }
+
+
+Requesting.request {
+  token: 'b7da1eb3-b94d-47de-9727-e051625bb25d',
+  date: '2025-11-06',
+  path: '/JournalEntry/_getEntryByDate'
+} => { request: '019a5c7f-bb3a-713d-bbd7-ea26955f5411' }
+
+Session: {
+  _id: "82860508-5a79-49fb-a8c6-e2e8b19f10a4",
+  user: "019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd",
+  token: "b7da1eb3-b94d-47de-9727-e051625bb25d",
+  createdAt: 2025-11-07T04:03:00.765Z,
+  expiresAt: 2025-12-07T04:03:00.765Z
+} Token: b7da1eb3-b94d-47de-9727-e051625bb25d
+Session: {
+  _id: "82860508-5a79-49fb-a8c6-e2e8b19f10a4",
+  user: "019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd",
+  token: "b7da1eb3-b94d-47de-9727-e051625bb25d",
+  createdAt: 2025-11-07T04:03:00.765Z,
+  expiresAt: 2025-12-07T04:03:00.765Z
+} Token: b7da1eb3-b94d-47de-9727-e051625bb25d
+
+Requesting.respond {
+  request: '019a5c7f-bb39-734e-bfac-c910d8ff168c',
+  entry: {
+    _id: '019a5c7d-9d66-774c-ad73-39494af007c2',
+    user: '019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd',
+    creationDate: '2025-11-06',
+    reflectionSession: '019a5c7b-68c8-725f-a03a-9c25a01cae4c',
+    rating: 0
+  }
+} => { request: '019a5c7f-bb39-734e-bfac-c910d8ff168c' }
+
+
+Requesting.respond {
+  request: '019a5c7f-bb3a-713d-bbd7-ea26955f5411',
+  entry: {
+    _id: '019a5c7d-9d66-774c-ad73-39494af007c2',
+    user: '019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd',
+    creationDate: '2025-11-06',
+    reflectionSession: '019a5c7b-68c8-725f-a03a-9c25a01cae4c',
+    rating: 0
+  }
+} => { request: '019a5c7f-bb3a-713d-bbd7-ea26955f5411' }
+
+[CallSchedulerWorker] Checking for pending calls at 2025-11-07T04:07:48.875Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-07T04:07:48.875Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-07T04:08:03.877Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-07T04:08:03.877Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-07T04:08:18.878Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-07T04:08:18.878Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-07T04:08:33.881Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-07T04:08:33.881Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[MongoDB] Reusing existing connection (singleton pattern)
+[MongoDB] Reusing existing connection (singleton pattern)
+[Requesting] Received request for path: /JournalEntry/_getEntryByDate
+[Requesting] Received request for path: /JournalEntry/_getEntryByDate
+
+Requesting.request {
+  token: 'b7da1eb3-b94d-47de-9727-e051625bb25d',
+  date: '2025-11-06',
+  path: '/JournalEntry/_getEntryByDate'
+} => { request: '019a5c80-8a5b-78c9-a63a-19dc3934c182' }
+
+
+Requesting.request {
+  token: 'b7da1eb3-b94d-47de-9727-e051625bb25d',
+  date: '2025-11-06',
+  path: '/JournalEntry/_getEntryByDate'
+} => { request: '019a5c80-8a69-7a4b-9d30-2dcd65663b23' }
+
+Session: {
+  _id: "82860508-5a79-49fb-a8c6-e2e8b19f10a4",
+  user: "019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd",
+  token: "b7da1eb3-b94d-47de-9727-e051625bb25d",
+  createdAt: 2025-11-07T04:03:00.765Z,
+  expiresAt: 2025-12-07T04:03:00.765Z
+} Token: b7da1eb3-b94d-47de-9727-e051625bb25d
+Session: {
+  _id: "82860508-5a79-49fb-a8c6-e2e8b19f10a4",
+  user: "019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd",
+  token: "b7da1eb3-b94d-47de-9727-e051625bb25d",
+  createdAt: 2025-11-07T04:03:00.765Z,
+  expiresAt: 2025-12-07T04:03:00.765Z
+} Token: b7da1eb3-b94d-47de-9727-e051625bb25d
+
+Requesting.respond {
+  request: '019a5c80-8a5b-78c9-a63a-19dc3934c182',
+  entry: {
+    _id: '019a5c7d-9d66-774c-ad73-39494af007c2',
+    user: '019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd',
+    creationDate: '2025-11-06',
+    reflectionSession: '019a5c7b-68c8-725f-a03a-9c25a01cae4c',
+    rating: 0
+  }
+} => { request: '019a5c80-8a5b-78c9-a63a-19dc3934c182' }
+
+
+Requesting.respond {
+  request: '019a5c80-8a69-7a4b-9d30-2dcd65663b23',
+  entry: {
+    _id: '019a5c7d-9d66-774c-ad73-39494af007c2',
+    user: '019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd',
+    creationDate: '2025-11-06',
+    reflectionSession: '019a5c7b-68c8-725f-a03a-9c25a01cae4c',
+    rating: 0
+  }
+} => { request: '019a5c80-8a69-7a4b-9d30-2dcd65663b23' }
+
+[CallSchedulerWorker] Checking for pending calls at 2025-11-07T04:08:48.882Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-07T04:08:48.882Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-07T04:09:03.884Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-07T04:09:03.884Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-07T04:09:18.880Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-07T04:09:18.880Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-07T04:09:33.868Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-07T04:09:33.868Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[MongoDB] Reusing existing connection (singleton pattern)
+[MongoDB] Reusing existing connection (singleton pattern)
+[Requesting] Received request for path: /JournalEntry/_getEntryByDate
+[Requesting] Received request for path: /JournalEntry/_getEntryByDate
+
+Requesting.request {
+  token: 'b7da1eb3-b94d-47de-9727-e051625bb25d',
+  date: '2025-11-06',
+  path: '/JournalEntry/_getEntryByDate'
+} => { request: '019a5c81-74a6-7d22-9574-7145091f38e5' }
+
+
+Requesting.request {
+  token: 'b7da1eb3-b94d-47de-9727-e051625bb25d',
+  date: '2025-11-06',
+  path: '/JournalEntry/_getEntryByDate'
+} => { request: '019a5c81-74a7-73ec-bef2-0388f8f6d2b4' }
+
+Session: {
+  _id: "82860508-5a79-49fb-a8c6-e2e8b19f10a4",
+  user: "019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd",
+  token: "b7da1eb3-b94d-47de-9727-e051625bb25d",
+  createdAt: 2025-11-07T04:03:00.765Z,
+  expiresAt: 2025-12-07T04:03:00.765Z
+} Token: b7da1eb3-b94d-47de-9727-e051625bb25d
+Session: {
+  _id: "82860508-5a79-49fb-a8c6-e2e8b19f10a4",
+  user: "019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd",
+  token: "b7da1eb3-b94d-47de-9727-e051625bb25d",
+  createdAt: 2025-11-07T04:03:00.765Z,
+  expiresAt: 2025-12-07T04:03:00.765Z
+} Token: b7da1eb3-b94d-47de-9727-e051625bb25d
+
+Requesting.respond {
+  request: '019a5c81-74a6-7d22-9574-7145091f38e5',
+  entry: {
+    _id: '019a5c7d-9d66-774c-ad73-39494af007c2',
+    user: '019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd',
+    creationDate: '2025-11-06',
+    reflectionSession: '019a5c7b-68c8-725f-a03a-9c25a01cae4c',
+    rating: 0
+  }
+} => { request: '019a5c81-74a6-7d22-9574-7145091f38e5' }
+
+
+Requesting.respond {
+  request: '019a5c81-74a7-73ec-bef2-0388f8f6d2b4',
+  entry: {
+    _id: '019a5c7d-9d66-774c-ad73-39494af007c2',
+    user: '019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd',
+    creationDate: '2025-11-06',
+    reflectionSession: '019a5c7b-68c8-725f-a03a-9c25a01cae4c',
+    rating: 0
+  }
+} => { request: '019a5c81-74a7-73ec-bef2-0388f8f6d2b4' }
+
+[CallSchedulerWorker] Checking for pending calls at 2025-11-07T04:09:48.866Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-07T04:09:48.866Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-07T04:10:03.867Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-07T04:10:03.867Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-07T04:10:18.868Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-07T04:10:18.868Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-07T04:10:33.869Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-07T04:10:33.869Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[MongoDB] Reusing existing connection (singleton pattern)
+[MongoDB] Reusing existing connection (singleton pattern)
+[Requesting] Received request for path: /JournalEntry/_getEntryByDate
+[Requesting] Received request for path: /JournalEntry/_getEntryByDate
+
+Requesting.request {
+  token: 'b7da1eb3-b94d-47de-9727-e051625bb25d',
+  date: '2025-11-06',
+  path: '/JournalEntry/_getEntryByDate'
+} => { request: '019a5c82-5f63-7e9a-91d5-8692ef61cbcc' }
+
+
+Requesting.request {
+  token: 'b7da1eb3-b94d-47de-9727-e051625bb25d',
+  date: '2025-11-06',
+  path: '/JournalEntry/_getEntryByDate'
+} => { request: '019a5c82-5f63-7b7a-ac0e-ee4413df0568' }
+
+Session: {
+  _id: "82860508-5a79-49fb-a8c6-e2e8b19f10a4",
+  user: "019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd",
+  token: "b7da1eb3-b94d-47de-9727-e051625bb25d",
+  createdAt: 2025-11-07T04:03:00.765Z,
+  expiresAt: 2025-12-07T04:03:00.765Z
+} Token: b7da1eb3-b94d-47de-9727-e051625bb25d
+Session: {
+  _id: "82860508-5a79-49fb-a8c6-e2e8b19f10a4",
+  user: "019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd",
+  token: "b7da1eb3-b94d-47de-9727-e051625bb25d",
+  createdAt: 2025-11-07T04:03:00.765Z,
+  expiresAt: 2025-12-07T04:03:00.765Z
+} Token: b7da1eb3-b94d-47de-9727-e051625bb25d
+
+Requesting.respond {
+  request: '019a5c82-5f63-7e9a-91d5-8692ef61cbcc',
+  entry: {
+    _id: '019a5c7d-9d66-774c-ad73-39494af007c2',
+    user: '019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd',
+    creationDate: '2025-11-06',
+    reflectionSession: '019a5c7b-68c8-725f-a03a-9c25a01cae4c',
+    rating: 0
+  }
+} => { request: '019a5c82-5f63-7e9a-91d5-8692ef61cbcc' }
+
+
+Requesting.respond {
+  request: '019a5c82-5f63-7b7a-ac0e-ee4413df0568',
+  entry: {
+    _id: '019a5c7d-9d66-774c-ad73-39494af007c2',
+    user: '019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd',
+    creationDate: '2025-11-06',
+    reflectionSession: '019a5c7b-68c8-725f-a03a-9c25a01cae4c',
+    rating: 0
+  }
+} => { request: '019a5c82-5f63-7b7a-ac0e-ee4413df0568' }
+
+[CallSchedulerWorker] Checking for pending calls at 2025-11-07T04:10:48.871Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-07T04:10:48.871Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-07T04:11:03.874Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-07T04:11:03.874Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[MongoDB] Reusing existing connection (singleton pattern)
+[MongoDB] Reusing existing connection (singleton pattern)
+[Requesting] Received request for path: /JournalEntry/_getEntryByDate
+[Requesting] Received request for path: /JournalEntry/_getEntryByDate
+
+Requesting.request {
+  token: 'b7da1eb3-b94d-47de-9727-e051625bb25d',
+  date: '2025-11-06',
+  path: '/JournalEntry/_getEntryByDate'
+} => { request: '019a5c82-d025-76cc-8c73-8deebdfc3c38' }
+
+
+Requesting.request {
+  token: 'b7da1eb3-b94d-47de-9727-e051625bb25d',
+  date: '2025-11-06',
+  path: '/JournalEntry/_getEntryByDate'
+} => { request: '019a5c82-d026-7b53-9480-2bbb11deb4df' }
+
+Session: {
+  _id: "82860508-5a79-49fb-a8c6-e2e8b19f10a4",
+  user: "019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd",
+  token: "b7da1eb3-b94d-47de-9727-e051625bb25d",
+  createdAt: 2025-11-07T04:03:00.765Z,
+  expiresAt: 2025-12-07T04:03:00.765Z
+} Token: b7da1eb3-b94d-47de-9727-e051625bb25d
+Session: {
+  _id: "82860508-5a79-49fb-a8c6-e2e8b19f10a4",
+  user: "019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd",
+  token: "b7da1eb3-b94d-47de-9727-e051625bb25d",
+  createdAt: 2025-11-07T04:03:00.765Z,
+  expiresAt: 2025-12-07T04:03:00.765Z
+} Token: b7da1eb3-b94d-47de-9727-e051625bb25d
+
+Requesting.respond {
+  request: '019a5c82-d026-7b53-9480-2bbb11deb4df',
+  entry: {
+    _id: '019a5c7d-9d66-774c-ad73-39494af007c2',
+    user: '019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd',
+    creationDate: '2025-11-06',
+    reflectionSession: '019a5c7b-68c8-725f-a03a-9c25a01cae4c',
+    rating: 0
+  }
+} => { request: '019a5c82-d026-7b53-9480-2bbb11deb4df' }
+
+
+Requesting.respond {
+  request: '019a5c82-d025-76cc-8c73-8deebdfc3c38',
+  entry: {
+    _id: '019a5c7d-9d66-774c-ad73-39494af007c2',
+    user: '019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd',
+    creationDate: '2025-11-06',
+    reflectionSession: '019a5c7b-68c8-725f-a03a-9c25a01cae4c',
+    rating: 0
+  }
+} => { request: '019a5c82-d025-76cc-8c73-8deebdfc3c38' }
+
+[MongoDB] Reusing existing connection (singleton pattern)
+[MongoDB] Reusing existing connection (singleton pattern)
+[Requesting] Received request for path: /JournalEntry/_getEntryByDate
+[Requesting] Received request for path: /JournalEntry/_getEntryByDate
+
+Requesting.request {
+  token: 'b7da1eb3-b94d-47de-9727-e051625bb25d',
+  date: '2025-11-06',
+  path: '/JournalEntry/_getEntryByDate'
+} => { request: '019a5c82-db5f-779c-b1e7-dc879c9ba81f' }
+
+
+Requesting.request {
+  token: 'b7da1eb3-b94d-47de-9727-e051625bb25d',
+  date: '2025-11-06',
+  path: '/JournalEntry/_getEntryByDate'
+} => { request: '019a5c82-db60-75ad-ad7c-903df71f14ec' }
+
+Session: {
+  _id: "82860508-5a79-49fb-a8c6-e2e8b19f10a4",
+  user: "019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd",
+  token: "b7da1eb3-b94d-47de-9727-e051625bb25d",
+  createdAt: 2025-11-07T04:03:00.765Z,
+  expiresAt: 2025-12-07T04:03:00.765Z
+} Token: b7da1eb3-b94d-47de-9727-e051625bb25d
+Session: {
+  _id: "82860508-5a79-49fb-a8c6-e2e8b19f10a4",
+  user: "019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd",
+  token: "b7da1eb3-b94d-47de-9727-e051625bb25d",
+  createdAt: 2025-11-07T04:03:00.765Z,
+  expiresAt: 2025-12-07T04:03:00.765Z
+} Token: b7da1eb3-b94d-47de-9727-e051625bb25d
+
+Requesting.respond {
+  request: '019a5c82-db5f-779c-b1e7-dc879c9ba81f',
+  entry: {
+    _id: '019a5c7d-9d66-774c-ad73-39494af007c2',
+    user: '019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd',
+    creationDate: '2025-11-06',
+    reflectionSession: '019a5c7b-68c8-725f-a03a-9c25a01cae4c',
+    rating: 0
+  }
+} => { request: '019a5c82-db5f-779c-b1e7-dc879c9ba81f' }
+
+
+Requesting.respond {
+  request: '019a5c82-db60-75ad-ad7c-903df71f14ec',
+  entry: {
+    _id: '019a5c7d-9d66-774c-ad73-39494af007c2',
+    user: '019a5c7b-5f9e-70ce-9d4d-4196c4e2d3dd',
+    creationDate: '2025-11-06',
+    reflectionSession: '019a5c7b-68c8-725f-a03a-9c25a01cae4c',
+    rating: 0
+  }
+} => { request: '019a5c82-db60-75ad-ad7c-903df71f14ec' }
+
+
+UserAuthentication.logout {} => { error: 'Session not found.' }
+
+[CallSchedulerWorker] Checking for pending calls at 2025-11-07T04:11:18.875Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-07T04:11:18.875Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-07T04:11:33.877Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-07T04:11:33.877Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls
+[CallSchedulerWorker] Checking for pending calls at 2025-11-07T04:11:48.877Z
+[CallScheduler] _getPendingCalls called with beforeTime: 2025-11-07T04:11:48.877Z
+[CallScheduler] Found 0 pending calls
+[CallSchedulerWorker] No pending calls

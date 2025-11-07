@@ -256,6 +256,35 @@ export default class ReflectionSessionConcept {
   }
 
   /**
+   * Action: Updates the prompts array for a session.
+   * Used when prompts are dynamically added (e.g., rating prompt).
+   * @requires session exists and is IN_PROGRESS
+   * @effects Updates the prompts array
+   */
+  async updateSessionPrompts(
+    { session, prompts }: { 
+      session: ReflectionSession; 
+      prompts: { promptId: string; promptText: string }[] 
+    },
+  ): Promise<Empty | { error: string }> {
+    const sessionDoc = await this.reflectionSessions.findOne({ _id: session });
+    if (!sessionDoc) {
+      return { error: `Session ${session} not found.` };
+    }
+
+    if (sessionDoc.status !== "IN_PROGRESS") {
+      return { error: `Cannot update prompts for session with status ${sessionDoc.status}.` };
+    }
+
+    await this.reflectionSessions.updateOne(
+      { _id: session },
+      { $set: { prompts } },
+    );
+
+    return {};
+  }
+
+  /**
    * Action: Abandons a session.
    * @requires session exists
    * @effects Sets status to ABANDONED; sets endedAt to current time (idempotent - succeeds if already abandoned)
@@ -327,25 +356,15 @@ export default class ReflectionSessionConcept {
     params: { user?: User; token?: string },
   ): Promise<{ session: ReflectionSessionDoc | null }[]> {
     try {
-      let userId: User;
-      
-      // Handle passthrough calls with token
-      if (params.token && !params.user) {
-        const UserAuthentication = (await import("@concepts")).UserAuthentication;
-        const authResult = await UserAuthentication.authenticate({ token: params.token });
-        if ('error' in authResult || !authResult.user) {
-          return [{ session: null }];
-        }
-        userId = authResult.user;
-      } else if (params.user) {
-        userId = params.user;
-      } else {
+      // Use resolveUser utility to handle both user and token
+      const result = await resolveUser(params);
+      if ('error' in result) {
         return [{ session: null }];
       }
       
       const session = await withTimeout(
         this.reflectionSessions.findOne({
-          user: userId,
+          user: result.user,
           status: "IN_PROGRESS",
         }),
         5000 // 5-second timeout

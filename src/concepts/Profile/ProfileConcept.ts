@@ -17,7 +17,6 @@ interface ProfileDoc {
   displayName: string;
   phoneNumber: string; // E.164 format: +1234567890
   timezone: string; // IANA timezone: "America/New_York"
-  includeRating: boolean; // Whether to include day rating prompt in reflection calls
   namePronunciation?: string; // Phonetic pronunciation guide for TTS
   maxRetries: number; // Maximum number of call retry attempts (minimum 1)
   updatedAt: Date;
@@ -40,12 +39,13 @@ export default class ProfileConcept {
    * @effects A new Profile is created with the provided information.
    */
   async createProfile(
-    { user, token, displayName, phoneNumber, timezone }: {
+    { user, token, displayName, phoneNumber, timezone, namePronunciation }: {
       user?: User;
       token?: string;
       displayName: string;
       phoneNumber: string;
       timezone: string;
+      namePronunciation?: string;
     },
   ): Promise<{ profile: ID } | { error: string }> {
     // Resolve user from either user parameter or token
@@ -70,16 +70,22 @@ export default class ProfileConcept {
     // In production, you'd validate against IANA timezone database
 
     const profileId = crypto.randomUUID() as ID;
-    await this.profiles.insertOne({
+    const profileDoc: any = {
       _id: profileId,
       user,
       displayName,
       phoneNumber,
       timezone,
-      includeRating: true, // Default to including rating prompt
       maxRetries: 4, // Default to 4 retry attempts
       updatedAt: new Date(),
-    });
+    };
+
+    // Add namePronunciation if provided
+    if (namePronunciation) {
+      profileDoc.namePronunciation = namePronunciation;
+    }
+
+    await this.profiles.insertOne(profileDoc);
 
     return { profile: profileId };
   }
@@ -251,6 +257,67 @@ export default class ProfileConcept {
     await this.profiles.updateOne(
       { user },
       { $set: { maxRetries, updatedAt: new Date() } },
+    );
+
+    return {};
+  }
+
+  /**
+   * Action: Updates multiple profile fields at once.
+   * @requires Profile exists for user; all provided fields are valid
+   * @effects Updates specified profile fields and sets updatedAt to current time.
+   */
+  async updateProfile(
+    { user, token, updates }: {
+      user?: User;
+      token?: string;
+      updates: {
+        displayName?: string;
+        phoneNumber?: string;
+        timezone?: string;
+        namePronunciation?: string;
+        includeRating?: boolean;
+        maxRetries?: number;
+      };
+    },
+  ): Promise<Empty | { error: string }> {
+    // Resolve user from either user parameter or token
+    const userResult = await resolveUser({ user, token });
+    if ("error" in userResult) {
+      return userResult;
+    }
+    user = userResult.user;
+
+    const profile = await this.profiles.findOne({ user });
+    if (!profile) {
+      return { error: `No profile found for user ${user}.` };
+    }
+
+    // Validate updates
+    if (updates.displayName !== undefined && updates.displayName.trim().length === 0) {
+      return { error: "Display name cannot be empty." };
+    }
+
+    if (updates.phoneNumber !== undefined && !updates.phoneNumber.match(/^\+[1-9]\d{1,14}$/)) {
+      return { error: `Invalid phone number format. Must be E.164 format (e.g., +1234567890).` };
+    }
+
+    if (updates.maxRetries !== undefined && (!Number.isInteger(updates.maxRetries) || updates.maxRetries < 1)) {
+      return { error: "maxRetries must be an integer of at least 1." };
+    }
+
+    // Build update object with only provided fields
+    const updateFields: any = { updatedAt: new Date() };
+    if (updates.displayName !== undefined) updateFields.displayName = updates.displayName;
+    if (updates.phoneNumber !== undefined) updateFields.phoneNumber = updates.phoneNumber;
+    if (updates.timezone !== undefined) updateFields.timezone = updates.timezone;
+    if (updates.namePronunciation !== undefined) updateFields.namePronunciation = updates.namePronunciation;
+    if (updates.includeRating !== undefined) updateFields.includeRating = updates.includeRating;
+    if (updates.maxRetries !== undefined) updateFields.maxRetries = updates.maxRetries;
+
+    await this.profiles.updateOne(
+      { user },
+      { $set: updateFields },
     );
 
     return {};

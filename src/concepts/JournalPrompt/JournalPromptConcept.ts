@@ -19,6 +19,7 @@ interface PromptTemplateDoc {
   promptText: string;
   position: number; // 1-5
   isActive: boolean;
+  isRatingPrompt?: boolean; // Special flag for the day rating prompt
 }
 
 /**
@@ -46,11 +47,15 @@ export default class JournalPromptConcept {
       return userResult;
     }
     user = userResult.user;
+    console.log(`[createDefaultPrompts] Checking prompts for user: ${user}`);
     // Check if user already has prompts
     const existingPrompts = await this.promptTemplates.find({ user }).toArray();
+    console.log(`[createDefaultPrompts] Found ${existingPrompts.length} existing prompts`);
     if (existingPrompts.length > 0) {
+      console.log(`[createDefaultPrompts] User already has prompts, returning error`);
       return { error: `User ${user} already has prompts.` };
     }
+    console.log(`[createDefaultPrompts] Creating default prompts for user ${user}`);
 
     const defaultPrompts = [
       "What are you grateful for today?",
@@ -66,6 +71,16 @@ export default class JournalPromptConcept {
       position: index + 1,
       isActive: true,
     }));
+
+    // Add the rating prompt (separate position namespace from regular prompts)
+    promptDocs.push({
+      _id: freshID() as PromptTemplate,
+      user,
+      promptText: "On a scale from negative 2 to positive 2, using whole numbers only, how would you rate your day?",
+      position: 1, // Rating prompts have their own position namespace
+      isActive: true,
+      isRatingPrompt: true,
+    });
 
     await this.promptTemplates.insertMany(promptDocs);
     return {};
@@ -159,16 +174,24 @@ export default class JournalPromptConcept {
    * @effects Toggles the isActive flag of the PromptTemplate
    */
   async togglePromptActive(
-    { user, position }: { user: User; position: number },
+    { user, position, isRatingPrompt }: { user: User; position: number; isRatingPrompt?: boolean },
   ): Promise<Empty | { error: string }> {
     if (position < 1 || position > 5) {
       return { error: "Position must be between 1 and 5." };
     }
 
-    const prompt = await this.promptTemplates.findOne({ user, position });
+    // Build query to find the right prompt (regular vs rating)
+    const query: any = { user, position };
+    if (isRatingPrompt) {
+      query.isRatingPrompt = true;
+    } else {
+      query.$or = [{ isRatingPrompt: { $exists: false } }, { isRatingPrompt: false }];
+    }
+
+    const prompt = await this.promptTemplates.findOne(query);
     if (!prompt) {
       return {
-        error: `No prompt found for user ${user} at position ${position}.`,
+        error: `No ${isRatingPrompt ? 'rating ' : ''}prompt found for user ${user} at position ${position}.`,
       };
     }
 
@@ -281,5 +304,65 @@ export default class JournalPromptConcept {
       .sort({ position: 1 })
       .toArray();
     return [{ prompts }];
+  }
+
+  /**
+   * Action: Creates or updates the rating prompt for a user.
+   * The rating prompt is always positioned last and marked with isRatingPrompt=true.
+   * @requires User exists
+   * @effects Creates or updates the rating prompt
+   */
+  async ensureRatingPrompt(
+    { user }: { user: User },
+  ): Promise<{ prompt: PromptTemplate } | { error: string }> {
+    // Check if rating prompt already exists
+    const existingRatingPrompt = await this.promptTemplates.findOne({
+      user,
+      isRatingPrompt: true,
+    });
+
+    const ratingPromptText = "On a scale from negative 2 to positive 2, using whole numbers only, how would you rate your day?";
+
+    if (existingRatingPrompt) {
+      // Update text if it changed
+      await this.promptTemplates.updateOne(
+        { _id: existingRatingPrompt._id },
+        { $set: { promptText: ratingPromptText, isActive: true } },
+      );
+      return { prompt: existingRatingPrompt._id };
+    }
+
+    // Create new rating prompt
+    // Find max position to place it last
+    const allPrompts = await this.promptTemplates.find({ user }).toArray();
+    const maxPosition = allPrompts.length > 0
+      ? Math.max(...allPrompts.map((p) => p.position))
+      : 0;
+
+    const promptId = freshID() as PromptTemplate;
+    await this.promptTemplates.insertOne({
+      _id: promptId,
+      user,
+      promptText: ratingPromptText,
+      position: maxPosition + 1,
+      isActive: true,
+      isRatingPrompt: true,
+    });
+
+    return { prompt: promptId };
+  }
+
+  /**
+   * Query: Gets the rating prompt for a user if it exists and is active.
+   */
+  async _getRatingPrompt(
+    { user }: { user: User },
+  ): Promise<{ prompt: PromptTemplateDoc | null }[]> {
+    const prompt = await this.promptTemplates.findOne({
+      user,
+      isRatingPrompt: true,
+      isActive: true,
+    });
+    return [{ prompt }];
   }
 }

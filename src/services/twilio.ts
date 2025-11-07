@@ -92,6 +92,14 @@ export class TwilioService {
   }
 
   /**
+   * Updates an active call with new TwiML
+   */
+  async updateCall(callSid: string, twiml: string): Promise<void> {
+    const client = twilio(this.accountSid, this.authToken);
+    await client.calls(callSid).update({ twiml });
+  }
+
+  /**
    * Ends an active call
    */
   async endCall(callSid: string): Promise<void> {

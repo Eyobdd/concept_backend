@@ -1,0 +1,9 @@
+[MongoDB] Connected successfully with connection pooling (maxPoolSize: 10)
+[CallWindowScheduler] Starting (poll interval: 5 minutes)
+[CallWindowScheduler] Checking at 2025-11-07T03:47:53.744Z (THURSDAY, 22:47)
+[CallWindowScheduler] Running. Press Ctrl+C to stop.
+[CallWindowScheduler] Found 0 users with call windows
+[CallWindowScheduler] Check complete
+
+Received SIGINT, shutting down...
+[CallWindowScheduler] Stopped

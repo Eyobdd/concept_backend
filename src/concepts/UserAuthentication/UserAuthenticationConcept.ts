@@ -287,6 +287,32 @@ export default class UserAuthenticationConcept {
   }
 
   /**
+   * Query: Verifies if a code is valid for a phone number without consuming it.
+   */
+  async verifyCode(
+    { phoneNumber, code }: { phoneNumber: string; code: string },
+  ): Promise<{ valid: boolean } | { error: string }> {
+    const verificationCode = await this.verificationCodes.findOne({
+      phoneNumber,
+    });
+    
+    if (!verificationCode) {
+      return { error: "No verification code found. Please request a new code." };
+    }
+
+    if (new Date() > verificationCode.expiresAt) {
+      await this.verificationCodes.deleteOne({ _id: verificationCode._id });
+      return { error: "Verification code has expired. Please request a new code." };
+    }
+
+    if (verificationCode.code !== code) {
+      return { error: "Invalid verification code." };
+    }
+
+    return { valid: true };
+  }
+
+  /**
    * Query: Returns all active sessions for a user.
    */
   async _getUserSessions(
