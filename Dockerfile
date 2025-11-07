@@ -16,6 +16,9 @@ COPY --chown=deno:deno deno.json deno.lock ./
 # Install dependencies into node_modules (required for MongoDB TLS support)
 RUN deno install --allow-scripts
 
+# Verify node_modules was created
+RUN ls -la && echo "Checking node_modules..." && ls -la node_modules/ || echo "WARNING: node_modules not found!"
+
 # Copy all application files into the working directory.
 # CRITICAL FIX: Use --chown to ensure the 'deno' user owns the files.
 # This grants the necessary write permissions for the build step.

@@ -15,12 +15,16 @@ async function initMongoClient() {
   }
   
   // Configure connection pool to prevent connection exhaustion
+  // TLS configuration added for Deno compatibility with MongoDB Atlas
   const client = new MongoClient(DB_CONN, {
     maxPoolSize: 10,              // Max 10 connections per client (reduced from default 100)
     minPoolSize: 2,               // Keep 2 connections ready
     maxIdleTimeMS: 30000,         // Close idle connections after 30s
     serverSelectionTimeoutMS: 5000,
     socketTimeoutMS: 45000,
+    tls: true,                    // Force TLS/SSL
+    tlsAllowInvalidCertificates: false,
+    tlsAllowInvalidHostnames: false,
   });
   
   try {
