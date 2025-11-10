@@ -511,19 +511,54 @@ export default class UserAuthenticationConcept {
       return { error: `Phone number ${phoneNumber} is already registered.` };
     }
 
-    // Verify code
-    const verificationCode = await this.verificationCodes.findOne({ phoneNumber });
-    if (!verificationCode) {
-      return { error: "No verification code found. Please request a new code." };
+    const useMockVerify = Deno.env.get("MOCK_TWILIO_VERIFY") === "true";
+    let verificationDocument = null;
+    let verified = false;
+
+    if (useMockVerify) {
+      verificationDocument = await this.verificationCodes.findOne({ phoneNumber });
+      if (!verificationDocument) {
+        return { error: "No verification code found. Please request a new code." };
+      }
+      if (verificationDocument.code !== code) {
+        return { error: "Invalid verification code." };
+      }
+      if (new Date() > verificationDocument.expiresAt) {
+        await this.verificationCodes.deleteOne({ _id: verificationDocument._id });
+        return { error: "Verification code has expired. Please request a new code." };
+      }
+      verified = true;
+    } else {
+      if (this.twilioService && 'verifyCode' in this.twilioService) {
+        try {
+          verified = await this.twilioService.verifyCode(phoneNumber, code);
+          if (verified) {
+            console.log(`[Verify] Code verified successfully via Twilio Verify`);
+          }
+        } catch (error: any) {
+          if (!error.message?.includes("Verify Service SID not configured")) {
+            console.error(`[Verify] Verification failed:`, error);
+          }
+        }
+      }
+
+      if (!verified) {
+        verificationDocument = await this.verificationCodes.findOne({ phoneNumber });
+        if (!verificationDocument) {
+          return { error: "No verification code found. Please request a new code." };
+        }
+        if (verificationDocument.code !== code) {
+          return { error: "Invalid verification code." };
+        }
+        if (new Date() > verificationDocument.expiresAt) {
+          await this.verificationCodes.deleteOne({ _id: verificationDocument._id });
+          return { error: "Verification code has expired. Please request a new code." };
+        }
+      }
     }
 
-    if (verificationCode.code !== code) {
-      return { error: "Invalid verification code." };
-    }
-
-    if (new Date() > verificationCode.expiresAt) {
-      await this.verificationCodes.deleteOne({ _id: verificationCode._id });
-      return { error: "Verification code has expired. Please request a new code." };
+    if (verificationDocument) {
+      await this.verificationCodes.deleteOne({ _id: verificationDocument._id });
     }
 
     // Create credentials
